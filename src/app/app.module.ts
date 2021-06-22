@@ -12,12 +12,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { HomeComponent } from './modules/main-page/home/home.component';
+import { NavbarComponent } from './core/share/navbar/navbar.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
