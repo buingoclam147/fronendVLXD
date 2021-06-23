@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+
+
+html body {
+  height: 100%;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.container-fluid {
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  height: 100%;
+}
+.align-item-center{
+  height: 100%;
+    align-items: center;
+}
+.text-align-center{
+  text-align: center;
+    width: 100%;
+}
+a {
+  text-decoration: none;
+}
+

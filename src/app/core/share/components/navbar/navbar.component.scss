@@ -1,0 +1,36 @@
+@import '/src/style/grid.scss';
+@import '/src/style/variable.scss';
+.bgr-navbar{
+    position: relative;
+    background-color: white;
+    min-height: 90px;
+    box-shadow: 0 0 20px;
+    width: 100%;
+}
+.logo img{
+    max-height: 70px;
+}
+.categoryNav li a{
+    font-size: $font18;
+    color: $colorblack !important;
+    font-weight: 500;
+}
+.dropdowNav{
+    position: relative;
+}
+.dropdowNav::after{
+    font-family: FontAwesome;
+    position: absolute;
+    bottom: -36px;
+    display: block;
+    font-size: 15px;
+    line-height: 90px;
+    color: #919191;
+    font-weight: 400;
+    content: "\f107";
+    z-index: 5;
+    right: -17px;
+}
+.pageItem{
+    justify-content: space-evenly;
+}
