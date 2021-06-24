@@ -5,7 +5,7 @@ import { NotAuthComponent } from './not-auth.component';
 const routes: Routes = [
   {
     path: '', component: NotAuthComponent, children: [
-      { path: 'home', loadChildren: () => import('./child/home/home.module').then((x) => x.HomeModule) },
+      { path: '', loadChildren: () => import('./child/home/home.module').then((x) => x.HomeModule) },
       { path: 'product', loadChildren: () => import('./child/product/product.module').then((x) => x.ProductModule) }
     ]
   },

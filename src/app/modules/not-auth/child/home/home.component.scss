@@ -1,1 +1,150 @@
-@import '/src/style/variable.scss'
+@import '/src/style/variable.scss';
+
+.bgr-img {
+  position: relative;
+  max-width: 1600px;
+  min-height: 700px;
+  margin: auto;
+}
+
+[nz-carousel-content] {
+  min-height: 600px;
+  line-height: 50px;
+  background: #364d79;
+  color: #fff;
+  overflow: hidden;
+}
+
+h3 {
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.bgr-carosel1 {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/assets/bgr-vlxd1.jpg);
+}
+
+
+.bgr-carosel2 {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/assets/bgr-vlxd2.jpg);
+}
+
+.box-content {
+  position: absolute;
+  left: 15%;
+}
+
+.box-content div {
+  font-size: 72px;
+  font-weight: 500;
+}
+
+.box-content p {
+  font-size: 18px;
+  margin-top: 35px;
+}
+
+.box-content button {
+  border-radius: 15px;
+  height: 60px;
+  width: 168px;
+  font-size: 18px;
+  background-color: $colorred;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  font-weight: 500;
+  transition: all 600ms ease;
+}
+
+.box-content button a {
+  color: white;
+}
+
+.box-content button:hover {
+  background-color: $bgrbtn;
+  transition: all 600ms ease;
+}
+
+.box-content button:hover a {
+  color: #706C61;
+  transition: all 600ms ease;
+}
+
+.card-carosel {
+  width: 100%;
+}
+
+.img-card img {
+  height: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.img-card {
+  border: 3px solid $colorred;
+  width: 110px;
+    height: 110px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  z-index: 1;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cartBtCarosel {
+  position: absolute;
+  width: 100%;
+  top: 80%;
+  z-index: 1000;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.box-card div{
+  background-color: $colorred;
+}
+.box-card a {
+  
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+.box-card div:hover{
+  transition: all 600ms ease;
+  background-color: $bgrbtn;
+}
+.box-card div:hover a {
+  transition: all 600ms ease;
+  color: $color33;
+}
+.box-card{
+  box-shadow: 0px 4px 11px -1px #ececec;
+  border: 0.3px solid #33333338;
+  background-color: white;
+  border-radius: 2px;
+}
+.box-card p{
+  opacity: 0.6;
+  font-weight: 500;
+  max-width: 260px;
+  margin: 25px auto 25px auto;
+}

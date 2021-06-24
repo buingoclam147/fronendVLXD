@@ -32,5 +32,19 @@
     right: -17px;
 }
 .pageItem{
+    position: relative;
     justify-content: space-evenly;
+}
+.pageItem i{
+    color: $color33;
+}
+.pageItem p{
+    color: $colorred;
+  
+    color: #e9212e;
+    position: absolute;
+    top: 8px;
+    right: 40px;
+    font-size: 17px;
+    font-weight: 600;
 }
