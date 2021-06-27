@@ -8,3 +8,15 @@
 /* Import one component's styles */
 // boxicon
 @import 'boxicons';
+.ant-carousel .slick-dots li{
+    width: 40px;
+}
+.ant-carousel .slick-dots li button {
+  background: #e9212e !important;
+  height: 8px;
+}
+
+.ant-carousel .slick-dots {
+    margin-right: 79%;
+    margin-left: 0%;
+}

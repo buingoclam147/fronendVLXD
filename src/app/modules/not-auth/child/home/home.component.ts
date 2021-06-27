@@ -6,8 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
-
-  ngOnInit(): void {
+  a = false;
+  constructor() {
   }
+  ngOnInit(): void {
+    this.caroselOn();
+  }
+  caroselOn(): void {
+    this.a = !this.a;
+  }
+
 }

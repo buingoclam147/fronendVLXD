@@ -13,6 +13,9 @@
     flex: 0 0 auto;
     width: 25%;
   }
+  .align-item-center{
+    align-items: center;
+  }
   .text-center{
     text-align: center;
   }
@@ -440,6 +443,9 @@
   
   .ps-5 {
     padding-left: 3rem !important;
+  }
+  .ps-6{
+    padding-left: 4rem !important;
   }
   .d-flex{
     display: flex;

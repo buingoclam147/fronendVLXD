@@ -40,7 +40,6 @@
 }
 .pageItem p{
     color: $colorred;
-  
     color: #e9212e;
     position: absolute;
     top: 8px;
@@ -48,3 +47,11 @@
     font-size: 17px;
     font-weight: 600;
 }
+.head-example {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    background: #eee;
+    display: inline-block;
+    vertical-align: middle;
+  }

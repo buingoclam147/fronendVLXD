@@ -8,14 +8,15 @@ import { ColorDirective } from './directivate/color.directive';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 @NgModule({
   imports: [
     CommonModule,
     NzGridModule,
     NzButtonModule,
     NzLayoutModule,
-    FormsModule
+    FormsModule,
+    NzBadgeModule
   ],
   declarations: [ShareComponent, NavbarComponent, FooterComponent, ColorDirective],
   exports: [NavbarComponent, FooterComponent, ColorDirective, NzGridModule, NzButtonModule, FormsModule, NzLayoutModule ]
