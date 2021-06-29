@@ -216,7 +216,7 @@
     </div>
     <div nz-row [nzGutter]="16">
         <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box m-4">
+            <div class="inner-box in-box m-4">
                 <div class="out-box">
                     <img src="/assets/boximg1.jpg" alt="boximg1" width="320px" height="320px">
                     <div class="opacity-box">
@@ -231,7 +231,7 @@
             </div>
         </div>
         <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box m-4">
+            <div class="inner-box in-box m-4">
                 <div class="out-box">
                     <img src="/assets/boximg2.jpg" alt="boximg2" width="320px" height="320px">
                     <div class="opacity-box">
@@ -246,7 +246,7 @@
             </div>
         </div>
         <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box m-4">
+            <div class="inner-box in-box m-4">
                 <div class="out-box">
                     <img src="/assets/boximg3.jpg" alt="boximg3" width="320px" height="320px">
                     <div class="opacity-box">
@@ -261,7 +261,7 @@
             </div>
         </div>
         <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box m-4">
+            <div class="inner-box in-box m-4">
                 <div class="out-box">
                     <img src="/assets/boximg4.jpg" alt="boximg4" width="320px" height="320px">
                     <div class="opacity-box">
@@ -275,6 +275,78 @@
                 </div>
             </div>
         </div>
-
+    </div>
+</div>
+<div class="outsidecontact mb-6">
+    <div nz-row nzJustify="center">
+        <div nz-col nzSpan="8">
+            <div class="sec-title">
+                <p>LIÊN HỆ CHI TIẾT </p>
+                <div class="title cw"> CHÚNG TÔI CÓ THỂ GIÚP BẠN</div>
+            </div>
+            <div>
+                <img src="assets/incontactvietnampng.png" alt="ban do viet nam" width="450px" height="auto">
+            </div>
+        </div>
+        <div nz-col nzSpan="8">
+            <div class="box-contact">
+                <div class="title-box">
+                    <h2>Bạn đang cần tư vấn </h2>
+                    <span>
+                        <p>Nhận tư vấn trực tiếp từ các kiến trúc sư hàng đầu, quý khách vui lòng để lại thông tin cá
+                            nhân
+                            để chúng tôi kịp thời hỗ trợ.</p>
+                    </span>
+                </div>
+                <form action="post">
+                    <div class="form-contact">
+                        <input type="email" name="email" placeholder="Email">
+                        <input type="text" name="name" placeholder="Tên">
+                        <input type="tel" name="phone" placeholder="Điện thoại">
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Nội dung cần tư vấn"
+                            [(ngModel)]="selectedValue">
+                            <nz-option nzLabel="Sản phẩm" nzValue="product"></nz-option>
+                            <nz-option nzLabel="Các chính sách bảo mật" nzValue="privacyPolicy"></nz-option>
+                            <nz-option nzLabel="Phương thức liên hệ shop" nzValue="concact"></nz-option>
+                        </nz-select>
+                        <button>
+                            Đăng ký
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bgr-btf mb-6">
+    <div class="container-fluid ">
+        <div class="sec-title">
+            <p>Đối tác </p>
+            <div class="title">
+                HƠN 200+ ĐƠN VỊ CUNG CẤP THIẾT BỊ
+            </div>
+        </div>
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box">
+                    <img src="/assets/nhacungcap1.png" alt="nha cung cap" width="296px" height="auto">
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box">
+                    <img src="/assets/nhacungcap1.png" alt="nha cung cap" width="296px" height="auto">
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box">
+                    <img src="/assets/nhacungcap1.png" alt="nha cung cap" width="296px" height="auto">
+                </div>
+            </div>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box">
+                    <img src="/assets/nhacungcap1.png" alt="nha cung cap" width="296px" height="auto">
+                </div>
+            </div>
+        </div>
     </div>
 </div>

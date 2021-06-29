@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  email?: string;
   a = false;
+  selectedValue = null;
   constructor() {
   }
   ngOnInit(): void {
@@ -15,5 +17,4 @@ export class HomeComponent implements OnInit {
   caroselOn(): void {
     this.a = !this.a;
   }
-
 }

@@ -6,6 +6,7 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { FormsModule } from '@angular/forms';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     NzCarouselModule,
     NzCardModule,
     NzGridModule,
-    FormsModule
+    FormsModule,
+    NzSelectModule
   ],
   declarations: [HomeComponent]
 })
