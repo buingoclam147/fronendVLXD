@@ -1,0 +1,17 @@
+.bgr-footer{
+    position: relative;
+    display: block;
+    background: #27282c;
+    padding-top: 110px;
+    padding-bottom: 110px;
+}
+.bgr-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: top right;
+    height: 695px;
+    width: 695px;
+    background-image: url(/assets/bgrRightFooter.png);
+}

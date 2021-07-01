@@ -1,1 +1,52 @@
-<p>main works!</p>
+<nz-layout class="container-admin">
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div [class]="isCollapsed===true? 'logo-small': 'logo'"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu nzTitle="Products" nzIcon="shop">
+        <ul>
+          <li nz-menu-item>Category</li>
+          <li nz-menu-item>Product</li>
+          <li nz-menu-item>Supplier</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Invoice" nzIcon="file-done">
+        <ul>
+          <li nz-menu-item>Invoice</li>
+          <li nz-menu-item>Invoice Detail</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Customer" nzIcon="team">
+        <ul>
+          <li nz-menu-item>Customer</li>
+          <li nz-menu-item>Customer Account</li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Employe" nzIcon="user-switch">
+        <ul>
+          <li nz-menu-item>Employe</li>
+          <li nz-menu-item>Employe Account</li>
+        </ul>
+      </li>
+    </ul>
+
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"></i>
+      <div class="logout">
+        <button><a href="#"><i nz-icon nzType="logout" nzTheme="outline"></i> LOGOUT</a></button>
+      </div>
+    </nz-header>
+    <nz-content>
+      <nz-breadcrumb>
+        <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div class="inner-content">
+        Bill is a cat.
+      </div>
+    </nz-content>
+    <nz-footer>BuiLam Design ©2021 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

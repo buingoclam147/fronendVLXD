@@ -1,0 +1,75 @@
+@import '/src/style/variable.scss';
+
+.container-admin {
+  height: 100vh;
+}
+.logo {
+  height: 72px;
+  background: rgba(255, 255, 255, 0.2);
+  background-image: url(/assets/logo.jpg);
+  background-size: cover;
+  margin: 18px;
+  transition: all 0.25s;
+}
+
+.logo-small {
+  height: 72px;
+  background: rgba(255, 255, 255, 0.2);
+  background-image: url(/assets/logosmall.jpg);
+  background-size: cover;
+  margin: 18px 8px;
+  transition: all 0.25s;
+}
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 0 16px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.logout {
+  text-align: center;
+  display: flex;
+  float: right;
+  margin: 0 16px;
+}
+.logout button{
+  border: none;
+  background: none;
+}
+.logout a{
+  color: $colorblack;
+  font-weight: 600;
+}
+
+.logout:hover a{
+  color: #1890ff;
+}
