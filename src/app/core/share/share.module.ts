@@ -10,8 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { MainFooterComponent } from './components/main-footer/main-footer.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,10 +25,35 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     FormsModule,
     NzBadgeModule,
     NzMenuModule,
-    NzIconModule
+    NzIconModule,
+    NzBreadCrumbModule,
+    NzInputModule,
+    NzTableModule,
+    NzPopconfirmModule,
+    NzModalModule
   ],
-  declarations: [ShareComponent, NavbarComponent, FooterComponent, ColorDirective, MainFooterComponent],
-  exports: [NavbarComponent, FooterComponent, MainFooterComponent, NzMenuModule,
-    ColorDirective, NzGridModule, NzButtonModule, FormsModule, NzLayoutModule, NzIconModule]
+  declarations: [
+    ShareComponent,
+    NavbarComponent,
+    FooterComponent,
+    ColorDirective,
+  ],
+  exports: [
+    NavbarComponent,
+    FooterComponent,
+    NzMenuModule,
+    ColorDirective,
+    NzGridModule,
+    NzButtonModule,
+    FormsModule,
+    NzLayoutModule,
+    NzIconModule,
+    NzBadgeModule,
+    NzBreadCrumbModule,
+    NzInputModule,
+    NzTableModule,
+    NzPopconfirmModule,
+    NzModalModule
+  ]
 })
 export class ShareModule { }

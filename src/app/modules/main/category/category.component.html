@@ -1,0 +1,57 @@
+<div class="box-out-search">
+  <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzSpan]="18">
+      <div class="inner-box">
+        <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+          <input type="text" nz-input placeholder="Tìm kiếm theo loại hàng" />
+        </nz-input-group>
+        <ng-template #suffixButton>
+          <button nz-button nzType="primary" nzSize="large" nzSearch>Search</button>
+        </ng-template>
+      </div>
+    </div>
+    <div nz-col class="gutter-row plus" [nzSpan]="6">
+      <div class="inner-box">
+        <button nz-button nzType="primary" (click)="showModal()">
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
+        </button>
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="Tạo mới loại hàng" (nzOnCancel)="handleCancel()"
+          (nzOnOk)="handleOk()" nzOkText="Tạo mới" nzCancelText="Hủy" [nzOkLoading]="isOkLoading">
+          <input nz-input placeholder="Tên loại hàng" [(ngModel)]="name" class=" my-3" />
+          <textarea rows="4" nz-input [(ngModel)]="note"></textarea>
+        </nz-modal>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="table-content">
+  <nz-table #middleTable nzSize="middle" [nzData]="data" [nzBordered]="true" [nzOuterBordered]="true">
+    <thead>
+      <tr>
+        <th>checkbox</th>
+        <th>Name</th>
+        <th>node</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of middleTable.data">
+        <td [nzChecked]="false"></td>
+        <td> {{ data.name }}</td>
+        <td>{{ data.age }}</td>
+        <td class="btn-action">
+          <button >
+            <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.name)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+          </button>
+          <button ><i nz-icon nzType="edit" nzTheme="outline"></i></button>
+         <button   (click)="showData()" > <i nz-icon nzType="eye" nzTheme="outline"></i></button>
+        <nz-modal [(nzVisible)]="isData" nzTitle="Xem loại hàng" (nzOnCancel)="offShow()"
+           nzCancelText="Hủy" [nzOkLoading]="isOkLoading">
+          <input nz-input placeholder="Tên loại hàng" [(ngModel)]="name" class=" my-3" />
+          <textarea rows="4" nz-input [(ngModel)]="note"></textarea>
+        </nz-modal>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
