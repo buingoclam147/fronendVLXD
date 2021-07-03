@@ -39,19 +39,35 @@
         <td [nzChecked]="false"></td>
         <td> {{ data.name }}</td>
         <td>{{ data.age }}</td>
-        <td class="btn-action">
-          <button >
-            <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.name)"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
-          </button>
-          <button ><i nz-icon nzType="edit" nzTheme="outline"></i></button>
-         <button   (click)="showData()" > <i nz-icon nzType="eye" nzTheme="outline"></i></button>
-        <nz-modal [(nzVisible)]="isData" nzTitle="Xem loại hàng" (nzOnCancel)="offShow()"
-           nzCancelText="Hủy" [nzOkLoading]="isOkLoading">
-          <input nz-input placeholder="Tên loại hàng" [(ngModel)]="name" class=" my-3" />
-          <textarea rows="4" nz-input [(ngModel)]="note"></textarea>
-        </nz-modal>
-        </td>
+        
       </tr>
     </tbody>
   </nz-table>
+  <table class="table-container">
+    <tr>
+      <th><input type="checkbox" class="checkbox-table"></th>
+      <th>Name</th>
+      <th>Node</th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkbox-table"></td>
+      <td>Smith</td>
+      <td>50</td>
+      <td class="btn-action">
+        <button >
+          <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow()"><i nz-icon nzType="delete" nzTheme="outline"></i></a>
+        </button>
+        <button ><i nz-icon nzType="edit" nzTheme="outline"></i></button>
+       <button   (click)="showData()" > <i nz-icon nzType="eye" nzTheme="outline"></i></button>
+      <nz-modal [(nzVisible)]="isData" nzTitle="Xem loại hàng" (nzOnCancel)="offShow()"
+         nzCancelText="Hủy" [nzOkLoading]="isOkLoading">
+        <input nz-input placeholder="Tên loại hàng" [(ngModel)]="name" class=" my-3" />
+        <textarea rows="4" nz-input [(ngModel)]="note"></textarea>
+      </nz-modal>
+      </td>
+    </tr>
+    
+  </table>
+  
 </div>

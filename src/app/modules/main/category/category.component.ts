@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/core/share/service/category.service';
 
 @Component({
   selector: 'app-category',
@@ -28,19 +29,18 @@ export class CategoryComponent implements OnInit {
       address: 'Sidney No. 1 Lake Park'
     }
   ];
-  constructor() { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.categoryService.getCategory().subscribe(x => {
+      console.log(x);
+    });
   }
-  deleteRow(name: string): void {
-    this.data = this.data.filter(d => d.name !== name);
+  deleteRow(): void {
   }
-
-
   showModal(): void {
     this.isVisible = true;
   }
-
   handleOk(): void {
     this.isOkLoading = true;
     setTimeout(() => {
@@ -58,5 +58,6 @@ export class CategoryComponent implements OnInit {
   offShow(): void {
     this.isData = false;
   }
+
 }
 
