@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { delay } from 'rxjs/operators';
 import { CategoryService } from 'src/app/core/share/service/category.service';
 
 @Component({
@@ -12,29 +13,27 @@ export class CategoryComponent implements OnInit {
   isOkLoading = false;
   name = '';
   note = '';
-  data = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
+  table = {
+    pagination: {
+      searchName: '',
+      perPage: 5,
+      page: 0
     },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
+    total: 0,
+    data: [],
+    isLoading: true
+  };
+  getCategory(): void {
+    this.categoryService.getCategory(this.table.pagination).subscribe(x => {
+      this.table.total = x.total;
+      this.table.data = x.data;
+      this.table.isLoading = false;
+    });
+  }
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategory().subscribe(x => {
-      console.log(x);
-    });
+    this.getCategory();
   }
   deleteRow(): void {
   }
@@ -58,6 +57,20 @@ export class CategoryComponent implements OnInit {
   offShow(): void {
     this.isData = false;
   }
-
+  pageIndexChange(value): void {
+    this.table.isLoading = true;
+    this.table.pagination.page = value - 1;
+    console.log(value);
+    this.getCategory();
+  }
+  pageSizeChange(value): void {
+    this.table.isLoading = true;
+    this.table.pagination.perPage = value;
+    this.getCategory();
+  }
+  search(): void {
+    this.getCategory();
+    console.log(this.table.pagination.searchName);
+  }
 }
 

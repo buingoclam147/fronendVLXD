@@ -16,6 +16,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +32,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzInputModule,
     NzTableModule,
     NzPopconfirmModule,
-    NzModalModule
+    NzModalModule,
+    NzPaginationModule,
+    NzSpinModule
   ],
   declarations: [
     ShareComponent,
@@ -53,7 +57,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzInputModule,
     NzTableModule,
     NzPopconfirmModule,
-    NzModalModule
+    NzModalModule,
+    NzPaginationModule,
+    NzSpinModule
   ]
 })
 export class ShareModule { }

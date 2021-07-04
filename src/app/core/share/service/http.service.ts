@@ -20,14 +20,18 @@ export class HttpService {
       'Content-Type': 'application/json'
     })
   };
-
   constructor(private httpClient: HttpClient) { }
   sendToServer(method: METHOD, uri: string, data?: any): Observable<any> {
     const url = this.URL + uri;
     let res;
     switch (method) {
       case METHOD.GET: {
-        res = this.httpClient.get<any>(url, this.httpOptions)
+        res = this.httpClient.get<any>(url, {
+          params: data,
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })
+        })
           .pipe(
             catchError(this.handleError)
           );
