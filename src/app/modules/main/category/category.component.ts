@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { delay } from 'rxjs/operators';
 import { CategoryService } from 'src/app/core/share/service/category.service';
+export enum STATE {
+  ADD, UPDATE, VIEW
+}
 
 @Component({
   selector: 'app-category',
@@ -8,11 +12,10 @@ import { CategoryService } from 'src/app/core/share/service/category.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  isVisible = false;
-  isData = false;
-  isOkLoading = false;
-  name = '';
-  note = '';
+  id = '';
+  state = STATE.ADD;
+  visible = false;
+  formEverything: FormGroup;
   table = {
     pagination: {
       searchName: '',
@@ -23,6 +26,36 @@ export class CategoryComponent implements OnInit {
     data: [],
     isLoading: true
   };
+  stay = [{
+    title: 'Tạo mới loại hàng',
+    cancelText: 'Hủy',
+    okText: 'Tạo mới'
+  },
+  {
+    title: 'Sửa loại hàng',
+    cancelText: 'Hủy',
+    okText: 'Đồng Ý'
+  },
+  {
+    title: 'Xem loại hàng',
+    cancelText: 'Đóng',
+    okText: null
+  }
+  ];
+  constructor(
+    private categoryService: CategoryService,
+    private fb: FormBuilder
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.formEverything = this.fb.group({
+      name: '',
+      note: ''
+    });
+    this.getCategory();
+  }
+
   getCategory(): void {
     this.categoryService.getCategory(this.table.pagination).subscribe(x => {
       this.table.total = x.total;
@@ -30,32 +63,72 @@ export class CategoryComponent implements OnInit {
       this.table.isLoading = false;
     });
   }
-  constructor(private categoryService: CategoryService) { }
-
-  ngOnInit(): void {
-    this.getCategory();
-  }
   deleteRow(): void {
   }
-  showModal(): void {
-    this.isVisible = true;
+  showModal(state: STATE, id?: any): void {
+    this.id = id;
+    this.state = state;
+    switch (this.state) {
+      case STATE.ADD:
+        {
+          this.visible = true;
+          break;
+        }
+      case STATE.UPDATE:
+      case STATE.VIEW:
+        {
+          this.categoryService.getOneCategory(id).subscribe(item => {
+            this.formEverything.patchValue({
+              name: item.name,
+              note: item.note
+            });
+            this.visible = true;
+          });
+          break;
+        }
+      default:
+        break;
+    }
   }
   handleOk(): void {
-    this.isOkLoading = true;
-    setTimeout(() => {
-      this.isVisible = false;
-      this.isOkLoading = false;
-    }, 3000);
+    switch (this.state) {
+      case STATE.ADD:
+        {
+          const data = {
+            name: this.formEverything.value.name,
+            note: this.formEverything.value.note
+          };
+          this.categoryService.postOneCategory(data).subscribe(item => {
+          });
+          this.formEverything.reset();
+          this.getCategory();
+          this.visible = false;
+          break;
+        }
+      case STATE.UPDATE:
+        {
+          const data = {
+            name: this.formEverything.value.name,
+            note: this.formEverything.value.note
+          };
+          console.log(this.formEverything);
+          this.categoryService.updateCategory(this.id, data).subscribe(item => {
+            console.log(item);
+          });
+          this.formEverything.reset();
+          this.getCategory();
+          this.visible = false;
+          this.id = '';
+          break;
+        }
+      default:
+        break;
+    }
   }
 
-  handleCancel(): void {
-    this.isVisible = false;
-  }
-  showData(): void {
-    this.isData = true;
-  }
-  offShow(): void {
-    this.isData = false;
+  onCancel(): void {
+    this.formEverything.reset();
+    this.visible = false;
   }
   pageIndexChange(value): void {
     this.table.isLoading = true;

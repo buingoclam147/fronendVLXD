@@ -2,26 +2,22 @@
   <div class="box-out-search">
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div nz-col class="gutter-row" [nzSpan]="18">
-          <div class="inner-box">
-            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-              <input type="text" [(ngModel)]="table.pagination.searchName" nz-input
-                placeholder="Tìm kiếm theo loại hàng" />
-            </nz-input-group>
-            <ng-template #suffixButton>
-              <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">Search</button>
-            </ng-template>
-          </div>
+        <div class="inner-box">
+          <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+            <input type="text" [(ngModel)]="table.pagination.searchName" nz-input
+              placeholder="Tìm kiếm theo loại hàng" />
+          </nz-input-group>
+          <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">Search</button>
+          </ng-template>
+        </div>
       </div>
       <div nz-col class="gutter-row plus" [nzSpan]="6">
         <div class="inner-box">
-          <button nz-button nzType="primary" (click)="showModal()">
+          <button nz-button nzType="primary" (click)="showModal(0)">
             <i nz-icon nzType="plus" nzTheme="outline"></i>
           </button>
-          <nz-modal [(nzVisible)]="isVisible" nzTitle="Tạo mới loại hàng" (nzOnCancel)="handleCancel()"
-            (nzOnOk)="handleOk()" nzOkText="Tạo mới" nzCancelText="Hủy" [nzOkLoading]="isOkLoading">
-            <input nz-input placeholder="Tên loại hàng" [(ngModel)]="name" class=" my-3" />
-            <textarea rows="4" nz-input [(ngModel)]="note"></textarea>
-          </nz-modal>
+
         </div>
       </div>
     </div>
@@ -49,13 +45,9 @@
                 <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow()"><i nz-icon
                     nzType="delete" nzTheme="outline"></i></a>
               </button>
-              <button><i nz-icon nzType="edit" nzTheme="outline"></i></button>
-              <button (click)="showData()"> <i nz-icon nzType="eye" nzTheme="outline"></i></button>
-              <nz-modal [(nzVisible)]="isData" nzTitle="Xem loại hàng" (nzOnCancel)="offShow()" nzCancelText="Hủy"
-                [nzOkLoading]="isOkLoading">
-                <input nz-input placeholder="Tên loại hàng" [(ngModel)]="name" class=" my-3" />
-                <textarea rows="4" nz-input [(ngModel)]="note"></textarea>
-              </nz-modal>
+              <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
+              <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
+
             </td>
           </tr>
         </tbody>
@@ -66,7 +58,6 @@
         (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="table.pagination.perPage" nzShowSizeChanger
         [nzPageSizeOptions]="[5, 10, 20]" (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
     </div>
-
   </div>
 </div>
 <ng-template #loading>
@@ -74,3 +65,16 @@
     <nz-spin nzSimple></nz-spin>
   </div>
 </ng-template>
+
+
+
+
+
+
+<nz-modal [(nzVisible)]="visible" [nzTitle]="stay[state].title" (nzOnCancel)="onCancel()"
+  [nzCancelText]="stay[state].cancelText" [nzOkText]="stay[state].okText" (nzOnOk)="handleOk()">
+  <form [formGroup]="formEverything">
+    <input nz-input placeholder="Tên loại hàng" [formControlName]="'name'" class=" my-3" />
+    <textarea rows="4" nz-input [formControlName]="'note'"></textarea>
+  </form>
+</nz-modal>
