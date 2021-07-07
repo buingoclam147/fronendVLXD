@@ -29,4 +29,7 @@ export class CategoryService {
   updateCategory(id: any, data: any): Observable<any> {
     return this.httpService.sendToServer(METHOD.PATCH, API.CATEGORY.UPDATE(id), data);
   }
+  deleteOneCategory(id: any): Observable<any> {
+    return this.httpService.sendToServer(METHOD.DELETE, API.CATEGORY.DELETE_ONE(id));
+  }
 }

@@ -16,6 +16,7 @@ export class CategoryComponent implements OnInit {
   state = STATE.ADD;
   visible = false;
   formEverything: FormGroup;
+  isCheckedAll = false;
   table = {
     pagination: {
       searchName: '',
@@ -57,13 +58,21 @@ export class CategoryComponent implements OnInit {
   }
 
   getCategory(): void {
+    this.table.isLoading = true;
     this.categoryService.getCategory(this.table.pagination).subscribe(x => {
       this.table.total = x.total;
-      this.table.data = x.data;
+      this.isCheckedAll = false;
+      this.table.data = x.data.map((i: any) => {
+        i.checked = false;
+        return i;
+      });
       this.table.isLoading = false;
     });
   }
-  deleteRow(): void {
+  deleteOneCategory(id): void {
+    this.categoryService.deleteOneCategory(id).subscribe(_ => {
+      this.getCategory();
+    });
   }
   showModal(state: STATE, id?: any): void {
     this.id = id;
@@ -145,5 +154,18 @@ export class CategoryComponent implements OnInit {
     this.getCategory();
     console.log(this.table.pagination.searchName);
   }
+  check(item): void {
+    item.checked = !item.checked;
+    this.isCheckedAll = this.table.data.filter(x => x.checked).length === this.table.data.length;
+  }
+  checkAll(): void {
+    this.table.data = this.table.data.map(x => {
+      x.checked = !this.isCheckedAll;
+      return x;
+    });
+    this.isCheckedAll = !this.isCheckedAll;
+  }
+  deleteSearch(): void {
+    this.table.pagination.searchName = '';
+  }
 }
-
