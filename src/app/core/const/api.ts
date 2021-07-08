@@ -10,6 +10,7 @@ export const API = {
         },
         DELETE_ONE: (id: any) => {
             return 'category/' + id;
-        }
+        },
+        DELETE_MANY: 'category/delete-many'
     }
 };

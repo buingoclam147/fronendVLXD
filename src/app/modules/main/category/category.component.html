@@ -4,7 +4,7 @@
       <div nz-col class="gutter-row" [nzSpan]="18">
         <div class="inner-box">
           <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton" [nzSuffix]="inputClearTpl">
-            <input #ipsearch type="text" [(ngModel)]="table.pagination.searchName" nz-input
+            <input #ipsearch type="text" [(ngModel)]="table.filter.searchName" nz-input
               placeholder="Tìm kiếm theo loại hàng" />
           </nz-input-group>
           <ng-template #suffixButton>
@@ -12,9 +12,10 @@
           </ng-template>
         </div>
       </div>
-      <div nz-col class="gutter-row plus" [nzSpan]="6">
-        <div class="inner-box mx-2">
-          <button nz-button nzType="primary">
+      <div nz-col class="gutter-row plus" >
+        <div class="inner-box mx-2" [nzSpan]="6" *ngIf="deleteBtnMany">
+          <button nz-button nzType="primary" nzPopconfirmPlacement="bottom" nz-popconfirm
+            nzPopconfirmTitle="Bạn có chắc chắn muốn xóa không?" (nzOnConfirm)="deleteMany()">
             <i nz-icon nzType="minus" nzTheme="outline"></i>
           </button>
         </div>
@@ -31,7 +32,8 @@
       <table class="table-container">
         <thead>
           <tr>
-            <th><input type="checkbox" class="checkbox-table" (click)="checkAll()" [checked]="isCheckedAll"></th>
+            <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()" [checked]="table.isCheckedAll">
+            </th>
             <th>Tên</th>
             <th>Mô tả</th>
             <th>Hành động</th>
@@ -39,13 +41,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of table.data">
-            <td><input type="checkbox" class="checkbox-table" (click)="check(item)" [checked]="item.checked"></td>
+            <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)" [checked]="item.checked"></td>
             <td class="text-center">{{item.name}}</td>
             <td class="text-center note-text py-6">
               <div class="text-overflow"> {{item.note}} </div>
             </td>
             <td class="btn-action text-center">
-              <button nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteOneCategory(item._id)">
+              <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
+                (nzOnConfirm)="deleteOneCategory(item._id)">
                 <i nz-icon nzType="delete" nzTheme="outline"></i>
               </button>
               <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
@@ -72,12 +75,13 @@
 
 
 <ng-template #inputClearTpl>
-  <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch.value" (click)="deleteSearch()"></i>
+  <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch.value"
+    (click)="deleteSearch()"></i>
 </ng-template>
 
 
-<nz-modal [(nzVisible)]="visible" [nzTitle]="stay[state].title" (nzOnCancel)="onCancel()"
-  [nzCancelText]="stay[state].cancelText" [nzOkText]="stay[state].okText" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="visible" [nzTitle]="stateConfig[state].title" (nzOnCancel)="onCancel()"
+  [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()">
   <form [formGroup]="formEverything">
     <input nz-input placeholder="Tên loại hàng" [formControlName]="'name'" class=" my-3" />
     <textarea rows="4" nz-input [formControlName]="'note'"></textarea>

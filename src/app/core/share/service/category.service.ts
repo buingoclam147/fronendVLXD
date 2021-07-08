@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { API } from '../../const/api';
 import { PAGINATION_INIT } from '../../const/sys.const';
+import { Pagination } from '../model/table.model';
 import { HttpService, METHOD } from './http.service';
 
 @Injectable({
@@ -12,9 +13,12 @@ import { HttpService, METHOD } from './http.service';
 export class CategoryService {
   constructor(private httpService: HttpService) { }
 
-  getCategory(pagination: any): Observable<any> {
-    if (pagination) {
-      return this.httpService.sendToServer(METHOD.GET, API.CATEGORY.GET_LIST, pagination);
+  getCategory(pagination: Pagination, filter: any): Observable<any> {
+    const data = {
+      ...pagination, ...filter
+    };
+    if (data) {
+      return this.httpService.sendToServer(METHOD.GET, API.CATEGORY.GET_LIST, data);
     }
     else {
       return this.httpService.sendToServer(METHOD.GET, API.CATEGORY.GET_LIST, PAGINATION_INIT);
@@ -31,5 +35,8 @@ export class CategoryService {
   }
   deleteOneCategory(id: any): Observable<any> {
     return this.httpService.sendToServer(METHOD.DELETE, API.CATEGORY.DELETE_ONE(id));
+  }
+  deleteCategory(data: any): Observable<any> {
+    return this.httpService.sendToServer(METHOD.POST, API.CATEGORY.DELETE_MANY, data);
   }
 }

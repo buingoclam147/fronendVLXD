@@ -49,6 +49,7 @@ nz-breadcrumb {
   padding: 24px;
   background: #fff;
   height: 100%;
+  overflow: scroll;
 }
 
 nz-footer {
@@ -72,4 +73,7 @@ nz-footer {
 
 .logout:hover a{
   color: #1890ff;
+}
+.logout i{
+  font-size: 20px;
 }

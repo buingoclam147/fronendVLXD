@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { delay } from 'rxjs/operators';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { STATE } from 'src/app/core/const/enum';
+import { StateConfig } from 'src/app/core/share/model/state-config.model';
+import { Pagination, Table } from 'src/app/core/share/model/table.model';
 import { CategoryService } from 'src/app/core/share/service/category.service';
-export enum STATE {
-  ADD, UPDATE, VIEW
-}
+
 
 @Component({
   selector: 'app-category',
@@ -12,56 +13,45 @@ export enum STATE {
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+  deleteBtnMany = false;
   id = '';
   state = STATE.ADD;
   visible = false;
   formEverything: FormGroup;
-  isCheckedAll = false;
-  table = {
-    pagination: {
-      searchName: '',
-      perPage: 5,
-      page: 0
-    },
-    total: 0,
-    data: [],
-    isLoading: true
-  };
-  stay = [{
-    title: 'Tạo mới loại hàng',
-    cancelText: 'Hủy',
-    okText: 'Tạo mới'
-  },
-  {
-    title: 'Sửa loại hàng',
-    cancelText: 'Hủy',
-    okText: 'Đồng Ý'
-  },
-  {
-    title: 'Xem loại hàng',
-    cancelText: 'Đóng',
-    okText: null
-  }
+  stateConfig: StateConfig[] = [
+    new StateConfig('Tạo mới loại hàng', 'Hủy', 'Tạo mới'),
+    new StateConfig('Sửa loại hàng', 'Hủy', 'Đồng Ý'),
+    new StateConfig('Xem loại hàng', 'Đóng', 'null'),
   ];
+  action = {
+    create: 'Tạo mới thành công',
+    update: 'cập nhật dữ liệu thành công',
+    delete: 'xóa dữ liệu thành công',
+  };
+  table: Table = new Table(new Pagination(5, 0), 0, [], { searchName: '' });
   constructor(
     private categoryService: CategoryService,
-    private fb: FormBuilder
-  ) {
+    private fb: FormBuilder,
+    private message: NzMessageService
+  ) { }
+  createMessage(type: string, contentMessage: string): void {
+    this.message.create(type, `${contentMessage}`);
   }
-
   ngOnInit(): void {
     this.formEverything = this.fb.group({
       name: '',
       note: ''
     });
-    this.getCategory();
+    this.search();
   }
 
-  getCategory(): void {
+
+  // table
+  search(): void {
     this.table.isLoading = true;
-    this.categoryService.getCategory(this.table.pagination).subscribe(x => {
+    this.categoryService.getCategory(this.table.pagination, this.table.filter).subscribe(x => {
       this.table.total = x.total;
-      this.isCheckedAll = false;
+      this.table.isCheckedAll = false;
       this.table.data = x.data.map((i: any) => {
         i.checked = false;
         return i;
@@ -69,11 +59,23 @@ export class CategoryComponent implements OnInit {
       this.table.isLoading = false;
     });
   }
-  deleteOneCategory(id): void {
-    this.categoryService.deleteOneCategory(id).subscribe(_ => {
-      this.getCategory();
-    });
+
+  pageIndexChange(value): void {
+    this.table.pageIndexChange(value);
+    this.search();
   }
+  pageSizeChange(value): void {
+    this.table.pageSizeChange(value);
+    this.search();
+  }
+
+
+
+
+
+
+  // add update and delete
+
   showModal(state: STATE, id?: any): void {
     this.id = id;
     this.state = state;
@@ -110,24 +112,21 @@ export class CategoryComponent implements OnInit {
           this.categoryService.postOneCategory(data).subscribe(item => {
           });
           this.formEverything.reset();
-          this.getCategory();
+          this.search();
           this.visible = false;
+          this.createMessage('success', this.action.create);
           break;
         }
       case STATE.UPDATE:
         {
-          const data = {
-            name: this.formEverything.value.name,
-            note: this.formEverything.value.note
-          };
-          console.log(this.formEverything);
-          this.categoryService.updateCategory(this.id, data).subscribe(item => {
-            console.log(item);
+          const data = { ...this.formEverything.value };
+          this.categoryService.updateCategory(this.id, data).subscribe(_ => {
+            this.formEverything.reset();
+            this.search();
+            this.visible = false;
+            this.createMessage('success', this.action.update);
+            this.id = '';
           });
-          this.formEverything.reset();
-          this.getCategory();
-          this.visible = false;
-          this.id = '';
           break;
         }
       default:
@@ -139,33 +138,23 @@ export class CategoryComponent implements OnInit {
     this.formEverything.reset();
     this.visible = false;
   }
-  pageIndexChange(value): void {
-    this.table.isLoading = true;
-    this.table.pagination.page = value - 1;
-    console.log(value);
-    this.getCategory();
-  }
-  pageSizeChange(value): void {
-    this.table.isLoading = true;
-    this.table.pagination.perPage = value;
-    this.getCategory();
-  }
-  search(): void {
-    this.getCategory();
-    console.log(this.table.pagination.searchName);
-  }
-  check(item): void {
-    item.checked = !item.checked;
-    this.isCheckedAll = this.table.data.filter(x => x.checked).length === this.table.data.length;
-  }
-  checkAll(): void {
-    this.table.data = this.table.data.map(x => {
-      x.checked = !this.isCheckedAll;
-      return x;
-    });
-    this.isCheckedAll = !this.isCheckedAll;
-  }
   deleteSearch(): void {
-    this.table.pagination.searchName = '';
+    this.table.filter.searchName = '';
+  }
+  deleteOneCategory(id): void {
+    this.categoryService.deleteOneCategory(id).subscribe(_ => {
+      this.search();
+      this.createMessage('success', this.action.delete);
+    });
+  }
+  deleteMany(): void {
+    const data = [];
+    this.table.data.forEach(item => {
+      return item.checked === true ? data.push(item._id) : data;
+    });
+    this.categoryService.deleteCategory(data).subscribe(item => {
+      this.search();
+      this.createMessage('success', this.action.delete);
+    });
   }
 }
