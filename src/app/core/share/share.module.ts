@@ -20,6 +20,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +39,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzPaginationModule,
     NzSpinModule,
     ReactiveFormsModule,
-    NzMessageModule
+    NzMessageModule,
+    NzAlertModule
   ],
   declarations: [
     ShareComponent,
@@ -65,7 +67,8 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     NzPaginationModule,
     NzSpinModule,
     ReactiveFormsModule,
-    NzMessageModule
+    NzMessageModule,
+    NzAlertModule
   ]
 })
 export class ShareModule { }

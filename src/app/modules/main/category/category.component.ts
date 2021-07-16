@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { STATE } from 'src/app/core/const/enum';
 import { StateConfig } from 'src/app/core/share/model/state-config.model';
@@ -13,7 +13,6 @@ import { CategoryService } from 'src/app/core/share/service/category.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  deleteBtnMany = false;
   id = '';
   state = STATE.ADD;
   visible = false;
@@ -21,7 +20,7 @@ export class CategoryComponent implements OnInit {
   stateConfig: StateConfig[] = [
     new StateConfig('Tạo mới loại hàng', 'Hủy', 'Tạo mới'),
     new StateConfig('Sửa loại hàng', 'Hủy', 'Đồng Ý'),
-    new StateConfig('Xem loại hàng', 'Đóng', 'null'),
+    new StateConfig('Xem loại hàng', 'Đóng', null),
   ];
   action = {
     create: 'Tạo mới thành công',
@@ -39,7 +38,7 @@ export class CategoryComponent implements OnInit {
   }
   ngOnInit(): void {
     this.formEverything = this.fb.group({
-      name: '',
+      name: ['', Validators.required],
       note: ''
     });
     this.search();
@@ -68,9 +67,6 @@ export class CategoryComponent implements OnInit {
     this.table.pageSizeChange(value);
     this.search();
   }
-
-
-
 
 
 
@@ -140,6 +136,7 @@ export class CategoryComponent implements OnInit {
   }
   deleteSearch(): void {
     this.table.filter.searchName = '';
+    this.search();
   }
   deleteOneCategory(id): void {
     this.categoryService.deleteOneCategory(id).subscribe(_ => {
@@ -156,5 +153,10 @@ export class CategoryComponent implements OnInit {
       this.search();
       this.createMessage('success', this.action.delete);
     });
+    console.log(data);
+  }
+
+  isShowMinus(): boolean {
+    return !!this.table.data.find(x => x.checked === true);
   }
 }

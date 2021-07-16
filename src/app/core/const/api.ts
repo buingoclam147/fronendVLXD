@@ -12,5 +12,15 @@ export const API = {
             return 'category/' + id;
         },
         DELETE_MANY: 'category/delete-many'
+    },
+    SUPPLIER: {
+        GET_LIST: 'supplier',
+        GET_ONE: (id: any) => {
+            return 'supplier/' + id;
+        },
+        POST_ONE: 'supplier',
+        DELETE_ONE: (id: any) => {
+            return 'supplier/' + id;
+        },
     }
 };

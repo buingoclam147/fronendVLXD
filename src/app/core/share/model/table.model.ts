@@ -1,3 +1,4 @@
+
 export class Table {
     pagination: Pagination;
     total: number;

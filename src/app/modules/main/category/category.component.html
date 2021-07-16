@@ -1,19 +1,20 @@
 <div class="container">
   <div class="box-out-search">
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-      <div nz-col class="gutter-row" [nzSpan]="18">
+      <div nz-col [nzSpan]="18">
         <div class="inner-box">
           <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton" [nzSuffix]="inputClearTpl">
             <input #ipsearch type="text" [(ngModel)]="table.filter.searchName" nz-input
               placeholder="Tìm kiếm theo loại hàng" />
           </nz-input-group>
           <ng-template #suffixButton>
-            <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()">Tìm kiếm</button>
+            <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()" class="m-0 abc">Tìm
+              kiếm</button>
           </ng-template>
         </div>
       </div>
-      <div nz-col class="gutter-row plus" >
-        <div class="inner-box mx-2" [nzSpan]="6" *ngIf="deleteBtnMany">
+      <div nz-col class="mx-5 plus">
+        <div class="inner-box mx-2" [nzSpan]="6" *ngIf="isShowMinus()">
           <button nz-button nzType="primary" nzPopconfirmPlacement="bottom" nz-popconfirm
             nzPopconfirmTitle="Bạn có chắc chắn muốn xóa không?" (nzOnConfirm)="deleteMany()">
             <i nz-icon nzType="minus" nzTheme="outline"></i>
@@ -81,9 +82,11 @@
 
 
 <nz-modal [(nzVisible)]="visible" [nzTitle]="stateConfig[state].title" (nzOnCancel)="onCancel()"
-  [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()">
+  [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()"
+  [nzOkDisabled]="formEverything.invalid">
   <form [formGroup]="formEverything">
-    <input nz-input placeholder="Tên loại hàng" [formControlName]="'name'" class=" my-3" />
-    <textarea rows="4" nz-input [formControlName]="'note'"></textarea>
+    <input nz-input placeholder="Tên loại hàng" [formControlName]="'name'" class=" mt-3 mb-2 input-name" />
+    <nz-alert nzType="error" nzMessage="Tên loại hàng không được bỏ trống" *ngIf="formEverything.invalid && formEverything.touched"></nz-alert>
+    <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'" class="my-3"></textarea>
   </form>
 </nz-modal>

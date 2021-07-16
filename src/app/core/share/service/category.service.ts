@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { API } from '../../const/api';
 import { PAGINATION_INIT } from '../../const/sys.const';
 import { Pagination } from '../model/table.model';
