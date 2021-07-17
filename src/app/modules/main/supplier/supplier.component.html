@@ -21,8 +21,8 @@
                         <div class="inner-box">
                             <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton2"
                                 [nzSuffix]="inputClearTpl2">
-                                <input #ipsearch2 type="text" [(ngModel)]="table.filter.address"
-                                 nz-input placeholder="Tìm kiếm theo địa chỉ" />
+                                <input #ipsearch2 type="text" [(ngModel)]="table.filter.address" nz-input
+                                    placeholder="Tìm kiếm theo địa chỉ" />
                             </nz-input-group>
                             <ng-template #suffixButton2>
                                 <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()"
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div nz-col class="mx-5 plus">
-                <div class="inner-box mx-2" [nzSpan]="6" *ngIf="">
+                <div class="inner-box mx-2" [nzSpan]="6" *ngIf="isShowMinus()">
                     <button nz-button nzType="primary" nzPopconfirmPlacement="bottom" nz-popconfirm
                         nzPopconfirmTitle="Bạn có chắc chắn muốn xóa không?" (nzOnConfirm)="deleteMany()">
                         <i nz-icon nzType="minus" nzTheme="outline"></i>
@@ -57,8 +57,8 @@
                             [checked]="table.isCheckedAll">
                     </th>
                     <th>Tên nhà cung cấp</th>
-                    <th>địa chỉ</th>
-                    <th>số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
@@ -88,9 +88,9 @@
     </div>
     <div class="pagination-bottom">
         <nz-pagination [nzPageIndex]="table.pagination.page + 1 " [nzTotal]="table.total" [nzPageSize]="2"
-          (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="table.pagination.perPage" nzShowSizeChanger
-          [nzPageSizeOptions]="[5, 10, 20]" (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
-      </div>
+            (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="table.pagination.perPage" nzShowSizeChanger
+            [nzPageSizeOptions]="[5, 10, 20]" (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
+    </div>
 </div>
 
 
@@ -103,10 +103,15 @@
         (click)="deleteSearch('address')"></i>
 </ng-template>
 <nz-modal [(nzVisible)]="visible" [nzTitle]="stateConfig[state].title" (nzOnCancel)="onCancel()"
-  [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()">
-  <form [formGroup]="formEverything">
-    <input nz-input placeholder="Tên nhà cung cấp" [formControlName]="'name'" class=" my-3" />
-    <input nz-input placeholder="Số điện thoại" [formControlName]="'phoneNumber'" class=" my-3" />
-    <textarea rows="4" nz-input placeholder="Địa chỉ" [formControlName]="'address'"></textarea>
-  </form>
+    [nzCancelText]="stateConfig[state].cancelText" [nzOkDisabled]="formEverything.invalid"
+    [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()">
+    <form [formGroup]="formEverything">
+        <input nz-input placeholder="Tên nhà cung cấp" [formControlName]="'name'" class=" my-3" />
+        <nz-alert nzType="error" nzMessage="Tên nhà cung cấp không được bỏ trống"
+            *ngIf="formEverything.controls.name.invalid && formEverything.touched"></nz-alert>
+        <input nz-input placeholder="Số điện thoại" [formControlName]="'phoneNumber'" class=" my-3" />
+        <nz-alert nzType="error" nzMessage="Số điện thoại không được bỏ trống hoặc nhỏ hơn 10 số"
+            *ngIf="formEverything.controls.phoneNumber.invalid  && formEverything.touched"></nz-alert>
+        <textarea rows="4" nz-input placeholder="Địa chỉ" [formControlName]="'address'"></textarea>
+    </form>
 </nz-modal>

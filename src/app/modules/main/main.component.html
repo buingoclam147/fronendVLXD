@@ -4,8 +4,8 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-submenu nzTitle="Hàng hóa" nzIcon="shop">
         <ul>
-          <li nz-menu-item [routerLink]="['/main/category']" >Loại hàng</li>
-          <li nz-menu-item>Hàng hóa</li>
+          <li nz-menu-item [routerLink]="['/main/category']">Loại hàng</li>
+          <li nz-menu-item [routerLink]="['/main/product']">Hàng hóa</li>
           <li nz-menu-item [routerLink]="['/main/supplier']">Nhà cung cấp</li>
         </ul>
       </li>
@@ -35,7 +35,7 @@
       <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"></i>
       <div class="logout">
-        <button><a href="#"><i nz-icon nzType="logout" nzTheme="outline" ></i></a></button>
+        <button><a href="#"><i nz-icon nzType="logout" nzTheme="outline"></i></a></button>
       </div>
     </nz-header>
     <nz-content>

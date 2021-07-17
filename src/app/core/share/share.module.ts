@@ -21,6 +21,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
 @NgModule({
   imports: [
     CommonModule,
@@ -40,7 +43,10 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzSpinModule,
     ReactiveFormsModule,
     NzMessageModule,
-    NzAlertModule
+    NzAlertModule,
+    NzUploadModule,
+    NzSelectModule,
+    NzSliderModule
   ],
   declarations: [
     ShareComponent,
@@ -68,7 +74,10 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzSpinModule,
     ReactiveFormsModule,
     NzMessageModule,
-    NzAlertModule
+    NzAlertModule,
+    NzUploadModule,
+    NzSelectModule,
+    NzSliderModule
   ]
 })
 export class ShareModule { }

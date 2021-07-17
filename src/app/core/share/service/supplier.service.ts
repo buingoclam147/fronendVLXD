@@ -31,4 +31,10 @@ export class SupplierService {
   deleteOneSupplier(id: any): Observable<any> {
     return this.httpService.sendToServer(METHOD.DELETE, API.SUPPLIER.DELETE_ONE(id));
   }
+  updateSupplier(id: any, data: any): Observable<any> {
+    return this.httpService.sendToServer(METHOD.PATCH, API.SUPPLIER.UPDATE(id), data);
+  }
+  deleteSupplier(data: any): Observable<any> {
+    return this.httpService.sendToServer(METHOD.POST, API.SUPPLIER.DELETE_MANY, data);
+  }
 }

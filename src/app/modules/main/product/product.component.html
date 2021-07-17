@@ -1,4 +1,159 @@
+<div class="container">
+  <div class="box-out-search">
+    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+      <div nz-col [nzSpan]="18">
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+          <div nz-col [nzSpan]="6">
+            <div class="inner-box">
+              <nz-select [nzSize]="'large'" nzShowSearch nzAllowClear nzPlaceHolder="Loại hàng" [(ngModel)]="table.filter.idCategory" >
+                <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataCategory"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+          <div nz-col [nzSpan]="6">
+            <div class="inner-box">
+              <nz-select [nzSize]="'large'" nzShowSearch nzAllowClear nzPlaceHolder="Nhà cung cấp" [(ngModel)]="table.filter.idSupplier" >
+                <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataSupplier"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+          <div nz-col [nzSpan]="6">
+            <div class="inner-box">
+              <nz-input-group nzSearch nzSize="large" [nzSuffix]="inputClearTpl1">
+                <input #ipsearch1 type="text" [(ngModel)]="table.filter.searchName" nz-input
+                  placeholder="Tên sản phẩm" />
+              </nz-input-group>
+            </div>
+          </div>
+          
+          <div nz-col [nzSpan]="6">
+            <div class="inner-box">
+                <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()" class="m-0">Tìm
+                  kiếm</button>
+            </div>
+          </div>
+          <div nz-col [nzSpan]="18" class="mt-4">
+            <label > Giá sản phẩm</label>
+            <div class="inner-box">
+              <nz-slider nzRange [(ngModel)]="valuePrice" [nzMarks]="marks" [nzMax]="500" ></nz-slider>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div nz-col class="mx-5 plus">
+        <div class="inner-box mx-2" [nzSpan]="6" *ngIf="isShowMinus()">
+          <button nz-button nzType="primary" nzPopconfirmPlacement="bottom" nz-popconfirm
+            nzPopconfirmTitle="Bạn có chắc chắn muốn xóa không?" (nzOnConfirm)="deleteMany()">
+            <i nz-icon nzType="minus" nzTheme="outline"></i>
+          </button>
+        </div>
+        <div class="inner-box mx-2">
+          <button nz-button nzType="primary" (click)="showModal(0)">
+            <i nz-icon nzType="plus" nzTheme="outline"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-content">
 
-<p>
-  Bill is a cat.
-</p>
+    <table class="table-container">
+      <thead>
+        <tr>
+          <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()" [checked]="table.isCheckedAll">
+          </th>
+          <th>Tên nhà cung cấp</th>
+          <th>địa chỉ</th>
+          <th>số điện thoại</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of table.data">
+          <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)" [checked]="item.checked"></td>
+          <td class="text-center">{{item.name}}</td>
+          <td class="text-center note-text py-6">
+            <div class="text-overflow"> {{item.address}} </div>
+          </td>
+          <td class="text-center note-text py-6">
+            <div class="text-overflow"> {{item.phoneNumber}} </div>
+          </td>
+          <td class="btn-action text-center">
+            <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
+              (nzOnConfirm)="deleteOneCategory(item._id)">
+              <i nz-icon nzType="delete" nzTheme="outline"></i>
+            </button>
+            <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
+            <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-bottom">
+    <nz-pagination [nzPageIndex]="table.pagination.page + 1 " [nzTotal]="table.total" [nzPageSize]="2"
+      (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="table.pagination.perPage" nzShowSizeChanger
+      [nzPageSizeOptions]="[5, 10, 20]" (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
+  </div>
+</div>
+
+
+<ng-template #inputClearTpl1>
+  <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch1.value"
+    (click)="deleteSearch()"></i>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<nz-modal [(nzVisible)]="visible" [nzTitle]="stateConfig[state].title" (nzOnCancel)="onCancel()"
+  [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()"
+  [nzOkDisabled]="formEverything.invalid">
+  <form [formGroup]="formEverything" enctype="multipart/form-data">
+    <input nz-input placeholder="Loại hàng" [formControlName]="'nameCategory'" class=" mt-3 mb-2 input-name" />
+    <input nz-input placeholder="Nhà cung cấp" [formControlName]="'nameProduct'" class=" mt-3 mb-2 input-name" />
+    <input nz-input placeholder="Tên sản phẩm" [formControlName]="'name'" class=" mt-3 mb-2 input-name" />
+    <input nz-input placeholder="Giá bán" [formControlName]="'price'" class=" mt-3 mb-2 input-name" />
+    <input nz-input placeholder="Đơn vị " [formControlName]="'unit'" class=" mt-3 mb-2 input-name" />
+    <input nz-input placeholder="Số lượng" [formControlName]="'quantity'" class=" mt-3 mb-2 input-name" />
+    <div class="clearfix addImg">
+      <div class="clearfix">
+        <nz-upload class="upload-list-inline" nzAction="http://localhost:3000/upload" nzListType="picture"
+          [(nzFileList)]="defaultFileList">
+          <button nz-button>
+            <span>
+              <i nz-icon nzType="upload"></i>
+              Thêm ảnh
+            </span>
+          </button>
+        </nz-upload>
+      </div>
+    </div>
+    <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'" class="my-3"></textarea>
+  </form>
+</nz-modal>

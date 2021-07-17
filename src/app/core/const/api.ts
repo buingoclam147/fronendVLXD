@@ -22,5 +22,24 @@ export const API = {
         DELETE_ONE: (id: any) => {
             return 'supplier/' + id;
         },
+        UPDATE: (id: any) => {
+            return 'supplier/' + id;
+        },
+        DELETE_MANY: 'supplier/delete-many'
+    },
+    PRODUCT: {
+        GET_LIST: 'product',
+        GET_ONE: (id: any) => {
+            return 'product/' + id;
+        },
+        POST_ONE: 'product',
+        DELETE_ONE: (id: any) => {
+            return 'product/' + id;
+        },
+        UPDATE: (id: any) => {
+            return 'product/' + id;
+        },
+        DELETE_MANY: 'product/delete-many'
     }
+
 };
