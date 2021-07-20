@@ -5,14 +5,16 @@
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
           <div nz-col [nzSpan]="6">
             <div class="inner-box">
-              <nz-select [nzSize]="'large'" nzShowSearch nzAllowClear nzPlaceHolder="Loại hàng" [(ngModel)]="table.filter.idCategory" >
+              <nz-select [nzSize]="'large'" nzShowSearch [nzAllowClear]="true" nzPlaceHolder="Loại hàng"
+                [(ngModel)]="table.filter.categoryId">
                 <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataCategory"></nz-option>
               </nz-select>
             </div>
           </div>
           <div nz-col [nzSpan]="6">
             <div class="inner-box">
-              <nz-select [nzSize]="'large'" nzShowSearch nzAllowClear nzPlaceHolder="Nhà cung cấp" [(ngModel)]="table.filter.idSupplier" >
+              <nz-select [nzSize]="'large'" nzShowSearch nzAllowClear nzPlaceHolder="Nhà cung cấp"
+                [(ngModel)]="table.filter.supplierId">
                 <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataSupplier"></nz-option>
               </nz-select>
             </div>
@@ -20,22 +22,21 @@
           <div nz-col [nzSpan]="6">
             <div class="inner-box">
               <nz-input-group nzSearch nzSize="large" [nzSuffix]="inputClearTpl1">
-                <input #ipsearch1 type="text" [(ngModel)]="table.filter.searchName" nz-input
-                  placeholder="Tên sản phẩm" />
+                <input #ipsearch1 type="text" [(ngModel)]="table.filter.name" nz-input placeholder="Tên sản phẩm" />
               </nz-input-group>
             </div>
           </div>
-          
+
           <div nz-col [nzSpan]="6">
             <div class="inner-box">
-                <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()" class="m-0">Tìm
-                  kiếm</button>
+              <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()" class="m-0">Tìm
+                kiếm</button>
             </div>
           </div>
           <div nz-col [nzSpan]="18" class="mt-4">
-            <label > Giá sản phẩm</label>
+            <label class="text-Price"> Giá sản phẩm</label>
             <div class="inner-box">
-              <nz-slider nzRange [(ngModel)]="valuePrice" [nzMarks]="marks" [nzMax]="500" ></nz-slider>
+              <nz-slider  nzRange [(ngModel)]="table.filter.price" [nzMarks]="marks" [nzMax]="maxPrice"></nz-slider>
             </div>
           </div>
         </div>
@@ -62,21 +63,27 @@
         <tr>
           <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()" [checked]="table.isCheckedAll">
           </th>
-          <th>Tên nhà cung cấp</th>
-          <th>địa chỉ</th>
-          <th>số điện thoại</th>
+          <th>Loại hàng</th>
+          <th>Nhà cung cấp</th>
+          <th>Sản phẩm</th>
+          <th>Giá bán</th>
           <th>Hành động</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of table.data">
           <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)" [checked]="item.checked"></td>
-          <td class="text-center">{{item.name}}</td>
-          <td class="text-center note-text py-6">
-            <div class="text-overflow"> {{item.address}} </div>
+          <td class="text-center">
+            <div class="text-overflow">{{item.categoryId | category:dataCategory}}</div>
           </td>
           <td class="text-center note-text py-6">
-            <div class="text-overflow"> {{item.phoneNumber}} </div>
+            <div class="text-overflow"> {{item.supplierId | supplier:dataSupplier}} </div>
+          </td>
+          <td class="text-center note-text py-6">
+            <div class="text-overflow"> {{item.name}} </div>
+          </td>
+          <td class="text-center note-text py-6">
+            <div class="text-overflow"> {{item.price | money}} </div>
           </td>
           <td class="btn-action text-center">
             <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
@@ -135,13 +142,19 @@
   [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()"
   [nzOkDisabled]="formEverything.invalid">
   <form [formGroup]="formEverything" enctype="multipart/form-data">
-    <input nz-input placeholder="Loại hàng" [formControlName]="'nameCategory'" class=" mt-3 mb-2 input-name" />
-    <input nz-input placeholder="Nhà cung cấp" [formControlName]="'nameProduct'" class=" mt-3 mb-2 input-name" />
-    <input nz-input placeholder="Tên sản phẩm" [formControlName]="'name'" class=" mt-3 mb-2 input-name" />
+    <nz-select [nzSize]="'large'" class=" mt-3 mb-2" nzShowSearch nzAllowClear nzPlaceHolder="Loại hàng"
+      [formControlName]="'categoryId'" [nzDisabled]="typeForm ==='view'">
+      <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataCategory"></nz-option>
+    </nz-select>
+    <nz-select [nzSize]="'large'" class=" mt-3 mb-2" nzShowSearch nzAllowClear nzPlaceHolder="Nhà cung cấp"
+      [formControlName]="'supplierId'" [nzDisabled]="typeForm ==='view'">
+      <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataSupplier"></nz-option>
+    </nz-select>
+    <input nz-input placeholder="Tên sản phẩm" [formControlName]="'name'" class=" mt-3 mb-2 input-name"/>
     <input nz-input placeholder="Giá bán" [formControlName]="'price'" class=" mt-3 mb-2 input-name" />
     <input nz-input placeholder="Đơn vị " [formControlName]="'unit'" class=" mt-3 mb-2 input-name" />
     <input nz-input placeholder="Số lượng" [formControlName]="'quantity'" class=" mt-3 mb-2 input-name" />
-    <div class="clearfix addImg">
+    <div class="clearfix addImg my-3" *ngIf="typeForm ==='add' || typeForm ==='update'">
       <div class="clearfix">
         <nz-upload class="upload-list-inline" nzAction="http://localhost:3000/upload" nzListType="picture"
           [(nzFileList)]="defaultFileList">
@@ -154,6 +167,12 @@
         </nz-upload>
       </div>
     </div>
-    <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'" class="my-3"></textarea>
+    <div class="p-auto img-product py-2 mb-3" *ngIf="typeForm ==='view' || typeForm ==='update'" nz-row [nzGutter]="16">
+      <div nz-col class="gutter-row mb-2 onDelete" [nzSpan]="12" *ngFor="let img of formEverything.value.photos">
+        <img nz-image width="227px" height="227px" [nzSrc]="img" [alt]="img" class="img-update"/>
+        <button class="btn-delete-img" (click)="deleteImg(img)"><i nz-icon nzType="close" nzTheme="outline"></i></button>
+      </div>
+    </div>
+    <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'" class="mb-3"></textarea>
   </form>
 </nz-modal>

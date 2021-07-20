@@ -1,7 +1,53 @@
-.addImg{
-    border: 1px solid #d9d9d9;
-    padding: 16px;
+.addImg {
+  border: 1px solid #d9d9d9;
+  padding: 16px;
 }
+
 nz-select {
-    width: 200px;
-  }
+  width: 100%;
+}
+
+.text-Price {
+  font-weight: 600;
+  color: rgba(0, 0, 0, .45);
+}
+
+.img-product {
+  display: flex;
+  border: 1px solid #d9d9d9;
+  position: relative;
+}
+.onDelete{
+    overflow: hidden;
+}
+.img-update{
+    transition: all 300ms ease 200ms;
+}
+.onDelete:hover .btn-delete-img {
+  display: block;
+  transition: all 300ms ease 200ms;
+  transform: scale(1.5);
+  transform-style: preserve-3d;
+}
+
+.btn-delete-img:hover{
+    cursor: pointer;
+}
+.onDelete:hover .img-update{
+    transition: all 300ms ease 200ms;
+  transform: scale(1.3);
+  filter: brightness(50%);
+}
+.btn-delete-img {
+  display: none;
+  position: absolute;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
+  border-radius: 50%;
+  border: 0;
+  width: 50px;
+  height: 50px;
+  transition: all 1000ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transform: perspective(1200px) rotateX(90deg) translateZ(-45px);
+  overflow: hidden;
+}

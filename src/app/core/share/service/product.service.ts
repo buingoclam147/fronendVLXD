@@ -13,7 +13,8 @@ export class ProductService {
 
   getProduct(pagination: Pagination, filter: any): Observable<any> {
     const data = {
-      ...pagination, ...filter
+      ...pagination, ...filter, price: `${filter.price}`
+
     };
     if (data) {
       return this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_LIST, data);

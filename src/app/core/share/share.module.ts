@@ -24,6 +24,10 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { CategoryPipe } from './pipes/category.pipe';
+import { SupplierPipe } from './pipes/supplier.pipe';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { MoneyPipe } from './pipes/money.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -46,13 +50,18 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
     NzAlertModule,
     NzUploadModule,
     NzSelectModule,
-    NzSliderModule
+    NzSliderModule,
+    NzImageModule
   ],
   declarations: [
     ShareComponent,
     NavbarComponent,
     FooterComponent,
     ColorDirective,
+    CategoryPipe,
+    SupplierPipe,
+    MoneyPipe
+
   ],
   exports: [
     NavbarComponent,
@@ -77,7 +86,12 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
     NzAlertModule,
     NzUploadModule,
     NzSelectModule,
-    NzSliderModule
+    NzSliderModule,
+    CategoryPipe,
+    SupplierPipe,
+    NzImageModule,
+    MoneyPipe
+
   ]
 })
 export class ShareModule { }

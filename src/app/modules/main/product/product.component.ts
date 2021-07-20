@@ -16,21 +16,22 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  maxPrice = 500;
   defaultFileList: NzUploadFile[] = [];
   dataCategory = [];
   dataSupplier = [];
-  valuePrice = [0, 500];
   marks = {
-    0: '0 VND',
-    50: '50.000 VND',
-    200: '200.000 VND',
+    0: '0đ',
+    50: '50.000đ',
+    200: '200.000đ',
     500: {
       style: {
         color: '#f50'
       },
-      label: '<strong>500.000 VND</strong>'
+      label: '<strong>500.000đ</strong>'
     }
   };
+  typeForm = '';
   id = '';
   state = STATE.ADD;
   visible = false;
@@ -45,7 +46,13 @@ export class ProductComponent implements OnInit {
     update: 'cập nhật dữ liệu thành công',
     delete: 'xóa dữ liệu thành công',
   };
-  table: Table = new Table(new Pagination(5, 0), 0, [], { idCategory: '', idSupplier: '', searchName: '' });
+  table: Table = new Table(new Pagination(5, 0), 0, [],
+    {
+      categoryId: '',
+      supplierId: '',
+      name: '',
+      price: [0, this.maxPrice]
+    });
 
   constructor(
     private supplierService: SupplierService,
@@ -60,16 +67,17 @@ export class ProductComponent implements OnInit {
   }
   ngOnInit(): void {
     this.formEverything = this.fb.group({
-      nameCategory: ['', Validators.required],
-      nameProduct: ['', Validators.required],
+      categoryId: ['', Validators.required],
+      supplierId: ['', Validators.required],
       name: ['', Validators.required],
       price: '',
       unit: '',
       quantity: '',
-      photos: '',
+      photos: [],
       note: ''
     });
     this.getFilterData();
+    this.search();
   }
   getFilterData(): void {
     this.categoryService.getCategory(new Pagination(99, 0), '').subscribe(data => {
@@ -90,6 +98,8 @@ export class ProductComponent implements OnInit {
         i.checked = false;
         return i;
       });
+      this.typeForm = '';
+      console.log(this.typeForm);
       this.table.isLoading = false;
     });
   }
@@ -106,14 +116,12 @@ export class ProductComponent implements OnInit {
             ...this.formEverything.value,
             photos: this.defaultFileList.map(x => environment.localhost + '/' + x.response.filename)
           };
-          console.log(data);
-          this.productService.postOneProduct(data).subscribe(item => {
-            console.log(item);
+          this.productService.postOneProduct(data).subscribe(_ => {
+            this.formEverything.reset();
+            this.visible = false;
+            this.createMessage('success', this.action.create);
+            this.search();
           });
-          this.formEverything.reset();
-          // this.search();
-          this.visible = false;
-          this.createMessage('success', this.action.create);
           break;
         }
       case STATE.UPDATE:
@@ -121,7 +129,7 @@ export class ProductComponent implements OnInit {
           const data = { ...this.formEverything.value };
           this.productService.updateProduct(this.id, data).subscribe(_ => {
             this.formEverything.reset();
-            // this.search();
+            this.search();
             this.visible = false;
             this.createMessage('success', this.action.update);
             this.id = '';
@@ -132,25 +140,51 @@ export class ProductComponent implements OnInit {
         break;
     }
   }
-  showModal(state: STATE, id?: any): void {
+  showModal(state: STATE, id?: any): any {
     this.id = id;
     this.state = state;
     switch (this.state) {
       case STATE.ADD:
         {
+          this.typeForm = 'add';
           this.visible = true;
           break;
         }
       case STATE.UPDATE:
+        {
+          this.productService.getOneProduct(id).subscribe(item => {
+            this.formEverything.patchValue({
+              name: item.name,
+              categoryId: item.categoryId,
+              supplierId: item.supplierId,
+              price: item.price,
+              unit: item.unit,
+              origin: item.origin,
+              quantity: item.quantity,
+              photos: item.photos,
+              note: item.note
+            });
+            this.visible = true;
+            this.typeForm = 'update';
+          });
+          break;
+        }
       case STATE.VIEW:
         {
           this.productService.getOneProduct(id).subscribe(item => {
             this.formEverything.patchValue({
               name: item.name,
-              address: item.address,
-              phoneNumber: item.phoneNumber
+              categoryId: item.categoryId,
+              supplierId: item.supplierId,
+              price: item.price,
+              unit: item.unit,
+              origin: item.origin,
+              quantity: item.quantity,
+              photos: item.photos,
+              note: item.note
             });
             this.visible = true;
+            this.typeForm = 'view';
           });
           break;
         }
@@ -171,5 +205,15 @@ export class ProductComponent implements OnInit {
   }
   deleteSearch(): void {
     this.table.filter.searchName = '';
+  }
+  deleteOneCategory(id): void {
+    this.productService.deleteOneProduct(id).subscribe(_ => {
+      this.search();
+      this.createMessage('success', this.action.delete);
+    });
+  }
+  deleteImg(nameImg): void {
+    this.formEverything.value.photos = this.formEverything.value.photos.filter(item => item !== nameImg);
+    console.log(this.formEverything.value.photos);
   }
 }
