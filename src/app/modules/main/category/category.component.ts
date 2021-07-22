@@ -85,10 +85,7 @@ export class CategoryComponent implements OnInit {
       case STATE.VIEW:
         {
           this.categoryService.getOneCategory(id).subscribe(item => {
-            this.formEverything.patchValue({
-              name: item.name,
-              note: item.note
-            });
+            this.formEverything.patchValue({...item});
             this.visible = true;
           });
           break;
@@ -101,10 +98,7 @@ export class CategoryComponent implements OnInit {
     switch (this.state) {
       case STATE.ADD:
         {
-          const data = {
-            name: this.formEverything.value.name,
-            note: this.formEverything.value.note
-          };
+          const data = { ...this.formEverything.value };
           this.categoryService.postOneCategory(data).subscribe(item => {
           });
           this.formEverything.reset();

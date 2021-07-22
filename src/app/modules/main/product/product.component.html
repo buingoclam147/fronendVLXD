@@ -26,7 +26,6 @@
               </nz-input-group>
             </div>
           </div>
-
           <div nz-col [nzSpan]="6">
             <div class="inner-box">
               <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()" class="m-0">Tìm
@@ -36,7 +35,8 @@
           <div nz-col [nzSpan]="18" class="mt-4">
             <label class="text-Price"> Giá sản phẩm</label>
             <div class="inner-box">
-              <nz-slider  nzRange [(ngModel)]="table.filter.price" [nzMarks]="marks" [nzMax]="maxPrice"></nz-slider>
+              <nz-slider [nzTipFormatter]="formatFn" nzRange [(ngModel)]="table.filter.price" [nzMarks]="marks"
+                [nzMax]="maxPrice"></nz-slider>
             </div>
           </div>
         </div>
@@ -57,7 +57,6 @@
     </div>
   </div>
   <div class="table-content">
-
     <table class="table-container">
       <thead>
         <tr>
@@ -150,10 +149,13 @@
       [formControlName]="'supplierId'" [nzDisabled]="typeForm ==='view'">
       <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataSupplier"></nz-option>
     </nz-select>
-    <input nz-input placeholder="Tên sản phẩm" [formControlName]="'name'" class=" mt-3 mb-2 input-name"/>
-    <input nz-input placeholder="Giá bán" [formControlName]="'price'" class=" mt-3 mb-2 input-name" />
-    <input nz-input placeholder="Đơn vị " [formControlName]="'unit'" class=" mt-3 mb-2 input-name" />
-    <input nz-input placeholder="Số lượng" [formControlName]="'quantity'" class=" mt-3 mb-2 input-name" />
+    <input nz-input placeholder="Tên sản phẩm" [formControlName]="'name'" class=" mt-3 mb-2 input-name"
+      [nzSize]="'large'" [type]="'text'"/>
+    <input nz-input placeholder="Giá bán" [formControlName]="'price'" class=" mt-3 mb-2 input-name"
+      [nzSize]="'large'" [type]="'number'"/>
+    <input nz-input placeholder="Đơn vị " [formControlName]="'unit'" class=" mt-3 mb-2 input-name" [nzSize]="'large'" [type]="'text'"/>
+    <input nz-input placeholder="Số lượng" [formControlName]="'quantity'" class=" mt-3 mb-2 input-name"
+      [nzSize]="'large'" [type]="'number'"/>
     <div class="clearfix addImg my-3" *ngIf="typeForm ==='add' || typeForm ==='update'">
       <div class="clearfix">
         <nz-upload class="upload-list-inline" nzAction="http://localhost:3000/upload" nzListType="picture"
@@ -169,10 +171,12 @@
     </div>
     <div class="p-auto img-product py-2 mb-3" *ngIf="typeForm ==='view' || typeForm ==='update'" nz-row [nzGutter]="16">
       <div nz-col class="gutter-row mb-2 onDelete" [nzSpan]="12" *ngFor="let img of formEverything.value.photos">
-        <img nz-image width="227px" height="227px" [nzSrc]="img" [alt]="img" class="img-update"/>
-        <button class="btn-delete-img" (click)="deleteImg(img)"><i nz-icon nzType="close" nzTheme="outline"></i></button>
+        <img nz-image width="227px" height="227px" [nzSrc]="img" [alt]="img" class="img-update" />
+        <button class="btn-delete-img" (click)="deleteImg(img)" *ngIf="typeForm ==='add' || typeForm ==='update'"><i
+            nz-icon nzType="close" nzTheme="outline"></i></button>
       </div>
     </div>
-    <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'" class="mb-3"></textarea>
+    <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'" class="mb-3"
+      [nzSize]="'large'"></textarea>
   </form>
 </nz-modal>

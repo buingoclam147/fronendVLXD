@@ -16,15 +16,16 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  maxPrice = 500;
+
+  maxPrice = 500000;
   defaultFileList: NzUploadFile[] = [];
   dataCategory = [];
   dataSupplier = [];
   marks = {
     0: '0đ',
-    50: '50.000đ',
-    200: '200.000đ',
-    500: {
+    50000: '50.000đ',
+    200000: '200.000đ',
+    500000: {
       style: {
         color: '#f50'
       },
@@ -37,15 +38,16 @@ export class ProductComponent implements OnInit {
   visible = false;
   formEverything: FormGroup;
   stateConfig: StateConfig[] = [
-    new StateConfig('Tạo mới loại hàng', 'Hủy', 'Tạo mới'),
-    new StateConfig('Sửa loại hàng', 'Hủy', 'Đồng Ý'),
-    new StateConfig('Xem loại hàng', 'Đóng', null),
+    new StateConfig('Tạo mới sản phẩm', 'Hủy', 'Tạo mới'),
+    new StateConfig('Sửa sản phẩm', 'Hủy', 'Đồng Ý'),
+    new StateConfig('Xem chi tiết sản phẩm', 'Đóng', null),
   ];
   action = {
     create: 'Tạo mới thành công',
     update: 'cập nhật dữ liệu thành công',
     delete: 'xóa dữ liệu thành công',
   };
+
   table: Table = new Table(new Pagination(5, 0), 0, [],
     {
       categoryId: '',
@@ -109,30 +111,40 @@ export class ProductComponent implements OnInit {
     this.visible = false;
   }
   handleOk(): void {
+    const newDataPhotos = this.defaultFileList.map(x => environment.localhost + '/' + x.response.filename);
     switch (this.state) {
       case STATE.ADD:
         {
           const data = {
             ...this.formEverything.value,
-            photos: this.defaultFileList.map(x => environment.localhost + '/' + x.response.filename)
+            photos: newDataPhotos
           };
           this.productService.postOneProduct(data).subscribe(_ => {
             this.formEverything.reset();
             this.visible = false;
             this.createMessage('success', this.action.create);
             this.search();
+            this.defaultFileList = [];
           });
           break;
         }
       case STATE.UPDATE:
         {
-          const data = { ...this.formEverything.value };
+          const data = {
+            ...this.formEverything.value,
+            photos:
+              [
+                ...this.formEverything.value.photos,
+                ...newDataPhotos
+              ]
+          };
           this.productService.updateProduct(this.id, data).subscribe(_ => {
             this.formEverything.reset();
             this.search();
             this.visible = false;
             this.createMessage('success', this.action.update);
             this.id = '';
+            this.defaultFileList = [];
           });
           break;
         }
@@ -215,5 +227,8 @@ export class ProductComponent implements OnInit {
   deleteImg(nameImg): void {
     this.formEverything.value.photos = this.formEverything.value.photos.filter(item => item !== nameImg);
     console.log(this.formEverything.value.photos);
+  }
+  formatFn = (value: number): string => {
+    return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   }
 }

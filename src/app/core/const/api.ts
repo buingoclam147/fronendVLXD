@@ -40,6 +40,20 @@ export const API = {
             return 'product/' + id;
         },
         DELETE_MANY: 'product/delete-many'
+    },
+    CUSTOMER: {
+        GET_LIST: 'customer',
+        GET_ONE: (id: any) => {
+            return 'customer/' + id;
+        },
+        POST_ONE: 'customer',
+        DELETE_ONE: (id: any) => {
+            return 'customer/' + id;
+        },
+        UPDATE: (id: any) => {
+            return 'customer/' + id;
+        },
+        DELETE_MANY: 'customer/delete-many'
     }
 
 };

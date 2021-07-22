@@ -15,17 +15,13 @@
           <li nz-menu-item>Chi tiết hóa đơn</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Khách hàng" nzIcon="team">
-        <ul>
-          <li nz-menu-item>Khách hàng</li>
-          <li nz-menu-item>Chi tiết khách hàng</li>
-        </ul>
+      <li nz-menu-item [routerLink]="['/main/customer']">
+        <i nz-icon nzType="team"></i>
+        <span>Khách hàng</span>
       </li>
-      <li nz-submenu nzTitle="Nhân viên" nzIcon="user-switch">
-        <ul>
-          <li nz-menu-item>Nhân viên</li>
-          <li nz-menu-item>Chi tiết nhân viên</li>
-        </ul>
+      <li nz-menu-item>
+        <i nz-icon nzType="user-switch"></i>
+        <span>Nhân viên</span>
       </li>
     </ul>
 
