@@ -1,6 +1,8 @@
 @import '/src/style/variable.scss';
 
-
+.box-out-search{
+  position: relative;
+}
 .plus {
   display: flex;
   justify-content: flex-end;

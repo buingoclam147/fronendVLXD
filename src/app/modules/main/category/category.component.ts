@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Subscription } from 'rxjs';
 import { STATE } from 'src/app/core/const/enum';
 import { StateConfig } from 'src/app/core/share/model/state-config.model';
 import { Pagination, Table } from 'src/app/core/share/model/table.model';
@@ -12,7 +13,8 @@ import { CategoryService } from 'src/app/core/share/service/category.service';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   id = '';
   state = STATE.ADD;
   visible = false;
@@ -43,12 +45,14 @@ export class CategoryComponent implements OnInit {
     });
     this.search();
   }
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 
   // table
   search(): void {
     this.table.isLoading = true;
-    this.categoryService.getCategory(this.table.pagination, this.table.filter).subscribe(x => {
+    this.subscriptions.push(this.categoryService.getCategory(this.table.pagination, this.table.filter).subscribe(x => {
       this.table.total = x.total;
       this.table.isCheckedAll = false;
       this.table.data = x.data.map((i: any) => {
@@ -56,7 +60,7 @@ export class CategoryComponent implements OnInit {
         return i;
       });
       this.table.isLoading = false;
-    });
+    }));
   }
 
   pageIndexChange(value): void {
@@ -84,10 +88,10 @@ export class CategoryComponent implements OnInit {
       case STATE.UPDATE:
       case STATE.VIEW:
         {
-          this.categoryService.getOneCategory(id).subscribe(item => {
-            this.formEverything.patchValue({...item});
+          this.subscriptions.push(this.categoryService.getOneCategory(id).subscribe(item => {
+            this.formEverything.patchValue({ ...item });
             this.visible = true;
-          });
+          }));
           break;
         }
       default:
@@ -99,8 +103,8 @@ export class CategoryComponent implements OnInit {
       case STATE.ADD:
         {
           const data = { ...this.formEverything.value };
-          this.categoryService.postOneCategory(data).subscribe(item => {
-          });
+          this.subscriptions.push(this.categoryService.postOneCategory(data).subscribe(item => {
+          }));
           this.formEverything.reset();
           this.search();
           this.visible = false;
@@ -110,13 +114,13 @@ export class CategoryComponent implements OnInit {
       case STATE.UPDATE:
         {
           const data = { ...this.formEverything.value };
-          this.categoryService.updateCategory(this.id, data).subscribe(_ => {
+          this.subscriptions.push(this.categoryService.updateCategory(this.id, data).subscribe(_ => {
             this.formEverything.reset();
             this.search();
             this.visible = false;
             this.createMessage('success', this.action.update);
             this.id = '';
-          });
+          }));
           break;
         }
       default:
@@ -133,20 +137,20 @@ export class CategoryComponent implements OnInit {
     this.search();
   }
   deleteOneCategory(id): void {
-    this.categoryService.deleteOneCategory(id).subscribe(_ => {
+    this.subscriptions.push(this.categoryService.deleteOneCategory(id).subscribe(_ => {
       this.search();
       this.createMessage('success', this.action.delete);
-    });
+    }));
   }
   deleteMany(): void {
     const data = [];
     this.table.data.forEach(item => {
       return item.checked === true ? data.push(item._id) : data;
     });
-    this.categoryService.deleteCategory(data).subscribe(item => {
+    this.subscriptions.push(this.categoryService.deleteCategory(data).subscribe(item => {
       this.search();
       this.createMessage('success', this.action.delete);
-    });
+    }));
     console.log(data);
   }
 

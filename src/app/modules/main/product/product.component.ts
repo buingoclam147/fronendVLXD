@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { Subscription } from 'rxjs';
 import { STATE } from 'src/app/core/const/enum';
 import { StateConfig } from 'src/app/core/share/model/state-config.model';
 import { Pagination, Table } from 'src/app/core/share/model/table.model';
@@ -15,8 +16,8 @@ import { environment } from 'src/environments/environment';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
-
+export class ProductComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   maxPrice = 500000;
   defaultFileList: NzUploadFile[] = [];
   dataCategory = [];
@@ -69,31 +70,35 @@ export class ProductComponent implements OnInit {
   }
   ngOnInit(): void {
     this.formEverything = this.fb.group({
-      categoryId: ['', Validators.required],
-      supplierId: ['', Validators.required],
-      name: ['', Validators.required],
-      price: '',
-      unit: '',
-      quantity: '',
+      categoryId: ['', [Validators.required]],
+      supplierId: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      price: [null, [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(4)]],
+      unit: ['', [Validators.required]],
+      quantity: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       photos: [],
       note: ''
     });
     this.getFilterData();
     this.search();
   }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
   getFilterData(): void {
-    this.categoryService.getCategory(new Pagination(99, 0), '').subscribe(data => {
+    this.subscriptions.push(this.categoryService.getCategory(new Pagination(99, 0), '').subscribe(data => {
       this.dataCategory = data.data;
-    });
-    this.supplierService.getSupplier(new Pagination(99, 0), '').subscribe(data => {
+    }));
+    this.subscriptions.push(this.supplierService.getSupplier(new Pagination(99, 0), '').subscribe(data => {
       this.dataSupplier = data.data;
-    });
+    }));
   }
 
   // table
   search(): void {
     this.table.isLoading = true;
-    this.productService.getProduct(this.table.pagination, this.table.filter).subscribe(x => {
+    this.subscriptions.push(this.productService.getProduct(this.table.pagination, this.table.filter).subscribe(x => {
       this.table.total = x.total;
       this.table.isCheckedAll = false;
       this.table.data = x.data.map((i: any) => {
@@ -103,12 +108,13 @@ export class ProductComponent implements OnInit {
       this.typeForm = '';
       console.log(this.typeForm);
       this.table.isLoading = false;
-    });
+    }));
   }
 
   onCancel(): void {
     this.formEverything.reset();
     this.visible = false;
+    this.typeForm = '';
   }
   handleOk(): void {
     const newDataPhotos = this.defaultFileList.map(x => environment.localhost + '/' + x.response.filename);
@@ -119,13 +125,13 @@ export class ProductComponent implements OnInit {
             ...this.formEverything.value,
             photos: newDataPhotos
           };
-          this.productService.postOneProduct(data).subscribe(_ => {
+          this.subscriptions.push(this.productService.postOneProduct(data).subscribe(_ => {
             this.formEverything.reset();
             this.visible = false;
             this.createMessage('success', this.action.create);
             this.search();
             this.defaultFileList = [];
-          });
+          }));
           break;
         }
       case STATE.UPDATE:
@@ -138,14 +144,14 @@ export class ProductComponent implements OnInit {
                 ...newDataPhotos
               ]
           };
-          this.productService.updateProduct(this.id, data).subscribe(_ => {
+          this.subscriptions.push(this.productService.updateProduct(this.id, data).subscribe(_ => {
             this.formEverything.reset();
             this.search();
             this.visible = false;
             this.createMessage('success', this.action.update);
             this.id = '';
             this.defaultFileList = [];
-          });
+          }));
           break;
         }
       default:
@@ -164,7 +170,7 @@ export class ProductComponent implements OnInit {
         }
       case STATE.UPDATE:
         {
-          this.productService.getOneProduct(id).subscribe(item => {
+          this.subscriptions.push(this.productService.getOneProduct(id).subscribe(item => {
             this.formEverything.patchValue({
               name: item.name,
               categoryId: item.categoryId,
@@ -178,12 +184,12 @@ export class ProductComponent implements OnInit {
             });
             this.visible = true;
             this.typeForm = 'update';
-          });
+          }));
           break;
         }
       case STATE.VIEW:
         {
-          this.productService.getOneProduct(id).subscribe(item => {
+          this.subscriptions.push(this.productService.getOneProduct(id).subscribe(item => {
             this.formEverything.patchValue({
               name: item.name,
               categoryId: item.categoryId,
@@ -197,7 +203,7 @@ export class ProductComponent implements OnInit {
             });
             this.visible = true;
             this.typeForm = 'view';
-          });
+          }));
           break;
         }
       default:
@@ -216,13 +222,13 @@ export class ProductComponent implements OnInit {
     this.search();
   }
   deleteSearch(): void {
-    this.table.filter.searchName = '';
+    this.table.filter.name = '';
   }
   deleteOneCategory(id): void {
-    this.productService.deleteOneProduct(id).subscribe(_ => {
+    this.subscriptions.push(this.productService.deleteOneProduct(id).subscribe(_ => {
       this.search();
       this.createMessage('success', this.action.delete);
-    });
+    }));
   }
   deleteImg(nameImg): void {
     this.formEverything.value.photos = this.formEverything.value.photos.filter(item => item !== nameImg);

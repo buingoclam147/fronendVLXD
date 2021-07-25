@@ -1,0 +1,9 @@
+<div class="mb-3" *ngIf="form.controls[controlName].invalid && (form.controls[controlName].dirty ||
+form.controls[controlName].touched)">
+    <ng-container *ngFor="let key of keys; index as i">
+        <nz-alert nzType="error" [nzMessage]="errorsMessage[key]"
+            *ngIf="form.controls[controlName].errors[key] && getFirstError() === key">
+        </nz-alert>
+    </ng-container>
+
+</div>

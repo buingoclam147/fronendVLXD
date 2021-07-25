@@ -3,32 +3,38 @@
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
             <div nz-col [nzSpan]="18">
                 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-                    <div nz-col [nzSpan]="12">
+                    <div nz-col [nzSpan]="6">
                         <div class="inner-box">
-                            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton1"
-                                [nzSuffix]="inputClearTpl1">
-                                <input #ipsearch1 type="text" [(ngModel)]="table.filter.searchName" nz-input
-                                    placeholder="Tìm kiếm tên nhà cung cấp" />
+                            <nz-input-group nzSearch nzSize="large" [nzSuffix]="inputClearTpl1">
+                                <input #ipsearch1 type="text" [(ngModel)]="table.filter.fullName" nz-input
+                                    placeholder="Tìm tên nhân viên" />
                             </nz-input-group>
-                            <ng-template #suffixButton1>
-                                <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()"
-                                    class="m-0">Tìm
-                                    kiếm</button>
-                            </ng-template>
                         </div>
                     </div>
-                    <div nz-col [nzSpan]="12">
+                    <div nz-col [nzSpan]="6">
                         <div class="inner-box">
-                            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton2"
-                                [nzSuffix]="inputClearTpl2">
+                            <nz-input-group nzSearch nzSize="large" [nzSuffix]="inputClearTpl2">
                                 <input #ipsearch2 type="text" [(ngModel)]="table.filter.address" nz-input
-                                    placeholder="Tìm kiếm theo địa chỉ" />
+                                    placeholder="Tìm địa chỉ" />
                             </nz-input-group>
-                            <ng-template #suffixButton2>
-                                <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()"
-                                    class="m-0">Tìm
-                                    kiếm</button>
-                            </ng-template>
+                        </div>
+                    </div>
+
+                    <div nz-col [nzSpan]="6">
+                        <div class="inner-box">
+                            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Giới tính"
+                                [(ngModel)]="table.filter.sex" [nzSize]="'large'" class="mb-3"
+                                [nzDisabled]="typeForm === 'view'">
+                                <nz-option nzLabel="Nam" [nzValue]="true"></nz-option>
+                                <nz-option nzLabel="Nữ" [nzValue]="false"></nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="6">
+                        <div class="inner-box">
+                            <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()"
+                                class="m-0">Tìm
+                                kiếm</button>
                         </div>
                     </div>
                 </div>
@@ -56,7 +62,7 @@
                         <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()"
                                 [checked]="table.isCheckedAll">
                         </th>
-                        <th>Tên nhà cung cấp</th>
+                        <th>Họ và tên</th>
                         <th>Địa chỉ</th>
                         <th>Số điện thoại</th>
                         <th>Hành động</th>
@@ -66,7 +72,7 @@
                     <tr *ngFor="let item of table.data">
                         <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)"
                                 [checked]="item.checked"></td>
-                        <td class="text-center">{{item.name}}</td>
+                        <td class="text-center">{{item.fullName}}</td>
                         <td class="text-center note-text py-6">
                             <div class="text-overflow"> {{item.address}} </div>
                         </td>
@@ -75,7 +81,7 @@
                         </td>
                         <td class="btn-action text-center">
                             <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
-                                (nzOnConfirm)="deleteOneCategory(item._id)">
+                                (nzOnConfirm)="deleteOneEmploye(item._id)">
                                 <i nz-icon nzType="delete" nzTheme="outline"></i>
                             </button>
                             <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit"
@@ -104,7 +110,7 @@
 
 <ng-template #inputClearTpl1>
     <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch1.value"
-        (click)="deleteSearch('name')"></i>
+        (click)="deleteSearch('fullName')"></i>
 </ng-template>
 <ng-template #inputClearTpl2>
     <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch2.value"
@@ -114,28 +120,48 @@
     [nzCancelText]="stateConfig[state].cancelText" [nzOkDisabled]="formEverything.invalid"
     [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()">
     <form [formGroup]="formEverything">
-        <input nz-input placeholder="Tên nhà cung cấp" [formControlName]="'name'" class=" my-3" [nzSize]="'large'"
-            [type]="'text'" />
-        <app-form-control-error [form]="formEverything" [controlName]="'name'" [errorsMessage]="
-            {
-                required: 'Giá trị không được bỏ trống'
-            }
-            "></app-form-control-error>
-        <input nz-input placeholder="Số điện thoại" [formControlName]="'phoneNumber'" class=" mb-3" [nzSize]="'large'"
-            [type]="'tel'" />
-        <app-form-control-error [form]="formEverything" [controlName]="'phoneNumber'" [errorsMessage]="
+        <input nz-input placeholder="Họ và Tên" [formControlName]="'fullName'" class=" my-3" [type]="'text'"
+            [nzSize]="'large'" />
+        <app-form-control-error [form]="formEverything" [controlName]="'fullName'" [errorsMessage]="
             {
                 required: 'Giá trị không được bỏ trống',
-                pattern: 'Giá trị phải là số',
-                minlength:'Giá trị không được ngắn hơn 10 ký tự'
+                minlength:'Giá trị không được ngắn hơn 4 ký tự'
             }
             "></app-form-control-error>
+        <input nz-input placeholder="Tên đăng nhập" [formControlName]="'userName'" class=" mb-3" [type]="'text'"
+            [nzSize]="'large'" />
+        <app-form-control-error [form]="formEverything" [controlName]="'userName'" [errorsMessage]="
+            {
+                required: 'Giá trị không được bỏ trống',
+                minlength:'Giá trị không được ngắn hơn 6 ký tự'
+            }
+            "></app-form-control-error>
+        <input nz-input placeholder="Mật khẩu" [formControlName]="'password'" class=" mb-3"
+            [type]="'password'" [nzSize]="'large'" />
+        <app-form-control-error [form]="formEverything" [controlName]="'password'" [errorsMessage]="
+            {
+                required: 'Giá trị không được bỏ trống',
+                minlength:'Giá trị không được ngắn hơn 8 ký tự'
+            }
+            "></app-form-control-error>
+        <input nz-input placeholder="Số điện thoại" [formControlName]="'phoneNumber'" class=" mb-3" [type]="'tel'"
+            [nzSize]="'large'" />
+
+        <app-form-control-error [form]="formEverything" [controlName]="'phoneNumber'" [errorsMessage]="
+        {
+            required: 'Giá trị không được bỏ trống',
+            pattern: 'Giá trị phải là số',
+            minlength:'Giá trị không được ngắn hơn 10 ký tự'
+        }
+        "></app-form-control-error>
+        <app-datepicker [formControlName]="'dateOfBirth'"></app-datepicker>
         <input nz-input placeholder="Địa chỉ" [formControlName]="'address'" class=" mb-3" [nzSize]="'large'"
             [type]="'text'" />
-        <app-form-control-error [form]="formEverything" [controlName]="'address'" [errorsMessage]="
-            {
-                required: 'Giá trị không được bỏ trống'
-            }
-            "></app-form-control-error>
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Giới tính" [formControlName]="'sex'" [nzSize]="'large'"
+            class="mb-3" [nzDisabled]="typeForm === 'view'">
+            <nz-option nzLabel="Nam" [nzValue]="true"></nz-option>
+            <nz-option nzLabel="Nữ" [nzValue]="false"></nz-option>
+        </nz-select>
+        <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'"></textarea>
     </form>
 </nz-modal>

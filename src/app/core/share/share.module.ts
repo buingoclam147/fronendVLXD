@@ -28,6 +28,9 @@ import { CategoryPipe } from './pipes/category.pipe';
 import { SupplierPipe } from './pipes/supplier.pipe';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { MoneyPipe } from './pipes/money.pipe';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
+import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -51,7 +54,8 @@ import { MoneyPipe } from './pipes/money.pipe';
     NzUploadModule,
     NzSelectModule,
     NzSliderModule,
-    NzImageModule
+    NzImageModule,
+    NzDatePickerModule
   ],
   declarations: [
     ShareComponent,
@@ -60,7 +64,9 @@ import { MoneyPipe } from './pipes/money.pipe';
     ColorDirective,
     CategoryPipe,
     SupplierPipe,
-    MoneyPipe
+    MoneyPipe,
+    DatepickerComponent,
+    FormControlErrorComponent
 
   ],
   exports: [
@@ -90,8 +96,10 @@ import { MoneyPipe } from './pipes/money.pipe';
     CategoryPipe,
     SupplierPipe,
     NzImageModule,
-    MoneyPipe
-
+    MoneyPipe,
+    NzDatePickerModule,
+    DatepickerComponent,
+    FormControlErrorComponent
   ]
 })
 export class ShareModule { }

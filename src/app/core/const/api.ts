@@ -54,6 +54,20 @@ export const API = {
             return 'customer/' + id;
         },
         DELETE_MANY: 'customer/delete-many'
-    }
+    },
+    EMPLOYE: {
+        GET_LIST: 'employe',
+        GET_ONE: (id: any) => {
+            return 'employe/' + id;
+        },
+        POST_ONE: 'employe',
+        DELETE_ONE: (id: any) => {
+            return 'employe/' + id;
+        },
+        UPDATE: (id: any) => {
+            return 'employe/' + id;
+        },
+        DELETE_MANY: 'employe/delete-many'
+    },
 
 };

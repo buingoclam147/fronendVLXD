@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Subscription } from 'rxjs';
 import { STATE } from 'src/app/core/const/enum';
 import { StateConfig } from 'src/app/core/share/model/state-config.model';
 import { Pagination, Table } from 'src/app/core/share/model/table.model';
@@ -11,7 +12,8 @@ import { SupplierService } from 'src/app/core/share/service/supplier.service';
   templateUrl: './supplier.component.html',
   styleUrls: ['./supplier.component.scss']
 })
-export class SupplierComponent implements OnInit {
+export class SupplierComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   id = '';
   state = STATE.ADD;
   visible = false;
@@ -39,17 +41,19 @@ export class SupplierComponent implements OnInit {
   ngOnInit(): void {
     this.formEverything = this.fb.group({
       name: ['', Validators.required],
-      address: '',
-      phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]+$')]]
+      address: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(10)]],
     });
     this.search();
   }
-
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
 
   // table
   search(): void {
     this.table.isLoading = true;
-    this.supplierService.getSupplier(this.table.pagination, this.table.filter).subscribe(x => {
+    this.subscriptions.push(this.supplierService.getSupplier(this.table.pagination, this.table.filter).subscribe(x => {
       this.table.total = x.total;
       this.table.isCheckedAll = false;
       this.table.data = x.data.map((i: any) => {
@@ -57,7 +61,7 @@ export class SupplierComponent implements OnInit {
         return i;
       });
       this.table.isLoading = false;
-    });
+    }));
   }
   deleteSearch(item): void {
     item === 'name' ? this.table.filter.searchName = '' : this.table.filter.address = '';
@@ -77,24 +81,24 @@ export class SupplierComponent implements OnInit {
             address: this.formEverything.value.address,
             phoneNumber: this.formEverything.value.phoneNumber
           };
-          this.supplierService.postOneSupplier(data).subscribe(item => {
+          this.subscriptions.push(this.supplierService.postOneSupplier(data).subscribe(item => {
             this.formEverything.reset();
             this.search();
             this.visible = false;
             this.createMessage('success', this.action.create);
-          });
+          }));
           break;
         }
       case STATE.UPDATE:
         {
           const data = { ...this.formEverything.value };
-          this.supplierService.updateSupplier(this.id, data).subscribe(_ => {
+          this.subscriptions.push(this.supplierService.updateSupplier(this.id, data).subscribe(_ => {
             this.formEverything.reset();
             this.search();
             this.visible = false;
             this.createMessage('success', this.action.update);
             this.id = '';
-          });
+          }));
           break;
         }
       default:
@@ -113,14 +117,14 @@ export class SupplierComponent implements OnInit {
       case STATE.UPDATE:
       case STATE.VIEW:
         {
-          this.supplierService.getOneSupplier(id).subscribe(item => {
+          this.subscriptions.push(this.supplierService.getOneSupplier(id).subscribe(item => {
             this.formEverything.patchValue({
               name: item.name,
               address: item.address,
               phoneNumber: item.phoneNumber
             });
             this.visible = true;
-          });
+          }));
           break;
         }
       default:
@@ -136,10 +140,10 @@ export class SupplierComponent implements OnInit {
     this.search();
   }
   deleteOneCategory(id): void {
-    this.supplierService.deleteOneSupplier(id).subscribe(_ => {
+    this.subscriptions.push(this.supplierService.deleteOneSupplier(id).subscribe(_ => {
       this.search();
       this.createMessage('success', this.action.delete);
-    });
+    }));
   }
   isShowMinus(): boolean {
     return !!this.table.data.find(x => x.checked === true);
@@ -149,10 +153,10 @@ export class SupplierComponent implements OnInit {
     this.table.data.forEach(item => {
       return item.checked === true ? data.push(item._id) : data;
     });
-    this.supplierService.deleteSupplier(data).subscribe(item => {
+    this.subscriptions.push(this.supplierService.deleteSupplier(data).subscribe(item => {
       this.search();
       this.createMessage('success', this.action.delete);
-    });
+    }));
     console.log(data);
   }
 }

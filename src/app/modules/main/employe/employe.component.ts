@@ -1,27 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { STATE } from 'src/app/core/const/enum';
 import { StateConfig } from 'src/app/core/share/model/state-config.model';
 import { Pagination, Table } from 'src/app/core/share/model/table.model';
-import { CustomerService } from 'src/app/core/share/service/customer.service';
+import { EmployeService } from 'src/app/core/share/service/employe.service';
 
 @Component({
-  selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.scss']
+  selector: 'app-employe',
+  templateUrl: './employe.component.html',
+  styleUrls: ['./employe.component.scss']
 })
-export class CustomerComponent implements OnInit, OnDestroy {
+export class EmployeComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   id = '';
   state = STATE.ADD;
   visible = false;
   formEverything: FormGroup;
   stateConfig: StateConfig[] = [
-    new StateConfig('Tạo mới người dùng', 'Hủy', 'Tạo mới'),
-    new StateConfig('Sửa thông tin người dùng', 'Hủy', 'Đồng Ý'),
-    new StateConfig('Xem chi tiết người dùng', 'Đóng', null),
+    new StateConfig('Tạo mới nhân viên', 'Hủy', 'Tạo mới'),
+    new StateConfig('Sửa thông tin nhân viên', 'Hủy', 'Đồng Ý'),
+    new StateConfig('Xem chi tiết nhân viên', 'Đóng', null),
   ];
   action = {
     create: 'Tạo mới thành công',
@@ -34,9 +34,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
     this.message.create(type, `${contentMessage}`);
   }
   constructor(
-    private customerService: CustomerService,
+    private employeService: EmployeService,
     private fb: FormBuilder,
-    private message: NzMessageService
+    private message: NzMessageService,
   ) { }
 
   ngOnInit(): void {
@@ -49,17 +49,17 @@ export class CustomerComponent implements OnInit, OnDestroy {
       sex: null,
       note: '',
       dateOfBirth: null,
+      role: 'employe'
     });
     this.search();
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-
   // table
   search(): void {
     this.table.isLoading = true;
-    this.subscriptions.push(this.customerService.getCustomer(this.table.pagination, this.table.filter).subscribe(x => {
+    this.subscriptions.push(this.employeService.getEmploye(this.table.pagination, this.table.filter).subscribe(x => {
       this.table.total = x.total;
       this.table.isCheckedAll = false;
       this.table.data = x.data.map((i: any) => {
@@ -86,7 +86,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
             ...this.formEverything.value,
             sex: this.formEverything.value.sex === null ? true : this.formEverything.value.sex
           };
-          this.subscriptions.push(this.customerService.postOneCustomer(data).subscribe(_ => {
+          this.subscriptions.push(this.employeService.postOneEmploye(data).subscribe(item => {
             this.formEverything.reset();
             this.search();
             this.visible = false;
@@ -97,7 +97,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
       case STATE.UPDATE:
         {
           const data = { ...this.formEverything.value };
-          this.subscriptions.push(this.customerService.updateCustomer(this.id, data).subscribe(_ => {
+          this.subscriptions.push(this.employeService.updateEmploye(this.id, data).subscribe(_ => {
             this.formEverything.reset();
             this.search();
             this.visible = false;
@@ -122,7 +122,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
         }
       case STATE.UPDATE:
         {
-          this.subscriptions.push(this.customerService.getOneCustomer(id).subscribe(item => {
+          this.subscriptions.push(this.employeService.getOneEmploye(id).subscribe(item => {
             this.formEverything.patchValue({
               ...item,
             });
@@ -133,9 +133,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
         }
       case STATE.VIEW:
         {
-          this.subscriptions.push(this.customerService.getOneCustomer(id).subscribe(item => {
+          this.subscriptions.push(this.employeService.getOneEmploye(id).subscribe(item => {
             this.formEverything.patchValue({
-              ...item,
+              ...item
             });
             this.visible = true;
             this.typeForm = 'view';
@@ -154,8 +154,8 @@ export class CustomerComponent implements OnInit, OnDestroy {
     this.table.pageSizeChange(value);
     this.search();
   }
-  deleteOneCustomer(id): void {
-    this.subscriptions.push(this.customerService.deleteOneCustomer(id).subscribe(_ => {
+  deleteOneEmploye(id): void {
+    this.subscriptions.push(this.employeService.deleteOneEmploye(id).subscribe(_ => {
       this.search();
       this.createMessage('success', this.action.delete);
     }));
@@ -168,10 +168,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
     this.table.data.forEach(item => {
       return item.checked === true ? data.push(item._id) : data;
     });
-    this.subscriptions.push(this.customerService.deleteCustomer(data).subscribe(item => {
+    this.subscriptions.push(this.employeService.deleteEmploye(data).subscribe(item => {
       this.search();
       this.createMessage('success', this.action.delete);
     }));
-    console.log(data);
   }
 }

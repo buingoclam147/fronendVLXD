@@ -5,7 +5,7 @@
                 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
                     <div nz-col [nzSpan]="6">
                         <div class="inner-box">
-                            <nz-input-group nzSearch nzSize="large" [nzSuffix]="inputClearTpl1" >
+                            <nz-input-group nzSearch nzSize="large" [nzSuffix]="inputClearTpl1">
                                 <input #ipsearch1 type="text" [(ngModel)]="table.filter.fullName" nz-input
                                     placeholder="Tìm tên khách hàng" />
                             </nz-input-group>
@@ -22,8 +22,9 @@
 
                     <div nz-col [nzSpan]="6">
                         <div class="inner-box">
-                            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Giới tính" [(ngModel)]="table.filter.sex"
-                                [nzSize]="'large'" class="mb-3" [nzDisabled]="typeForm === 'view'">
+                            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Giới tính"
+                                [(ngModel)]="table.filter.sex" [nzSize]="'large'" class="mb-3"
+                                [nzDisabled]="typeForm === 'view'">
                                 <nz-option nzLabel="Nam" [nzValue]="true"></nz-option>
                                 <nz-option nzLabel="Nữ" [nzValue]="false"></nz-option>
                             </nz-select>
@@ -54,42 +55,45 @@
         </div>
     </div>
     <div class="table-content">
+        <ng-container *ngIf="!table.isLoading; else loading">
+            <table class="table-container">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()"
+                                [checked]="table.isCheckedAll">
+                        </th>
+                        <th>Họ và tên</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of table.data">
+                        <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)"
+                                [checked]="item.checked"></td>
+                        <td class="text-center">{{item.fullName}}</td>
+                        <td class="text-center note-text py-6">
+                            <div class="text-overflow"> {{item.address}} </div>
+                        </td>
+                        <td class="text-center note-text py-6">
+                            <div class="text-overflow"> {{item.phoneNumber}} </div>
+                        </td>
+                        <td class="btn-action text-center">
+                            <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
+                                (nzOnConfirm)="deleteOneCustomer(item._id)">
+                                <i nz-icon nzType="delete" nzTheme="outline"></i>
+                            </button>
+                            <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit"
+                                    nzTheme="outline"></i></button>
+                            <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye"
+                                    nzTheme="outline"></i></button>
 
-        <table class="table-container">
-            <thead>
-                <tr>
-                    <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()"
-                            [checked]="table.isCheckedAll">
-                    </th>
-                    <th>Họ và tên</th>
-                    <th>Địa chỉ</th>
-                    <th>Số điện thoại</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of table.data">
-                    <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)"
-                            [checked]="item.checked"></td>
-                    <td class="text-center">{{item.fullName}}</td>
-                    <td class="text-center note-text py-6">
-                        <div class="text-overflow"> {{item.address}} </div>
-                    </td>
-                    <td class="text-center note-text py-6">
-                        <div class="text-overflow"> {{item.phoneNumber}} </div>
-                    </td>
-                    <td class="btn-action text-center">
-                        <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
-                            (nzOnConfirm)="deleteOneCustomer(item._id)">
-                            <i nz-icon nzType="delete" nzTheme="outline"></i>
-                        </button>
-                        <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
-                        <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
     </div>
     <div class="pagination-bottom">
         <nz-pagination [nzPageIndex]="table.pagination.page + 1 " [nzTotal]="table.total" [nzPageSize]="2"
@@ -98,6 +102,11 @@
     </div>
 </div>
 
+<ng-template #loading>
+    <div class="example">
+        <nz-spin nzSimple></nz-spin>
+    </div>
+</ng-template>
 
 <ng-template #inputClearTpl1>
     <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch1.value"
@@ -113,21 +122,42 @@
     <form [formGroup]="formEverything">
         <input nz-input placeholder="Họ và Tên" [formControlName]="'fullName'" class=" my-3" [type]="'text'"
             [nzSize]="'large'" />
-        <nz-alert nzType="error" nzMessage="Họ và tên không được bỏ trống"
-            *ngIf="formEverything.controls.fullName.invalid && formEverything.touched"></nz-alert>
+            <app-form-control-error [form]="formEverything" [controlName]="'fullName'" [errorsMessage]="
+            {
+                required: 'Giá trị không được bỏ trống',
+                minlength:'Giá trị không được ngắn hơn 4 ký tự'
+            }
+            "></app-form-control-error>
         <input nz-input placeholder="Tên đăng nhập" [formControlName]="'userName'" class=" mb-3" [type]="'text'"
             [nzSize]="'large'" />
-        <nz-alert nzType="error" nzMessage="Tên đăng nhập không được bỏ trống hoặc nhỏ hơn 6 kí tự"
-            *ngIf="formEverything.controls.userName.invalid  && formEverything.touched"></nz-alert>
+            <app-form-control-error [form]="formEverything" [controlName]="'userName'" [errorsMessage]="
+            {
+                required: 'Giá trị không được bỏ trống',
+                minlength:'Giá trị không được ngắn hơn 6 ký tự'
+            }
+            "></app-form-control-error>
         <input nz-input placeholder="Mật khẩu" [formControlName]="'password'" class=" mb-3"
-            [type]="typeForm === 'update'? 'text':'password'" [nzSize]="'large'" />
-        <nz-alert nzType="error" nzMessage="Mật khẩu không được bỏ trống hoặc nhỏ hơn 8 kí tự"
-            *ngIf="formEverything.controls.password.invalid  && formEverything.touched"></nz-alert>
-        <input nz-input placeholder="Số điện thoại" [formControlName]="'phoneNumber'" class=" mb-3" [type]="'tel'"
-            [nzSize]="'large'" />
-        <nz-alert nzType="error" nzMessage="Số điện thoại không được bỏ trống hoặc nhỏ hơn 10 số"
-            *ngIf="formEverything.controls.phoneNumber.invalid  && formEverything.touched"></nz-alert>
-        <input nz-input placeholder="Địa chỉ" [formControlName]="'address'" class=" mb-3" [nzSize]="'large'" />
+            [type]="'password'" [nzSize]="'large'" />
+            <app-form-control-error [form]="formEverything" [controlName]="'password'" [errorsMessage]="
+            {
+                required: 'Giá trị không được bỏ trống',
+                minlength:'Giá trị không được ngắn hơn 8 ký tự'
+            }
+            "></app-form-control-error>
+        <input nz-input  placeholder="Số điện thoại" [formControlName]="'phoneNumber'" class=" mb-3" [type]="'tel'"
+        [nzSize]="'large'"/>
+        <app-form-control-error [form]="formEverything" [controlName]="'phoneNumber'" [errorsMessage]="
+        {
+            required: 'Giá trị không được bỏ trống',
+            pattern: 'Giá trị phải là số',
+            minlength:'Giá trị không được ngắn hơn 10 ký tự'
+        }
+        "></app-form-control-error>
+        <app-datepicker [formControlName]="'dateOfBirth'"></app-datepicker>
+        <nz-alert nzType="error" nzMessage="Ngày sinh không được bỏ trống "
+            *ngIf="formEverything.controls.dateOfBirth.invalid  && formEverything.touched"></nz-alert>
+        <input nz-input placeholder="Địa chỉ" [formControlName]="'address'" class=" mb-3" [nzSize]="'large'"
+            [type]="'text'" />
         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Giới tính" [formControlName]="'sex'" [nzSize]="'large'"
             class="mb-3" [nzDisabled]="typeForm === 'view'">
             <nz-option nzLabel="Nam" [nzValue]="true"></nz-option>

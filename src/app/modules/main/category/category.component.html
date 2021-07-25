@@ -86,7 +86,11 @@
   [nzOkDisabled]="formEverything.invalid">
   <form [formGroup]="formEverything">
     <input nz-input placeholder="Tên loại hàng" [formControlName]="'name'" class=" my-3 input-name" [nzSize]="'large'" [type]="'text'"/>
-    <nz-alert nzType="error" nzMessage="Tên loại hàng không được bỏ trống" *ngIf="formEverything.invalid && formEverything.touched"></nz-alert>
+    <app-form-control-error [form]="formEverything" [controlName]="'name'" [errorsMessage]="
+        {
+            required: 'Giá trị không được bỏ trống'
+        }
+        "></app-form-control-error>
     <textarea rows="4" placeholder="Miêu tả" nz-input [formControlName]="'note'" [nzSize]="'large'"></textarea>
   </form>
 </nz-modal>

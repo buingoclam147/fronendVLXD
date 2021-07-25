@@ -57,45 +57,47 @@
     </div>
   </div>
   <div class="table-content">
-    <table class="table-container">
-      <thead>
-        <tr>
-          <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()" [checked]="table.isCheckedAll">
-          </th>
-          <th>Loại hàng</th>
-          <th>Nhà cung cấp</th>
-          <th>Sản phẩm</th>
-          <th>Giá bán</th>
-          <th>Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of table.data">
-          <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)" [checked]="item.checked"></td>
-          <td class="text-center">
-            <div class="text-overflow">{{item.categoryId | category:dataCategory}}</div>
-          </td>
-          <td class="text-center note-text py-6">
-            <div class="text-overflow"> {{item.supplierId | supplier:dataSupplier}} </div>
-          </td>
-          <td class="text-center note-text py-6">
-            <div class="text-overflow"> {{item.name}} </div>
-          </td>
-          <td class="text-center note-text py-6">
-            <div class="text-overflow"> {{item.price | money}} </div>
-          </td>
-          <td class="btn-action text-center">
-            <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
-              (nzOnConfirm)="deleteOneCategory(item._id)">
-              <i nz-icon nzType="delete" nzTheme="outline"></i>
-            </button>
-            <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
-            <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
+    <ng-container *ngIf="!table.isLoading; else loading">
+      <table class="table-container">
+        <thead>
+          <tr>
+            <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()" [checked]="table.isCheckedAll">
+            </th>
+            <th>Loại hàng</th>
+            <th>Nhà cung cấp</th>
+            <th>Sản phẩm</th>
+            <th>Giá bán</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of table.data">
+            <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)" [checked]="item.checked"></td>
+            <td class="text-center">
+              <div class="text-overflow">{{item.categoryId | category:dataCategory}}</div>
+            </td>
+            <td class="text-center note-text py-6">
+              <div class="text-overflow"> {{item.supplierId | supplier:dataSupplier}} </div>
+            </td>
+            <td class="text-center note-text py-6">
+              <div class="text-overflow"> {{item.name}} </div>
+            </td>
+            <td class="text-center note-text py-6">
+              <div class="text-overflow"> {{item.price | money}} </div>
+            </td>
+            <td class="btn-action text-center">
+              <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
+                (nzOnConfirm)="deleteOneCategory(item._id)">
+                <i nz-icon nzType="delete" nzTheme="outline"></i>
+              </button>
+              <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
+              <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
 
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
   </div>
   <div class="pagination-bottom">
     <nz-pagination [nzPageIndex]="table.pagination.page + 1 " [nzTotal]="table.total" [nzPageSize]="2"
@@ -104,6 +106,11 @@
   </div>
 </div>
 
+<ng-template #loading>
+  <div class="example">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</ng-template>
 
 <ng-template #inputClearTpl1>
   <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch1.value"
@@ -141,22 +148,54 @@
   [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()"
   [nzOkDisabled]="formEverything.invalid">
   <form [formGroup]="formEverything" enctype="multipart/form-data">
-    <nz-select [nzSize]="'large'" class=" mt-3 mb-2" nzShowSearch nzAllowClear nzPlaceHolder="Loại hàng"
+    <nz-select [nzSize]="'large'" class=" mt-3 mb-3" nzShowSearch nzAllowClear nzPlaceHolder="Loại hàng"
       [formControlName]="'categoryId'" [nzDisabled]="typeForm ==='view'">
       <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataCategory"></nz-option>
     </nz-select>
-    <nz-select [nzSize]="'large'" class=" mt-3 mb-2" nzShowSearch nzAllowClear nzPlaceHolder="Nhà cung cấp"
+    <app-form-control-error [form]="formEverything" [controlName]="'categoryId'" [errorsMessage]="
+        {
+            required: 'Giá trị không được bỏ trống'
+        }
+        "></app-form-control-error>
+    <nz-select [nzSize]="'large'" class=" mb-3" nzShowSearch nzAllowClear nzPlaceHolder="Nhà cung cấp"
       [formControlName]="'supplierId'" [nzDisabled]="typeForm ==='view'">
       <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataSupplier"></nz-option>
     </nz-select>
-    <input nz-input placeholder="Tên sản phẩm" [formControlName]="'name'" class=" mt-3 mb-2 input-name"
-      [nzSize]="'large'" [type]="'text'"/>
-    <input nz-input placeholder="Giá bán" [formControlName]="'price'" class=" mt-3 mb-2 input-name"
-      [nzSize]="'large'" [type]="'number'"/>
-    <input nz-input placeholder="Đơn vị " [formControlName]="'unit'" class=" mt-3 mb-2 input-name" [nzSize]="'large'" [type]="'text'"/>
-    <input nz-input placeholder="Số lượng" [formControlName]="'quantity'" class=" mt-3 mb-2 input-name"
-      [nzSize]="'large'" [type]="'number'"/>
-    <div class="clearfix addImg my-3" *ngIf="typeForm ==='add' || typeForm ==='update'">
+    <app-form-control-error [form]="formEverything" [controlName]="'supplierId'" [errorsMessage]="
+        {
+            required: 'Giá trị không được bỏ trống'
+        }
+        "></app-form-control-error>
+    <input nz-input placeholder="Tên sản phẩm" [formControlName]="'name'" class=" mb-3 input-name" [nzSize]="'large'"
+      [type]="'text'" />
+    <app-form-control-error [form]="formEverything" [controlName]="'name'" [errorsMessage]="
+      {
+          required: 'Giá trị không được bỏ trống'
+      }
+      "></app-form-control-error>
+    <input nz-input placeholder="Giá bán" [formControlName]="'price'" class="mb-3 input-name" [nzSize]="'large'" />
+    <app-form-control-error [form]="formEverything" [controlName]="'price'" [errorsMessage]="
+      {
+          required: 'Giá trị không được bỏ trống',
+          pattern: 'Giá trị phải là số',
+          minlength:'Giá trị phải lớn hơn 1.000đ'
+      }
+      "></app-form-control-error>
+    <input nz-input placeholder="Đơn vị " [formControlName]="'unit'" class="mb-3 input-name" [nzSize]="'large'"
+      [type]="'text'" />
+    <app-form-control-error [form]="formEverything" [controlName]="'unit'" [errorsMessage]="
+        {
+            required: 'Giá trị không được bỏ trống'
+        }
+        "></app-form-control-error>
+    <input nz-input placeholder="Số lượng" [formControlName]="'quantity'" class="mb-3 input-name" [nzSize]="'large'" />
+    <app-form-control-error [form]="formEverything" [controlName]="'quantity'" [errorsMessage]="
+        {
+            required: 'Giá trị không được bỏ trống',
+            pattern: 'Giá trị phải là số'
+        }
+        "></app-form-control-error>
+    <div class="clearfix addImg mb-3" *ngIf="typeForm ==='add' || typeForm ==='update'">
       <div class="clearfix">
         <nz-upload class="upload-list-inline" nzAction="http://localhost:3000/upload" nzListType="picture"
           [(nzFileList)]="defaultFileList">

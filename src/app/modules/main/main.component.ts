@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
+  subscriptions: Subscription[] = [];
   breadcrumb = {
     pagemain: '',
     pagechild: ''
@@ -16,15 +18,16 @@ export class MainComponent implements OnInit {
   constructor(private router: Router) {
 
   }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+   }
 
   ngOnInit(): void {
-    this.router.events.subscribe(x => {
+    this.subscriptions.push(this.router.events.subscribe(x => {
       if (x instanceof NavigationEnd) {
-        console.log(x);
         this.refeshBread(x);
       }
-
-    });
+    }));
   }
   refeshBread(path): void {
     this.breadcrumb.pagemain = path.url.split('/')[1];
