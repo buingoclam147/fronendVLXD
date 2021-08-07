@@ -11,11 +11,20 @@ import { HttpService, METHOD } from './http.service';
 export class ProductService {
   constructor(private httpService: HttpService) { }
 
-  getProduct(pagination: Pagination, filter: any): Observable<any> {
-    const data = {
-      ...pagination, ...filter, price: `${filter.price}`
+  getProduct(pagination: Pagination, filter: {
+    price?: number[],
+    name?: string,
+    categoryId?: string,
+    supplierId?: string
+  }): Observable<any> {
+    const data = filter.price ?
+      {
+        ...pagination, ...filter, price: filter.price?.join(',')
+      } :
+      {
+        ...pagination, ...filter
+      };
 
-    };
     if (data) {
       return this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_LIST, data);
     }

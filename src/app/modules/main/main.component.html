@@ -4,9 +4,9 @@
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-submenu nzTitle="Hàng hóa" nzIcon="shop">
         <ul>
-          <li nz-menu-item [routerLink]="['/main/category']">Loại hàng</li>
-          <li nz-menu-item [routerLink]="['/main/product']">Hàng hóa</li>
-          <li nz-menu-item [routerLink]="['/main/supplier']">Nhà cung cấp</li>
+          <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.CATEGORY.ROOT]" [nzSelected]="true">Loại hàng</li>
+          <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.PRODUCT.ROOT]">Hàng hóa</li>
+          <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.SUPPLIER.ROOT]">Nhà cung cấp</li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Hóa đơn" nzIcon="file-done">
@@ -15,11 +15,11 @@
           <li nz-menu-item>Chi tiết hóa đơn</li>
         </ul>
       </li>
-      <li nz-menu-item [routerLink]="['/main/customer']">
+      <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.CUSTOMER.ROOT]">
         <i nz-icon nzType="team"></i>
         <span>Khách hàng</span>
       </li>
-      <li nz-menu-item [routerLink]="['/main/employe']">
+      <li *ngIf="cookies === 'status=admin'" nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.EMPLOYEE.ROOT]">
         <i nz-icon nzType="user-switch"></i>
         <span>Nhân viên</span>
       </li>
@@ -31,7 +31,7 @@
       <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"></i>
       <div class="logout">
-        <button><a href="#"><i nz-icon nzType="logout" nzTheme="outline"></i></a></button>
+        <button><a [routerLink]="['/main/login']"><i nz-icon nzType="logout" nzTheme="outline"></i></a></button>
       </div>
     </nz-header>
     <nz-content>

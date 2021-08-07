@@ -106,7 +106,6 @@ export class ProductComponent implements OnInit, OnDestroy {
         return i;
       });
       this.typeForm = '';
-      console.log(this.typeForm);
       this.table.isLoading = false;
     }));
   }
@@ -232,7 +231,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   deleteImg(nameImg): void {
     this.formEverything.value.photos = this.formEverything.value.photos.filter(item => item !== nameImg);
-    console.log(this.formEverything.value.photos);
   }
   formatFn = (value: number): string => {
     return value.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });

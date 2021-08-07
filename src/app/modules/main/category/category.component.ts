@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subscription } from 'rxjs';
 import { STATE } from 'src/app/core/const/enum';
@@ -104,11 +104,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
         {
           const data = { ...this.formEverything.value };
           this.subscriptions.push(this.categoryService.postOneCategory(data).subscribe(item => {
+            this.formEverything.reset();
+            this.search();
+            this.visible = false;
+            this.createMessage('success', this.action.create);
           }));
-          this.formEverything.reset();
-          this.search();
-          this.visible = false;
-          this.createMessage('success', this.action.create);
           break;
         }
       case STATE.UPDATE:
@@ -151,7 +151,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
       this.search();
       this.createMessage('success', this.action.delete);
     }));
-    console.log(data);
   }
 
   isShowMinus(): boolean {

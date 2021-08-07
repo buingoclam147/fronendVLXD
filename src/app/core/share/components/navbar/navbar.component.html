@@ -1,19 +1,18 @@
-<nz-header class=" bgr-navbar" nzAlign="top">
+<nz-header class=" bgr-navbar" [class.scroll]="scrollY" nzAlign="top">
   <div class="container-fluid">
-    <div nz-row class="align-item-center">
+    <div nz-row class="align-item-center pt-3">
       <div nz-col nzSpan="5" nzJustify="center" class="logo text-align-center">
         <a href="#">
-          <img src="../../../../../assets/logo.jpg" alt="logo">
+          <img src="../../../../../assets//building-login.png" alt="logo">
         </a>
       </div>
       <div nz-col nzSpan="14">
 
         <ul nz-row nzJustify="center" class="d-flex categoryNav text-center">
-
-          <li class="col-md-3 "><a href="#"> giới thiệu </a></li>
-          <li class="col-md-3 "><a href="#" class="dropdowNav"> Danh mục sản phẩm</a></li>
+          <li class="col-md-3 "><a href="#">Trang chủ</a></li>
+          <li class="col-md-3 "><a href="#"> Giới thiệu </a></li>
+          <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu"><a href="#"> Sản phẩm</a></li>
           <li class="col-md-3 "><a href="#"> Liên hệ</a></li>
-          <li class="col-md-3 "><a href="#">Tin tức</a></li>
         </ul>
 
       </div>
@@ -26,10 +25,24 @@
         </a>
         <a href="#" class="d-flex">
           <nz-badge [nzCount]="5">
-              <i class='bx bx-cart bx-sm'></i>
+            <i class='bx bx-cart bx-sm'></i>
           </nz-badge>
         </a>
       </div>
     </div>
   </div>
 </nz-header>
+<nz-back-top [nzDuration]="'1000'" [nzTemplate]="backtop"></nz-back-top>
+<ng-template #backtop>
+  <div class="back-to-top">
+    <i class="fas fa-level-up-alt"></i>
+  </div>
+</ng-template>
+
+<nz-dropdown-menu #menu  >
+  <ul nz-menu nzSelectable class="dropdow-product">
+    <ng-container *ngIf="listCategory |async as listCategory">
+    <li nz-menu-item *ngFor="let category of listCategory.data">{{category.name}}</li>
+  </ng-container>
+  </ul>
+</nz-dropdown-menu>

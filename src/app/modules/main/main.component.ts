@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {  NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ROUTER_CONST } from '../../core/const/router.const';
 
 @Component({
   selector: 'app-main',
@@ -8,6 +9,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit, OnDestroy {
+  ROUTER_CONST = ROUTER_CONST;
+  cookies = document.cookie;
   subscriptions: Subscription[] = [];
   breadcrumb = {
     pagemain: '',
@@ -15,12 +18,14 @@ export class MainComponent implements OnInit, OnDestroy {
   };
 
   isCollapsed = false;
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+  ) {
 
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-   }
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(this.router.events.subscribe(x => {
@@ -28,6 +33,8 @@ export class MainComponent implements OnInit, OnDestroy {
         this.refeshBread(x);
       }
     }));
+    this.breadcrumb.pagemain = window.location.pathname.split('/')[1];
+    this.breadcrumb.pagechild = window.location.pathname.split('/')[2];
   }
   refeshBread(path): void {
     this.breadcrumb.pagemain = path.url.split('/')[1];

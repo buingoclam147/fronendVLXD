@@ -1,57 +1,104 @@
-@import '/src/style/grid.scss';
 @import '/src/style/variable.scss';
-.bgr-navbar{
-    position: relative;
-    background-color: white;
-    min-height: 90px;
-    box-shadow: 0 0 20px;
-    width: 100%;
+
+.bgr-navbar {
+  position: relative;
+  background-color: white;
+  min-height: 104px;
+  box-shadow: 0 0 20px;
+  width: 100%;
 }
-.logo img{
-    max-height: 70px;
+
+.logo img {
+  max-height: 70px;
 }
-.categoryNav li a{
-    font-size: $font18;
-    color: $colorblack !important;
-    font-weight: 500;
+
+.logo a {
+  float: left;
 }
-.dropdowNav{
-    position: relative;
+
+.categoryNav li a {
+  font-size: $font18;
+  color: $colorblack !important;
+  font-weight: 600;
 }
-.dropdowNav::after{
-    font-family: FontAwesome;
-    position: absolute;
-    bottom: -36px;
-    display: block;
-    font-size: 15px;
-    line-height: 90px;
-    color: #919191;
-    font-weight: 400;
-    content: "\f107";
-    z-index: 5;
-    right: -17px;
+
+.categoryNav li:hover a{
+  color: $colorred !important;
 }
-.pageItem{
-    position: relative;
-    justify-content: space-evenly;
+
+.dropdowNav::after {
+  font-family: FontAwesome;
+  position: absolute;
+  bottom: -36px;
+  display: block;
+  font-size: 15px;
+  line-height: 90px;
+  color: #919191;
+  font-weight: 400;
+  content: "\f107";
+  z-index: 5;
+  right: -17px;
 }
-.pageItem i{
-    color: $color33;
+
+.pageItem {
+  position: relative;
+  justify-content: space-evenly;
+  padding: 0 24px;
 }
-.pageItem p{
-    color: $colorred;
-    color: #e9212e;
-    position: absolute;
-    top: 8px;
-    right: 40px;
-    font-size: 17px;
-    font-weight: 600;
+
+.pageItem i {
+  color: $color33;
 }
+.pageItem i:hover {
+  color: $colorred;
+}
+.pageItem p {
+  color: $colorred;
+  color: #e9212e;
+  position: absolute;
+  top: 8px;
+  right: 40px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
 .head-example {
-    width: 42px;
-    height: 42px;
-    border-radius: 4px;
-    background: #eee;
-    display: inline-block;
-    vertical-align: middle;
-  }
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  background: #eee;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.scroll {
+  position: fixed;
+  z-index: 1000;
+  -webkit-box-shadow: 0 10px 15px rgb(25 25 25 / 10%);
+  animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+}
+
+.back-to-top i {
+  color: white;
+  font-size: 20px;
+  padding-top: 13px;
+}
+
+.back-to-top {
+  position: fixed;
+  z-index: 999999;
+  background: #ff2020;
+  height: 50px;
+  width: 50px;
+  right: 31px;
+  bottom: 18px;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 48px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  $section-transition-property: all;
+  $section-transition-duration: 500ms;
+  $section-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+}

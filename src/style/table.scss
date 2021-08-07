@@ -1,8 +1,9 @@
 @import '/src/style/variable.scss';
 
-.box-out-search{
+.box-out-search {
   position: relative;
 }
+
 .plus {
   display: flex;
   justify-content: flex-end;
@@ -14,6 +15,10 @@
 .plus button {
   width: 40px;
   height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
 }
 
 .table-content {
@@ -33,14 +38,14 @@
 .table-container {
   width: 100%;
   margin-top: 24px;
-  
+
 }
 
 .table-container tr {
   border-top: 1px solid #f0f0f0;
   border-bottom: 1px solid #f0f0f0;
   height: 53px;
-  
+
 }
 
 .table-container td {
@@ -52,14 +57,16 @@
   line-height: 1.6rem;
 }
 
-.note-text{
+.note-text {
   max-width: 336px;
-  .text-overflow{
+
+  .text-overflow {
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;  
+    overflow: hidden;
   }
 }
+
 .table-container th {
   border-left: 1px solid #f0f0f0;
   border-right: 1px solid #f0f0f0;
@@ -68,17 +75,20 @@
   background: #fafafa;
   color: $colorblack;
 }
+
 .checkbox-table {
-    margin: auto;
-    text-align: center;
-    width: 16px;
-    height: 16px;
-   display: flex;
+  margin: auto;
+  text-align: center;
+  width: 16px;
+  height: 16px;
+  display: flex;
 }
-.pagination-bottom{
+
+.pagination-bottom {
   text-align: center;
   margin-top: 15px;
 }
+
 .example {
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
@@ -87,23 +97,29 @@
   padding: 30px 50px;
   margin: 20px 0;
 }
-.input-name{
+
+.input-name {
   font-size: 16px;
 }
+
 nz-alert {
   margin-bottom: 8px;
 }
+
 :host ::ng-deep .upload-list-inline .ant-upload-list-item {
   float: left;
   width: 200px;
   margin-right: 8px;
 }
+
 :host ::ng-deep .upload-list-inline [class*='-upload-list-rtl'] .ant-upload-list-item {
   float: right;
 }
+
 :host ::ng-deep .upload-list-inline .ant-upload-animate-enter {
   animation-name: uploadAnimateInlineIn;
 }
+
 :host ::ng-deep .upload-list-inline .ant-upload-animate-leave {
   animation-name: uploadAnimateInlineOut;
 }

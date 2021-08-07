@@ -37,7 +37,7 @@ export class Table {
 export class Pagination {
     perPage: number;
     page: number;
-    constructor(perPage: number, page: number) {
+    constructor(perPage: number = 10, page: number = 0) {
         this.perPage = perPage;
         this.page = page;
     }

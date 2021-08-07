@@ -1,12 +1,19 @@
 @import '/src/style/variable.scss';
 // carosel top
 
+::placeholder {
+  /* chạy tốt trên Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #c5c5c5;
+  opacity: 1;
+  /* Firefox */
+}
+
 .bgr-img {
   position: relative;
   max-width: 1600px;
   min-height: 700px;
   margin: auto;
-  margin-bottom: 200px;
+  margin-bottom: 216px;
 }
 
 [nz-carousel-content] {
@@ -40,7 +47,7 @@ h3 {
 }
 
 .caroselOn {
-  margin-top: 7px;
+  margin-top: 15px;
   opacity: 1;
   transition: all 1000ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
   transform: translate(0px, 0px);
@@ -164,7 +171,7 @@ h3 {
   position: absolute;
   width: 100%;
   top: 80%;
-  z-index: 1000;
+  z-index: 999;
   left: 50%;
   transform: translateX(-50%);
   max-height: 300px;
@@ -192,7 +199,7 @@ h3 {
 }
 
 .box-card {
-  box-shadow: 0px 4px 11px -1px #ececec;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   border: 0.3px solid #33333338;
   background-color: white;
   border-radius: 2px;
@@ -214,6 +221,7 @@ h3 {
   background: $darknight;
   padding-top: 60px;
   padding-left: 60px;
+  height: 619px;
 }
 
 .img-box::before {
@@ -231,24 +239,30 @@ h3 {
   z-index: 2;
 }
 
+.in-box-img {
+  z-index: 2;
+  position: absolute;
+}
+
 .text-box {
   padding-top: 33px;
   padding-bottom: 52px;
   padding-right: 20px;
   margin-right: 60px;
   z-index: 1;
+  position: absolute;
+  bottom: 0;
 }
 
-.text-box::before {
-  font: normal normal normal 14px/1 FontAwesome;
-  content: "\f10e";
+.text-box i {
   font-size: 60px;
   transform: perspective(1200px) rotateX(0) translateZ(0px);
   position: absolute;
-  right: 90px;
+  right: 32px;
   opacity: 0.1;
   bottom: 30px;
 }
+
 
 .text-box p {
   color: $colorgray;
@@ -263,6 +277,42 @@ h3 {
   font-size: 18px;
   font-weight: 600;
 }
+
+// produc new
+.product-new {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.box-out-img {
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.box-out-img img {
+  width: 100%;
+  min-height: 480px;
+  margin: 0;
+  transform: scale(1);
+  transition: all .4s ease-out 0s;
+}
+
+.product-new h5 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.product-new span {
+  font-size: 16px;
+  font-weight: 600;
+  color: $colorred;
+}
+
+.box-out-img:hover img {
+  transform: scale(1.04);
+}
+
 
 .abount-text {
   position: relative;
@@ -355,7 +405,6 @@ h3 {
 // box img hover
 
 .in-box {
-
   padding: 8px 0;
 }
 
@@ -437,7 +486,7 @@ h3 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 65%;
+  left: 70%;
   border-radius: 5px;
 }
 
@@ -450,7 +499,7 @@ h3 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 65%;
+  right: 70%;
   border-radius: 5px;
 }
 
@@ -476,16 +525,15 @@ h3 {
   background: white;
   padding: 32px;
 }
-.title-box{
 
-}
+
 .cw {
   color: white;
 }
 
 .form-contact {
   max-width: 470px;
-    height: auto;
+  height: auto;
 }
 
 .form-contact input {
@@ -496,12 +544,13 @@ h3 {
   font-size: 15px;
   font-weight: 400;
   width: 100%;
-  height: 60px;
+  height: 40px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: 2px;
   transition: all 500ms ease;
 }
-.form-contact button{
+
+.form-contact button {
   padding: 0 20px;
   width: 100%;
   height: 60px;
@@ -512,16 +561,38 @@ h3 {
   border-radius: 5px;
 
 }
+
 nz-select {
   width: 100%;
-  
+
 }
-// provider
-.bgr-btf{
-  padding-top: 32px;
-  padding-bottom: 32px;
-  background-color: $darknight;
-  max-width: 1519.2px;
-  height: auto;
-  margin: auto;
+
+//wrapper
+.text-wrapper {
+  padding: 20px 40px 0;
+}
+
+.method-wrapper {
+  padding: 24px;
+  background-color: $colorred;
+}
+
+.icon-wrapper {
+  margin-bottom: 32px;
+}
+
+.icon-wrapper i {
+  font-size: 48px;
+  color: white;
+}
+
+.text-wrapper h2 {
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.text-wrapper p {
+  color: white;
+  font-size: 16px;
 }

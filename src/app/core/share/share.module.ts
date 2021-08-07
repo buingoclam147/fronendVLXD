@@ -31,6 +31,12 @@ import { MoneyPipe } from './pipes/money.pipe';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { FormControlErrorComponent } from './components/form-control-error/form-control-error.component';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -55,7 +61,12 @@ import { FormControlErrorComponent } from './components/form-control-error/form-
     NzSelectModule,
     NzSliderModule,
     NzImageModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzRadioModule,
+    NzCheckboxModule,
+    NzCarouselModule,
+    NzBackTopModule,
+    NzDropDownModule
   ],
   declarations: [
     ShareComponent,
@@ -99,7 +110,12 @@ import { FormControlErrorComponent } from './components/form-control-error/form-
     MoneyPipe,
     NzDatePickerModule,
     DatepickerComponent,
-    FormControlErrorComponent
+    FormControlErrorComponent,
+    NzRadioModule,
+    NzCheckboxModule,
+    NzCarouselModule,
+    NzBackTopModule,
+    NzDropDownModule
   ]
 })
 export class ShareModule { }

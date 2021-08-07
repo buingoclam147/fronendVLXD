@@ -172,6 +172,5 @@ export class CustomerComponent implements OnInit, OnDestroy {
       this.search();
       this.createMessage('success', this.action.delete);
     }));
-    console.log(data);
   }
 }

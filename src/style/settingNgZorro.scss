@@ -1,15 +1,69 @@
-.ant-carousel .slick-dots li{
-    width: 40px;
+.ant-carousel .slick-dots li {
+  width: 40px;
 }
+
 .ant-carousel .slick-dots li button {
   background: #e9212e !important;
   height: 8px;
 }
 
 .ant-carousel .slick-dots {
-    margin-right: 79%;
-    margin-left: 0%;
+  margin-right: 79%;
+  margin-left: 0%;
 }
+
 [nz-button] {
   margin-right: 8px;
+}
+
+.checkbox-rmb .ant-checkbox .ant-checkbox-inner {
+  border-radius: 99px;
+  width: 20px;
+  height: 20px;
+  background-color: #efefef;
+  border-color: #3e4ab8;
+}
+
+
+.checkbox-rmb .ant-checkbox .ant-checkbox-inner::after {
+  margin-left: 1px;
+}
+
+.checkbox-rmb:hover {
+  border: none !important;
+  outline: none;
+  border-radius: 99px;
+}
+
+.ant-checkbox-checked::after {
+  border: none;
+}
+
+.checkbox-rmb .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #3e4ab8;
+}
+
+.err .ant-alert {
+  border-radius: 16px;
+  margin-top: 16px;
+}
+
+.name-input-gr .ant-input:hover {
+  border-color: #3e4ab8;
+}
+
+.input-group .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+  border-color: #3e4ab8;
+}
+
+.name-input-gr .ant-input-focused,
+.ant-input:focus {
+  border-color: #3e4ab8;
+  box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
+
+}
+
+.input-group .ant-input-affix-wrapper-focused, .ant-input-affix-wrapper:focus{
+  border-color: #3e4ab8;
+  box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
 }

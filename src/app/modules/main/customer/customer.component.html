@@ -120,7 +120,7 @@
     [nzCancelText]="stateConfig[state].cancelText" [nzOkDisabled]="formEverything.invalid"
     [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()">
     <form [formGroup]="formEverything">
-        <input nz-input placeholder="Họ và Tên" [formControlName]="'fullName'" class=" my-3" [type]="'text'"
+        <input nz-input placeholder="Họ và tên" [formControlName]="'fullName'" class=" my-3" [type]="'text'"
             [nzSize]="'large'" />
             <app-form-control-error [form]="formEverything" [controlName]="'fullName'" [errorsMessage]="
             {

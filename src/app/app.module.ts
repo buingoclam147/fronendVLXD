@@ -22,7 +22,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

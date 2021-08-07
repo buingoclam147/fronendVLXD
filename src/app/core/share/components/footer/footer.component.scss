@@ -1,17 +1,56 @@
-.bgr-footer{
-    position: relative;
-    display: block;
-    background: #27282c;
-    padding-top: 110px;
-    padding-bottom: 110px;
+@import '/src/style/variable.scss';
+
+.logo img {
+  max-height: 70px;
 }
-.bgr-right{
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-repeat: no-repeat;
-    background-position: top right;
-    height: 695px;
-    width: 695px;
-    background-image: url(/assets/bgrRightFooter.png);
+
+.list-footer b {
+  font-size: 32px;
+  color: $colorblack !important;
+  font-weight: 600;
+  margin-top: 40px;
+  display: block;
+  margin-bottom: 32px;
+}
+
+.list-footer li {
+  margin-bottom: 24px;
+}
+
+.list-footer a {
+  color: $colorblack !important;
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.facebook-footer p {
+  font-size: 32px;
+  color: $colorblack !important;
+  font-weight: 600;
+  margin-top: 40px;
+  display: block;
+  margin-bottom: 32px;
+  font-weight: bold;
+}
+
+.copyright {
+  color: $colorblack !important;
+  font-size: 20px;
+  opacity: 0.6;
+}
+.copyright span{
+    color: $colorred;
+    opacity: 1;
+}
+.copyright i{
+    color: $colorred;
+    opacity: 1;
+}
+.icon-footer{
+  float: right;
+}
+.icon-footer i{
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 24px;
 }

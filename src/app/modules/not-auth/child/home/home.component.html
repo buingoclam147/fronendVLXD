@@ -1,352 +1,385 @@
-<div class="bgr-img">
-    <nz-carousel nzAutoPlay [nzAutoPlaySpeed]="3000" (nzAfterChange)="caroselOn()">
-        <div nz-carousel-content>
-            <div nz-row class="bgr-carosel1">
-                <div class="box-content">
-                    <div [class.backcaroselOn]="a">
-                        <div [class.caroselOn]="a" class="divCarosel">
-                            Vật liệu xây dựng
+<div class="container p-0">
+    <div class="bgr-img">
+        <nz-carousel nzAutoPlay [nzAutoPlaySpeed]="3000" (nzAfterChange)="caroselOn()">
+            <div nz-carousel-content>
+                <div nz-row class="bgr-carosel1">
+                    <div class="box-content">
+                        <div [class.backcaroselOn]="a">
+                            <div [class.caroselOn]="a" class="divCarosel">
+                                Vật liệu xây dựng
+                            </div>
+                        </div>
+                        <div [class.pcarosel]="a">
+                            <p [class.pcaroselOn]="a" class="pCaroselOn">
+                                Chuyên gia vật liệu xây dựng trong chung cư, biệt thự, khách sạn
+                            </p>
+                        </div>
+                        <div [class.btncarosel]="a">
+                            <button [class.pcaroselOn]="a" class="divCarosel">
+                                <a href="#">
+                                    Xem Thêm
+                                </a>
+                            </button>
                         </div>
                     </div>
-                    <div [class.pcarosel]="a">
-                        <p [class.pcaroselOn]="a" class="pCaroselOn">
-                            Chuyên gia vật liệu xây dựng trong chung cư, biệt thự, khách sạn
-                        </p>
-                    </div>
-                    <div [class.btncarosel]="a">
-                        <button [class.pcaroselOn]="a" class="divCarosel">
-                            <a href="#">
-                                Xem Thêm
-                            </a>
-                        </button>
-                    </div>
                 </div>
             </div>
-        </div>
-        <div nz-carousel-content>
-            <div class="bgr-carosel2">
-                <div class="box-content">
+            <div nz-carousel-content>
+                <div class="bgr-carosel2">
+                    <div class="box-content">
 
-                    <div [class.backcaroselOn]="a==false">
-                        <div [class.caroselOn]="a==false" class="divCarosel">
-                            Sản phẩm nội thất
+                        <div [class.backcaroselOn]="a==false">
+                            <div [class.caroselOn]="a==false" class="divCarosel">
+                                Sản phẩm nội thất
+                            </div>
+                        </div>
+
+                        <div [class.pcarosel]="a==false">
+                            <p [class.pcaroselOn]="a==false" class="pCaroselOn">
+                                Chất lượng tuyệt đối trong vật liệu, thiết kế và dịch vụ
+                            </p>
+                        </div>
+                        <div [class.btncarosel]="a==false">
+                            <button [class.pcaroselOn]="a==false" class="divCarosel">
+                                <a href="#">
+                                    Xem Thêm
+                                </a>
+                            </button>
                         </div>
                     </div>
-
-                    <div [class.pcarosel]="a==false">
-                        <p [class.pcaroselOn]="a==false" class="pCaroselOn">
-                            Chất lượng tuyệt đối trong vật liệu, thiết kế và dịch vụ
+                </div>
+            </div>
+        </nz-carousel>
+        <div class="container-fluid cartBtCarosel">
+            <div nz-row [nzGutter]="40" class="card-carosel justify-content-center">
+                <div nz-col [nzSpan]="8" class="text-align-center">
+                    <div class="img-card">
+                        <img src="/assets/noithatchungcu1-64x64.png" alt="chungcu">
+                    </div>
+                    <div class="box-card pt-6">
+                        <h2 class="my-2">
+                            Vật liệu
+                        </h2>
+                        <p>Giải pháp vật liệu cho căn nhà giàu thẩm mỹ.
                         </p>
-                    </div>
-                    <div [class.btncarosel]="a==false">
-                        <button [class.pcaroselOn]="a==false" class="divCarosel">
-                            <a href="#">
-                                Xem Thêm
-                            </a>
-                        </button>
+                        <div class="py-3">
+                            <a href="#">Đọc Thêm</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </nz-carousel>
-    <div class="container-fluid cartBtCarosel">
-        <div nz-row [nzGutter]="40" class="card-carosel justify-content-center">
-            <div nz-col [nzSpan]="8" class="text-align-center">
-                <div class="img-card">
-                    <img src="/assets/noithatchungcu1-64x64.png" alt="chungcu">
-                </div>
-                <div class="box-card pt-6">
-                    <h2 class="my-2">
-                        Vật liệu
-                    </h2>
-                    <p>Giải pháp vật liệu cho căn nhà giàu thẩm mỹ.
-                    </p>
-                    <div class="py-3">
-                        <a href="#">Đọc Thêm</a>
+                <div nz-col [nzSpan]="8" class="text-align-center">
+                    <div class="img-card">
+                        <img src="/assets/noithatbietthu1-64x64.png" alt="bietthu">
+                    </div>
+                    <div class="box-card pt-6">
+                        <h2 class="my-2">
+                            Chất lượng
+                        </h2>
+                        <p>Giải pháp cho vật liệu bền và giá thành thấp nhất.
+                        </p>
+                        <div class="py-3">
+                            <a href="#">Đọc Thêm</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div nz-col [nzSpan]="8" class="text-align-center">
-                <div class="img-card">
-                    <img src="/assets/noithatbietthu1-64x64.png" alt="bietthu">
-                </div>
-                <div class="box-card pt-6">
-                    <h2 class="my-2">
-                        Chất lượng
-                    </h2>
-                    <p>Giải pháp cho vật liệu bền và giá thành thấp nhất.
-                    </p>
-                    <div class="py-3">
-                        <a href="#">Đọc Thêm</a>
+                <div nz-col [nzSpan]="8" class="text-align-center">
+                    <div class="img-card">
+                        <img src="/assets/noithatvanphong1-64x64.png" alt="vanphong">
                     </div>
-                </div>
-            </div>
-            <div nz-col [nzSpan]="8" class="text-align-center">
-                <div class="img-card">
-                    <img src="/assets/noithatvanphong1-64x64.png" alt="vanphong">
-                </div>
-                <div class="box-card pt-6">
-                    <h2 class="my-2">
-                        Dịch vụ
-                    </h2>
-                    <p>Cửa hàng phục vụ Chuyên nghiệp, hiệp đại và chu đáo.
-                    </p>
-                    <div class="py-3">
-                        <a href="#">Đọc Thêm</a>
+                    <div class="box-card pt-6">
+                        <h2 class="my-2">
+                            Dịch vụ
+                        </h2>
+                        <p>Cửa hàng phục vụ Chuyên nghiệp, hiệp đại và chu đáo.
+                        </p>
+                        <div class="py-3">
+                            <a href="#">Đọc Thêm</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid my-6">
-    <div nz-row>
-        <div nz-col nzFlex="2" class="px-4">
-            <div class="img-box">
-                <div class="in-box">
-                    <img src="/assets/anhvlxd.jpg" alt="anhvlxd" width="410px" height="370px">
-                </div>
-                <div class="text-box">
-                    <p>Kinh nghiệm &amp; Kiến thức tốt về thiết kế nội thất</p>
-                    <h3>Ngọc Lâm, CEO &amp; Founder</h3>
-                </div>
-            </div>
-
+    <!-- new product -->
+    <div class="container-fluid mb-7">
+        <div class="title">
+            <h4>Sản phẩm mới</h4>
         </div>
-        <div nz-col nzFlex="3" class="px-4">
-            <div class="abount-text ps-6">
-                <div class="sec-title">
-                    <p>introduce</p>
-                    <div class="title">VẬT LIỆU XÂY DỰNG Ngọc LÂM</div>
-                </div>
-                <div class="inner-content">
-                    <div class="text">
-                        <p>
-                            Công ty TNHH VLXD Ngọc Lâm được thành lập vào thời kỳ ngành xây dựng Việt Nam có nhiều
-                            biến động, ngành vật liệu xây dựng cũng gặp rất nhiều khó khăn. Ngọc Lâm luôn là nhà
-                            phân phối sắt thép xây dựng hàng đầu ở khu vực thành phố Hồ Chí Minh và khu vực lân cận.
-                        </p>
-                        <p>
-                            Công ty liên tục cập nhật những xu hướng phong cách thiết kế nội thất mới nhất, giúp quý
-                            khách hàng sở hữu những sản phẩm nội thất hợp thời đại, mang phong cách độc đáo và khác
-                            biệt.
-                        </p>
-                    </div>
-                    <div class="about-carousel-box">
-                        <nz-carousel class="out-carosel">
-                            <div nz-carousel-content class="p-3 index-carosel">
-                                <div nz-row class="align-item-center">
-                                    <div nz-col nzFlex="1">
-                                        <i class='bx bxl-redux redux-size'></i>
-                                    </div>
-                                    <div nz-col nzFlex="4" class="text-carosel">
-                                        <h3>
-                                            Sứ mệnh
-                                        </h3>
-                                        <p>
-                                        <p>Cung cấp đến khách hàng những giá trị sáng tạo khi thiết kế, thi công nội
-                                            thất để không gian sống của quý khách hàng trở nên tuyệt vời hơn.</p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div nz-carousel-content class="p-3 index-carosel">
-                                <div nz-row class="align-item-center">
-                                    <div nz-col nzFlex="1">
-                                        <i class='bx bxl-redux redux-size'></i>
-                                    </div>
-                                    <div nz-col nzFlex="4" class="text-carosel">
-                                        <h3>
-                                            Tầm nhìn
-                                        </h3>
-                                        <p>
-                                        <p>Không ngừng nâng cao trình độ, VDesign luôn hướng tới sự tiện ích và tận dụng
-                                            tối đa công năng của không gian bạn đang sống, làm việc nhưng vẫn đảm bảo
-                                            đầy đủ yếu tố nghệ thuật.</p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div nz-carousel-content class="p-3 index-carosel">
-                                <div nz-row class="align-item-center">
-                                    <div nz-col nzFlex="1">
-                                        <i class='bx bxl-redux redux-size'></i>
-                                    </div>
-                                    <div nz-col nzFlex="4" class="text-carosel">
-                                        <h3>
-                                            Giá trị cốt lõi
-                                        </h3>
-                                        <p>
-                                        <p>Mang đến không gian hoàn hảo về thẩm mỹ, hữu dụng về công năng, mang lại cuộc
-                                            sống tiện nghi và nâng tầm không gian sống cho khách hàng.</p>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </nz-carousel>
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="d-flex">
+            <ng-container *ngIf="listNewProducts |async as productsNew">
+                <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let product of productsNew.data">
+                    <div class="inner-box product-new">
+                        <div class="box-out-img">
+                            <img src="{{product.photos[0]}}" alt="noithatvanphong1">
+                        </div>
+                        <h5>{{product.name}}</h5>
+                        <span>{{product.price |money}}</span>
                     </div>
                 </div>
-            </div>
+            </ng-container>
+            
         </div>
     </div>
-</div>
-<div class="container-fluid mb-4">
-    <div class="selling-products my-3">
-        <h2 class="title  text-align-center">Sản phẩm bán chạy</h2>
+    <!-- INTRODUCE -->
+    <div class="container-fluid my-6">
         <div nz-row>
-            <h4 class="title text-align-center">Cát bê tông </h4>
-            <div nz-col nzSpan="12" class="p-6">
-                <img src="/assets/products/catbetong1.jpg" alt="catbetong1.jpg" width="512px" height="512px">
+            <div nz-col nzFlex="2" class="px-4">
+                <div class="img-box">
+                    <div class="in-box-img">
+                        <img src="/assets/anhvlxd.jpg" alt="anhvlxd" width="410px" height="370px">
+                    </div>
+                    <div class="text-box">
+                        <p>Kinh nghiệm &amp; Kiến thức tốt về thiết kế nội thất</p>
+                        <h3>Ngọc Lâm, CEO &amp; Founder</h3>
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+
+                </div>
+
             </div>
-            <div nz-col nzSpan="12" class="p-6">
-                <img src="/assets/products/catbetong2.jpg" alt="catbetong2.jpg" width="512px" height="512px">
+            <div nz-col nzFlex="3" class="px-4">
+                <div class="abount-text ps-6">
+                    <div class="sec-title">
+                        <p>introduce</p>
+                        <div class="title">VẬT LIỆU XÂY DỰNG Ngọc LÂM</div>
+                    </div>
+                    <div class="inner-content">
+                        <div class="text">
+                            <p>
+                                Công ty TNHH VLXD Ngọc Lâm được thành lập vào thời kỳ ngành xây dựng Việt Nam có nhiều
+                                biến động, ngành vật liệu xây dựng cũng gặp rất nhiều khó khăn. Ngọc Lâm luôn là nhà
+                                phân phối sắt thép xây dựng hàng đầu ở khu vực thành phố Hồ Chí Minh và khu vực lân cận.
+                            </p>
+                            <p>
+                                Công ty liên tục cập nhật những xu hướng phong cách thiết kế nội thất mới nhất, giúp quý
+                                khách hàng sở hữu những sản phẩm nội thất hợp thời đại, mang phong cách độc đáo và khác
+                                biệt.
+                            </p>
+                        </div>
+                        <div class="about-carousel-box">
+                            <nz-carousel class="out-carosel">
+                                <div nz-carousel-content class="p-3 index-carosel">
+                                    <div nz-row class="align-item-center">
+                                        <div nz-col nzFlex="1">
+                                            <i class='bx bxl-redux redux-size'></i>
+                                        </div>
+                                        <div nz-col nzFlex="4" class="text-carosel">
+                                            <h3>
+                                                Sứ mệnh
+                                            </h3>
+                                            <p>
+                                            <p>Cung cấp đến khách hàng những giá trị sáng tạo khi thiết kế, thi công nội
+                                                thất để không gian sống của quý khách hàng trở nên tuyệt vời hơn.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div nz-carousel-content class="p-3 index-carosel">
+                                    <div nz-row class="align-item-center">
+                                        <div nz-col nzFlex="1">
+                                            <i class='bx bxl-redux redux-size'></i>
+                                        </div>
+                                        <div nz-col nzFlex="4" class="text-carosel">
+                                            <h3>
+                                                Tầm nhìn
+                                            </h3>
+                                            <p>
+                                            <p>Không ngừng nâng cao trình độ, VDesign luôn hướng tới sự tiện ích và tận
+                                                dụng
+                                                tối đa công năng của không gian bạn đang sống, làm việc nhưng vẫn đảm
+                                                bảo
+                                                đầy đủ yếu tố nghệ thuật.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div nz-carousel-content class="p-3 index-carosel">
+                                    <div nz-row class="align-item-center">
+                                        <div nz-col nzFlex="1">
+                                            <i class='bx bxl-redux redux-size'></i>
+                                        </div>
+                                        <div nz-col nzFlex="4" class="text-carosel">
+                                            <h3>
+                                                Giá trị cốt lõi
+                                            </h3>
+                                            <p>
+                                            <p>Mang đến không gian hoàn hảo về thẩm mỹ, hữu dụng về công năng, mang lại
+                                                cuộc
+                                                sống tiện nghi và nâng tầm không gian sống cho khách hàng.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </nz-carousel>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <!-- selling products -->
+    <div class="container-fluid mb-4">
+        <div class="selling-products my-3">
+            <h2 class="title  text-align-center">Sản phẩm bán chạy</h2>
+            <div nz-row>
+                <h4 class="title text-align-center">Cát bê tông </h4>
+                <div nz-col nzSpan="12" class="p-6">
+                    <img src="/assets/products/catbetong1.jpg" alt="catbetong1.jpg" width="512px" height="512px">
+                </div>
+                <div nz-col nzSpan="12" class="p-6">
+                    <img src="/assets/products/catbetong2.jpg" alt="catbetong2.jpg" width="512px" height="512px">
+                </div>
+            </div>
+        </div>
 
-</div>
-<div class="container-boximg">
-    <div class="text-boximg container-fluid ps-5 my-3">
-        <p>
-            Project
-        </p>
-        <h4 class="title">
-            CÁC DỰ ÁN HOÀN THÀNH MỚI NHẤT
-        </h4>
     </div>
-    <div nz-row [nzGutter]="16">
-        <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box in-box m-4">
-                <div class="out-box">
-                    <img src="/assets/boximg1.jpg" alt="boximg1" width="320px" height="320px">
-                    <div class="opacity-box">
 
-                    </div>
-                </div>
-                <div class="on-text">
-                    <h2>
-                        Thiết kế căn hộ mái thái
-                    </h2>
-                </div>
-            </div>
+    <div class="container-boximg">
+        <div class="text-boximg container-fluid title">
+            <p>
+                Project
+            </p>
+            <h4>
+                CÁC DỰ ÁN HOÀN THÀNH MỚI NHẤT
+            </h4>
         </div>
-        <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box in-box m-4">
-                <div class="out-box">
-                    <img src="/assets/boximg2.jpg" alt="boximg2" width="320px" height="320px">
-                    <div class="opacity-box">
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box in-box m-4">
+                    <div class="out-box">
+                        <img src="/assets/boximg1.jpg" alt="boximg1" width="320px" height="320px">
+                        <div class="opacity-box">
 
+                        </div>
+                    </div>
+                    <div class="on-text">
+                        <h2>
+                            Thiết kế căn hộ mái thái
+                        </h2>
                     </div>
                 </div>
-                <div class="on-text">
-                    <h2>
-                        Thiết kế biệt thự The Hamony
-                    </h2>
-                </div>
             </div>
-        </div>
-        <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box in-box m-4">
-                <div class="out-box">
-                    <img src="/assets/boximg3.jpg" alt="boximg3" width="320px" height="320px">
-                    <div class="opacity-box">
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box in-box m-4">
+                    <div class="out-box">
+                        <img src="/assets/boximg2.jpg" alt="boximg2" width="320px" height="320px">
+                        <div class="opacity-box">
 
+                        </div>
+                    </div>
+                    <div class="on-text">
+                        <h2>
+                            Thiết kế biệt thự The Hamony
+                        </h2>
                     </div>
                 </div>
-                <div class="on-text">
-                    <h2>
-                        Thiết kế khách sạn tại Phú Quốc
-                    </h2>
-                </div>
             </div>
-        </div>
-        <div nz-col class="gutter-row" [nzSpan]="6">
-            <div class="inner-box in-box m-4">
-                <div class="out-box">
-                    <img src="/assets/boximg4.jpg" alt="boximg4" width="320px" height="320px">
-                    <div class="opacity-box">
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box in-box m-4">
+                    <div class="out-box">
+                        <img src="/assets/boximg3.jpg" alt="boximg3" width="320px" height="320px">
+                        <div class="opacity-box">
 
+                        </div>
+                    </div>
+                    <div class="on-text">
+                        <h2>
+                            Thiết kế khách sạn tại Phú Quốc
+                        </h2>
                     </div>
                 </div>
-                <div class="on-text">
-                    <h2>
-                        Thiết kế căn hộ Vinhome Central Park
-                    </h2>
-                </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="outsidecontact mb-6">
-    <div nz-row nzJustify="center">
-        <div nz-col nzSpan="8">
-            <div class="sec-title">
-                <p>LIÊN HỆ CHI TIẾT </p>
-                <div class="title cw"> CHÚNG TÔI CÓ THỂ GIÚP BẠN</div>
-            </div>
-            <div>
-                <img src="assets/incontactvietnampng.png" alt="ban do viet nam" width="450px" height="auto">
-            </div>
-        </div>
-        <div nz-col nzSpan="8">
-            <div class="box-contact">
-                <div class="title-box">
-                    <h2>Bạn đang cần tư vấn </h2>
-                    <span>
-                        <p>Nhận tư vấn trực tiếp từ các kiến trúc sư hàng đầu, quý khách vui lòng để lại thông tin cá
-                            nhân
-                            để chúng tôi kịp thời hỗ trợ.</p>
-                    </span>
-                </div>
-                <form action="post">
-                    <div class="form-contact">
-                        <input type="email" name="email" placeholder="Email">
-                        <input type="text" name="name" placeholder="Tên">
-                        <input type="tel" name="phone" placeholder="Điện thoại">
-                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Nội dung cần tư vấn"
-                            [(ngModel)]="selectedValue">
-                            <nz-option nzLabel="Sản phẩm" nzValue="product"></nz-option>
-                            <nz-option nzLabel="Các chính sách bảo mật" nzValue="privacyPolicy"></nz-option>
-                            <nz-option nzLabel="Phương thức liên hệ shop" nzValue="concact"></nz-option>
-                        </nz-select>
-                        <button>
-                            Đăng ký
-                        </button>
+            <div nz-col class="gutter-row" [nzSpan]="6">
+                <div class="inner-box in-box m-4">
+                    <div class="out-box">
+                        <img src="/assets/boximg4.jpg" alt="boximg4" width="320px" height="320px">
+                        <div class="opacity-box">
+
+                        </div>
                     </div>
-                </form>
+                    <div class="on-text">
+                        <h2>
+                            Thiết kế căn hộ Vinhome Central Park
+                        </h2>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="bgr-btf mb-6">
-    <div class="container-fluid ">
-        <div class="sec-title">
-            <p>Đối tác </p>
-            <div class="title">
-                HƠN 200+ ĐƠN VỊ CUNG CẤP THIẾT BỊ
+    <div class="outsidecontact mb-6">
+        <div nz-row nzJustify="center">
+            <div nz-col nzSpan="8">
+                <div class="sec-title">
+                    <p>LIÊN HỆ CHI TIẾT </p>
+                    <div class="title cw"> CHÚNG TÔI CÓ THỂ GIÚP BẠN</div>
+                </div>
+                <div>
+                    <img src="assets/incontactvietnampng.png" alt="ban do viet nam" width="450px" height="auto">
+                </div>
+            </div>
+            <div nz-col nzSpan="8">
+                <div class="box-contact">
+                    <div class="title-box">
+                        <h2>Bạn đang cần tư vấn </h2>
+                        <span>
+                            <p>Nhận tư vấn trực tiếp từ các kiến trúc sư hàng đầu, quý khách vui lòng để lại thông tin
+                                cá
+                                nhân
+                                để chúng tôi kịp thời hỗ trợ.</p>
+                        </span>
+                    </div>
+                    <form [formGroup]="profileForm">
+                        <div class="form-contact">
+                            <input [type]="'email'" [formControlName]="'email'" placeholder="Email">
+                            <input [type]="'text'" [formControlName]="'name'" placeholder="Tên">
+                            <input [type]="'text'" [formControlName]="'phone'" placeholder="Điện thoại">
+                            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Nội dung cần tư vấn"
+                                [formControlName]="'selectedValue'" [nzSize]="'large'">
+                                <nz-option nzLabel="Sản phẩm" nzValue="product"></nz-option>
+                                <nz-option nzLabel="Các chính sách bảo mật" nzValue="privacyPolicy"></nz-option>
+                                <nz-option nzLabel="Phương thức liên hệ shop" nzValue="concact"></nz-option>
+                            </nz-select>
+                            <button [type]="'submit'">
+                                Đăng ký
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="container-fluid mb-6 method-wrapper">
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-            <div nz-col class="gutter-row" [nzSpan]="6">
-                <div class="inner-box">
-                    <img src="/assets/products/nccashley.png" alt="nha cung cap" width="296px" height="auto">
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div class="inner-box text-wrapper">
+                    <div class="icon-wrapper">
+                        <i class="fa fa-truck"></i>
+                    </div>
+                    <h2>Miễn phí vẫn chuyển</h2>
+                    <p>Vận chuyển hàng hóa miễn phí, nhanh chóng, cẩn thận </p>
                 </div>
             </div>
-            <div nz-col class="gutter-row" [nzSpan]="6">
-                <div class="inner-box">
-                    <img src="/assets/products/nccashley.png" alt="nha cung cap" width="296px" height="auto">
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div class="inner-box text-wrapper">
+                    <div class="icon-wrapper">
+                        <i class="fa fa-credit-card"></i>
+                    </div>
+                    <h2>Thanh toán tiện lợi</h2>
+                    <p>Thanh toán dễ dàng bằng thẻ visa và nhiều loại ví</p>
+
                 </div>
             </div>
-            <div nz-col class="gutter-row" [nzSpan]="6">
-                <div class="inner-box">
-                    <img src="/assets/products/nccashley.png" alt="nha cung cap" width="296px" height="auto">
+            <div nz-col class="gutter-row" [nzSpan]="8">
+                <div class="inner-box text-wrapper">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <h2>Đổi trả hàng nhanh chóng</h2>
+                    <p>Đổi trả hàng nhanh chóng, miễn phí, hài lòng</p>
                 </div>
             </div>
-            <div nz-col class="gutter-row" [nzSpan]="6">
-                <div class="inner-box">
-                    <img src="/assets/products/nccashley.png" alt="nha cung cap" width="296px" height="auto">
-                </div>
-            </div>
+
         </div>
     </div>
+    
 </div>

@@ -9,6 +9,7 @@
     margin-right: calc(var(--bs-gutter-x) / -2);
     margin-left: calc(var(--bs-gutter-x) / -2);
   }
+ 
   .col-md-3 {
     flex: 0 0 auto;
     width: 25%;
@@ -218,6 +219,9 @@
   }
   .mb-6 {
     margin-bottom: 4rem !important;
+  }
+  .mb-7 {
+    margin-bottom: 8rem !important;
   }
   
   .mb-auto {
