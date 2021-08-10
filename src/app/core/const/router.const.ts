@@ -18,5 +18,9 @@ export const ROUTER_CONST =
         EMPLOYEE: {
             ROOT: '/main/employee'
         }
+    },
+    NOT_AUTH: {
+        HOME: '/',
+        ABOUTUS: '/about-us'
     }
 };

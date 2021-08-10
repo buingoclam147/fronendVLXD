@@ -36,6 +36,9 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { RouterModule } from '@angular/router';
+import { BreadcrumbAreaComponent } from './components/breadcrumb-area/breadcrumb-area.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
   imports: [
@@ -66,7 +69,9 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     NzCheckboxModule,
     NzCarouselModule,
     NzBackTopModule,
-    NzDropDownModule
+    NzDropDownModule,
+    RouterModule,
+    NzCardModule
   ],
   declarations: [
     ShareComponent,
@@ -77,7 +82,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     SupplierPipe,
     MoneyPipe,
     DatepickerComponent,
-    FormControlErrorComponent
+    FormControlErrorComponent,
+    BreadcrumbAreaComponent
 
   ],
   exports: [
@@ -115,7 +121,9 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     NzCheckboxModule,
     NzCarouselModule,
     NzBackTopModule,
-    NzDropDownModule
+    NzDropDownModule,
+    BreadcrumbAreaComponent,
+    NzCardModule
   ]
 })
 export class ShareModule { }

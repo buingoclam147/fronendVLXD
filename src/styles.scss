@@ -99,47 +99,32 @@ a {
   height: 100px;
 }
 
-.dropdow-product {
-  z-index: 99999;
-  top: 8px;
-  left: 24px;
-  border-radius: 5px;
-
-  box-shadow: 0 0 10px 3px rgb(0 0 0 / 5%);
-  padding: 17px 0;
-  border-top: 3px solid #ff2020;
-  border-radius: 7px 7px 3px 3px;
-  -webkit-transition: all .2s ease-out 0s;
-  -moz-transition: all .2s ease-out 0s;
-  -ms-transition: all .2s ease-out 0s;
-  -o-transition: all .2s ease-out 0s;
-  transition: all .2s ease-out 0s;
+.title-1 {
+  font-size: 72px;
+  font-weight: 700;
 }
 
-.dropdow-product li {
-  margin: 8px;
-  font-size: 16px;
+.title-2 {
+  color: white;
   font-weight: 600;
+  font-size: 48px;
+  line-height: 62px;
+  letter-spacing: 2.5px;
+  text-transform: capitalize;
 }
 
-.dropdow-product::before {
-  border-style: solid;
-  border-width: 0 6px 6px 6px;
-  border-color: transparent transparent red transparent;
-  content: "";
-  top: -9px;
-  left: 16%;
-  position: absolute;
-  transition: .3s;
-  z-index: -1;
-  overflow: hidden;
-  -webkit-transition: all .3s ease-out 0s;
-  -moz-transition: all .3s ease-out 0s;
-  -ms-transition: all .3s ease-out 0s;
-  -o-transition: all .3s ease-out 0s;
-  transition: all .3s ease-out 0s;
+.title-4 {
+  z-index: 6;
+  color: $colorred;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0 0 7px;
+}
+.text {
+  margin-top: 16px;
+  font-size: 16px;
+  opacity: 0.6;
 }
 
-.dropdow-product li:hover {
-  color: #ff2020;
-}

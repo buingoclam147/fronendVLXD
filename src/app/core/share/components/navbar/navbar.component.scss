@@ -22,7 +22,7 @@
   font-weight: 600;
 }
 
-.categoryNav li:hover a{
+.categoryNav li:hover a {
   color: $colorred !important;
 }
 
@@ -49,9 +49,11 @@
 .pageItem i {
   color: $color33;
 }
+
 .pageItem i:hover {
   color: $colorred;
 }
+
 .pageItem p {
   color: $colorred;
   color: #e9212e;
@@ -74,8 +76,19 @@
 .scroll {
   position: fixed;
   z-index: 1000;
-  -webkit-box-shadow: 0 10px 15px rgb(25 25 25 / 10%);
-  animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+  animation-name: showing;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes showing {
+  from {
+    transform: translateY(-100px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
 
 .back-to-top i {
@@ -86,7 +99,7 @@
 
 .back-to-top {
   position: fixed;
-  z-index: 999999;
+  z-index: 9999;
   background: #ff2020;
   height: 50px;
   width: 50px;
@@ -102,3 +115,5 @@
   $section-transition-duration: 500ms;
   $section-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
+
+

@@ -1,0 +1,9 @@
+@import '/src/style/variable.scss';
+.img-a-text {
+  background-image: url(/assets/about-us/bg-about-us.jpg);
+  background-size: cover;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  text-align: center;
+}

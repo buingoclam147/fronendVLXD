@@ -1,4 +1,4 @@
-<nz-header class=" bgr-navbar" [class.scroll]="scrollY" nzAlign="top">
+<nz-header class=" bgr-navbar" [class.scroll]="isShowMiddleNav" nzAlign="top">
   <div class="container-fluid">
     <div nz-row class="align-item-center pt-3">
       <div nz-col nzSpan="5" nzJustify="center" class="logo text-align-center">
@@ -9,8 +9,8 @@
       <div nz-col nzSpan="14">
 
         <ul nz-row nzJustify="center" class="d-flex categoryNav text-center">
-          <li class="col-md-3 "><a href="#">Trang chủ</a></li>
-          <li class="col-md-3 "><a href="#"> Giới thiệu </a></li>
+          <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.HOME]">Trang chủ</a></li>
+          <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.ABOUTUS]"> Giới thiệu </a></li>
           <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu"><a href="#"> Sản phẩm</a></li>
           <li class="col-md-3 "><a href="#"> Liên hệ</a></li>
         </ul>
@@ -31,6 +31,7 @@
       </div>
     </div>
   </div>
+  
 </nz-header>
 <nz-back-top [nzDuration]="'1000'" [nzTemplate]="backtop"></nz-back-top>
 <ng-template #backtop>
@@ -39,10 +40,10 @@
   </div>
 </ng-template>
 
-<nz-dropdown-menu #menu  >
+<nz-dropdown-menu #menu>
   <ul nz-menu nzSelectable class="dropdow-product">
     <ng-container *ngIf="listCategory |async as listCategory">
-    <li nz-menu-item *ngFor="let category of listCategory.data">{{category.name}}</li>
-  </ng-container>
+      <li nz-menu-item *ngFor="let category of listCategory.data">{{category.name}}</li>
+    </ng-container>
   </ul>
 </nz-dropdown-menu>

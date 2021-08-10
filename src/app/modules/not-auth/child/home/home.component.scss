@@ -42,8 +42,6 @@ h3 {
   transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 81.2, 0, 1);
   transform-origin: 50% 50% 0px;
   opacity: 0;
-  font-size: 72px;
-  font-weight: 700;
 }
 
 .caroselOn {
@@ -326,20 +324,6 @@ h3 {
   margin-bottom: 30px;
 }
 
-.sec-title p {
-  color: $colorred;
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin: 0 0 7px;
-}
-
-.text {
-  margin-top: 16px;
-  font-size: 16px;
-  opacity: 0.6;
-}
 
 .about-carousel-box {
   max-width: 570px;
@@ -568,31 +552,4 @@ nz-select {
 }
 
 //wrapper
-.text-wrapper {
-  padding: 20px 40px 0;
-}
 
-.method-wrapper {
-  padding: 24px;
-  background-color: $colorred;
-}
-
-.icon-wrapper {
-  margin-bottom: 32px;
-}
-
-.icon-wrapper i {
-  font-size: 48px;
-  color: white;
-}
-
-.text-wrapper h2 {
-  color: white;
-  font-weight: 600;
-  font-size: 24px;
-}
-
-.text-wrapper p {
-  color: white;
-  font-size: 16px;
-}

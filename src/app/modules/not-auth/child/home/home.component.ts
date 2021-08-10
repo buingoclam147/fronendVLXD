@@ -11,23 +11,35 @@ import { ProductService } from 'src/app/core/share/service/product.service';
 export class HomeComponent implements OnInit {
   listNewProducts;
   profileForm: FormGroup;
-  a = false;
+  isCarosel = true;
+  items;
+
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
   ) {
+    this.items = [
+      {
+        title: 'Vật liệu xây dựng',
+        content: 'Chuyên gia vật liệu xây dựng trong chung cư, biệt thự, khách sạn'
+      },
+      {
+        title: 'Sản phẩm nội thất',
+        content: 'Chất lượng tuyệt đối trong vật liệu, thiết kế và dịch vụ'
+      }
+    ];
   }
   ngOnInit(): void {
-    this.caroselOn();
     this.profileForm = this.fb.group({
       email: '',
       name: '',
       phone: '',
-      selectedValue: null
+      selectedValue: null,
+      content: ''
     });
     this.listNewProducts = this.productService.getProduct(new Pagination(3, 0), {});
   }
   caroselOn(): void {
-    this.a = !this.a;
+    this.isCarosel = !this.isCarosel;
   }
 }

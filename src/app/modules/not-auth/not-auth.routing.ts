@@ -6,6 +6,7 @@ const routes: Routes = [
   {
     path: '', component: NotAuthComponent, children: [
       { path: '', loadChildren: () => import('./child/home/home.module').then((x) => x.HomeModule) },
+      { path: 'about-us', loadChildren: () => import('./child/about-us/about-us.module').then((x) => x.AboutUsModule) },
       { path: 'product', loadChildren: () => import('./child/product/product.module').then((x) => x.ProductModule) }
     ]
   },

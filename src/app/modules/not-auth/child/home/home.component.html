@@ -1,21 +1,21 @@
 <div class="container p-0">
     <div class="bgr-img">
-        <nz-carousel nzAutoPlay [nzAutoPlaySpeed]="3000" (nzAfterChange)="caroselOn()">
-            <div nz-carousel-content>
+        <nz-carousel nzAutoPlay [nzAutoPlaySpeed]="3000" (nzBeforeChange)="caroselOn()" (nzAfterChange)="caroselOn()">
+            <div nz-carousel-content *ngFor="let i of items">
                 <div nz-row class="bgr-carosel1">
                     <div class="box-content">
-                        <div [class.backcaroselOn]="a">
-                            <div [class.caroselOn]="a" class="divCarosel">
-                                Vật liệu xây dựng
+                        <div [class.backcaroselOn]="isCarosel">
+                            <div [class.caroselOn]="isCarosel" class="divCarosel title-1">
+                                {{i.title}}
                             </div>
                         </div>
-                        <div [class.pcarosel]="a">
-                            <p [class.pcaroselOn]="a" class="pCaroselOn">
-                                Chuyên gia vật liệu xây dựng trong chung cư, biệt thự, khách sạn
+                        <div [class.pcarosel]="isCarosel">
+                            <p [class.pcaroselOn]="isCarosel" class="pCaroselOn">
+                                {{i.content}}
                             </p>
                         </div>
-                        <div [class.btncarosel]="a">
-                            <button [class.pcaroselOn]="a" class="divCarosel">
+                        <div [class.btncarosel]="isCarosel">
+                            <button [class.pcaroselOn]="isCarosel" class="divCarosel">
                                 <a href="#">
                                     Xem Thêm
                                 </a>
@@ -24,23 +24,23 @@
                     </div>
                 </div>
             </div>
-            <div nz-carousel-content>
+            <!-- <div nz-carousel-content>
                 <div class="bgr-carosel2">
                     <div class="box-content">
 
-                        <div [class.backcaroselOn]="a==false">
-                            <div [class.caroselOn]="a==false" class="divCarosel">
+                        <div [class.backcaroselOn]="!isCarosel">
+                            <div [class.caroselOn]="!isCarosel" class="divCarosel">
                                 Sản phẩm nội thất
                             </div>
                         </div>
 
-                        <div [class.pcarosel]="a==false">
-                            <p [class.pcaroselOn]="a==false" class="pCaroselOn">
+                        <div [class.pcarosel]="!isCarosel">
+                            <p [class.pcaroselOn]="!isCarosel" class="pCaroselOn">
                                 Chất lượng tuyệt đối trong vật liệu, thiết kế và dịch vụ
                             </p>
                         </div>
-                        <div [class.btncarosel]="a==false">
-                            <button [class.pcaroselOn]="a==false" class="divCarosel">
+                        <div [class.btncarosel]="!isCarosel">
+                            <button [class.pcaroselOn]="!isCarosel" class="divCarosel">
                                 <a href="#">
                                     Xem Thêm
                                 </a>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </nz-carousel>
         <div class="container-fluid cartBtCarosel">
             <div nz-row [nzGutter]="40" class="card-carosel justify-content-center">
@@ -140,8 +140,8 @@
             <div nz-col nzFlex="3" class="px-4">
                 <div class="abount-text ps-6">
                     <div class="sec-title">
-                        <p>introduce</p>
-                        <div class="title">VẬT LIỆU XÂY DỰNG Ngọc LÂM</div>
+                        <p class="title-4">introduce</p>
+                        <div class="title">VẬT LIỆU XÂY DỰNG NGỌC LÂM</div>
                     </div>
                     <div class="inner-content">
                         <div class="text">
@@ -157,7 +157,7 @@
                             </p>
                         </div>
                         <div class="about-carousel-box">
-                            <nz-carousel class="out-carosel">
+                            <nz-carousel class="out-carosel introduce-carosel">
                                 <div nz-carousel-content class="p-3 index-carosel">
                                     <div nz-row class="align-item-center">
                                         <div nz-col nzFlex="1">
@@ -310,7 +310,7 @@
         <div nz-row nzJustify="center">
             <div nz-col nzSpan="8">
                 <div class="sec-title">
-                    <p>LIÊN HỆ CHI TIẾT </p>
+                    <p class="title-4">LIÊN HỆ CHI TIẾT </p>
                     <div class="title cw"> CHÚNG TÔI CÓ THỂ GIÚP BẠN</div>
                 </div>
                 <div>
@@ -339,6 +339,7 @@
                                 <nz-option nzLabel="Các chính sách bảo mật" nzValue="privacyPolicy"></nz-option>
                                 <nz-option nzLabel="Phương thức liên hệ shop" nzValue="concact"></nz-option>
                             </nz-select>
+                            <textarea class="mt-4" rows="4" [formControlName]="'content'" nz-input></textarea>
                             <button [type]="'submit'">
                                 Đăng ký
                             </button>
@@ -348,38 +349,4 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid mb-6 method-wrapper">
-        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-            <div nz-col class="gutter-row" [nzSpan]="8">
-                <div class="inner-box text-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-truck"></i>
-                    </div>
-                    <h2>Miễn phí vẫn chuyển</h2>
-                    <p>Vận chuyển hàng hóa miễn phí, nhanh chóng, cẩn thận </p>
-                </div>
-            </div>
-            <div nz-col class="gutter-row" [nzSpan]="8">
-                <div class="inner-box text-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fa fa-credit-card"></i>
-                    </div>
-                    <h2>Thanh toán tiện lợi</h2>
-                    <p>Thanh toán dễ dàng bằng thẻ visa và nhiều loại ví</p>
-
-                </div>
-            </div>
-            <div nz-col class="gutter-row" [nzSpan]="8">
-                <div class="inner-box text-wrapper">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-sync"></i>
-                    </div>
-                    <h2>Đổi trả hàng nhanh chóng</h2>
-                    <p>Đổi trả hàng nhanh chóng, miễn phí, hài lòng</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    
 </div>

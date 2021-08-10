@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { ROUTER_CONST } from 'src/app/core/const/router.const';
 import { Pagination } from '../../model/table.model';
 import { CategoryService } from '../../service/category.service';
 
@@ -8,8 +9,9 @@ import { CategoryService } from '../../service/category.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  ROUTER_CONST = ROUTER_CONST;
   listCategory;
-  scrollY = false;
+  isShowMiddleNav = false;
   constructor(
     private categoryService: CategoryService,
   ) {
@@ -20,7 +22,7 @@ export class NavbarComponent implements OnInit {
   }
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-    window.scrollY > 500 ? this.scrollY = true : this.scrollY = false;
+    this.isShowMiddleNav = window.scrollY > 500;
   }
   onTop(): void {
     window.scroll(0, 100);

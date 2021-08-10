@@ -1,0 +1,62 @@
+<app-breadcrumb-area title="Về chúng tôi"></app-breadcrumb-area>
+<div class="container-fluid">
+    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div nz-col class="gutter-row" [nzSpan]="12">
+            <div class="inner-box">
+                <p class="title-4">
+                    Tổng quan xưởng
+                </p>
+                <h4 class="title">
+                    Xưởng sản xuất hiện đại & hàng hóa đa dạng
+                </h4>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="12">
+            <div class="inner-box text mt-4">
+                <p>
+                    Khi mang đến công trường nhà thép tiền chế chỉ cần rất ít thao tác lắp ghép để tạo nên một công
+                    trình hoàn chỉnh. Nhằm giảm thiểu thời gian thi công trên công trường và góp phần hạn chế các quá
+                    trình chỉ đạo thi công mệt nhọc trên công trường, giảm thiểu thời gian hoàn thành công trình và mang
+                    tính chuyên môn hóa cao. Mặt khác chủ đầu tư còn có thể dễ dàng kiểm soát được chất lượng công trình
+                    ngay từ trong quá trình sản xuất.
+                </p>
+            </div>
+        </div>
+    </div>
+    <nz-carousel nzAutoPlay class="st-carosel mb-6" [nzAutoPlaySpeed]="3000000">
+        <div nz-carousel-content *ngFor="let index of dataCarosel" class="crs-about-us">
+            <div class="container-fluid p-0 mb-6 ">
+                <div nz-row class="out-crs">
+                    <div nz-col nzSpan="12" class="img-crs">
+                        <img [src]="index.img" alt="crs1">
+                    </div>
+                    <div nz-col nzSpan="12">
+                        <h4 class="title mt-6 px-5">
+                            {{index.title}}
+                        </h4>
+                        <p class="text color-st">
+                            {{index.text}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nz-carousel>
+    <div class="container-fluid mb-6">
+        <h4 class="title">
+            ĐỘI NGŨ THÀNH VIÊN
+        </h4>
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+            <div nz-col class="gutter-row" [nzSpan]="6"  *ngFor="let item of cards">
+                <div class="inner-box">
+                    <nz-card nzHoverable style="width:240px" [nzCover]="coverTemplate" class="cart-about-us">
+                        <nz-card-meta [nzTitle]="item.name" [nzDescription]="item.position"></nz-card-meta>
+                    </nz-card>
+                    <ng-template #coverTemplate>
+                        <img [alt]="item.avt" [src]="item.avt" />
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,69 +1,150 @@
-.ant-carousel .slick-dots li {
-  width: 40px;
-}
+  .introduce-carosel .slick-dots li {
+    width: 40px;
+  }
 
-.ant-carousel .slick-dots li button {
-  background: #e9212e !important;
-  height: 8px;
-}
+  .introduce-carosel .slick-dots li button {
+    background: #e9212e !important;
+    height: 8px;
+  }
 
-.ant-carousel .slick-dots {
-  margin-right: 79%;
-  margin-left: 0%;
-}
-
-[nz-button] {
-  margin-right: 8px;
-}
-
-.checkbox-rmb .ant-checkbox .ant-checkbox-inner {
-  border-radius: 99px;
-  width: 20px;
-  height: 20px;
-  background-color: #efefef;
-  border-color: #3e4ab8;
-}
+  .introduce-carosel .slick-dots {
+    margin-right: 79%;
+    margin-left: 0%;
+  }
 
 
-.checkbox-rmb .ant-checkbox .ant-checkbox-inner::after {
-  margin-left: 1px;
-}
 
-.checkbox-rmb:hover {
-  border: none !important;
-  outline: none;
-  border-radius: 99px;
-}
+  [nz-button] {
+    margin-right: 8px;
+  }
 
-.ant-checkbox-checked::after {
-  border: none;
-}
+  .checkbox-rmb .ant-checkbox .ant-checkbox-inner {
+    border-radius: 99px;
+    width: 20px;
+    height: 20px;
+    background-color: #efefef;
+    border-color: #3e4ab8;
+  }
 
-.checkbox-rmb .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #3e4ab8;
-}
 
-.err .ant-alert {
-  border-radius: 16px;
-  margin-top: 16px;
-}
+  .checkbox-rmb .ant-checkbox .ant-checkbox-inner::after {
+    margin-left: 1px;
+  }
 
-.name-input-gr .ant-input:hover {
-  border-color: #3e4ab8;
-}
+  .checkbox-rmb:hover {
+    border: none !important;
+    outline: none;
+    border-radius: 99px;
+  }
 
-.input-group .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
-  border-color: #3e4ab8;
-}
+  .ant-checkbox-checked::after {
+    border: none;
+  }
 
-.name-input-gr .ant-input-focused,
-.ant-input:focus {
-  border-color: #3e4ab8;
-  box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
+  .checkbox-rmb .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #3e4ab8;
+  }
 
-}
+  .err .ant-alert {
+    border-radius: 16px;
+    margin-top: 16px;
+  }
 
-.input-group .ant-input-affix-wrapper-focused, .ant-input-affix-wrapper:focus{
-  border-color: #3e4ab8;
-  box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
-}
+  .name-input-gr .ant-input:hover {
+    border-color: #3e4ab8;
+  }
+
+  .input-group .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+    border-color: #3e4ab8;
+  }
+
+  .name-input-gr .ant-input-focused,
+  .ant-input:focus {
+    border-color: #3e4ab8;
+    box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
+
+  }
+
+  .input-group .ant-input-affix-wrapper-focused,
+  .ant-input-affix-wrapper:focus {
+    border-color: #3e4ab8;
+    box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
+  }
+
+  .dropdow-product {
+    z-index: 99999;
+    top: 8px;
+    left: 24px;
+    border-radius: 5px;
+
+    box-shadow: 0 0 10px 3px rgb(0 0 0 / 5%);
+    padding: 17px 0;
+    border-top: 3px solid #ff2020;
+    border-radius: 7px 7px 3px 3px;
+    -webkit-transition: all .2s ease-out 0s;
+    -moz-transition: all .2s ease-out 0s;
+    -ms-transition: all .2s ease-out 0s;
+    -o-transition: all .2s ease-out 0s;
+    transition: all .2s ease-out 0s;
+  }
+
+  .dropdow-product li {
+    margin: 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .dropdow-product::before {
+    border-style: solid;
+    border-width: 0 6px 6px 6px;
+    border-color: transparent transparent red transparent;
+    content: "";
+    top: -9px;
+    left: 16%;
+    position: absolute;
+    transition: .3s;
+    z-index: -1;
+    overflow: hidden;
+    -webkit-transition: all .3s ease-out 0s;
+    -moz-transition: all .3s ease-out 0s;
+    -ms-transition: all .3s ease-out 0s;
+    -o-transition: all .3s ease-out 0s;
+    transition: all .3s ease-out 0s;
+  }
+
+  .st-carosel {
+    height: 470px !important;
+  }
+
+  .dropdow-product li:hover {
+    color: #ff2020;
+  }
+
+  .st-carosel .slick-active button {
+    background: red !important;
+    border-radius: 50% !important;
+    height: 15px !important;
+    width: 15px !important;
+    margin: 0 !important;
+  }
+
+  .st-carosel li button {
+    background: #6d6da6 !important;
+    border-radius: 50% !important;
+    height: 15px !important;
+    width: 15px !important;
+    margin: 0 !important;
+  }
+
+  .st-carosel li {
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    width: 16px !important;
+  }
+
+  .st-carosel ul {
+    bottom: 48px !important;
+  }
+  .cart-about-us{
+    width: 100% !important;
+  }
