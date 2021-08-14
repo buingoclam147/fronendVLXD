@@ -158,6 +158,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     }
   }
   showModal(state: STATE, id?: any): any {
+    this.formEverything.enable();
     this.id = id;
     this.state = state;
     switch (this.state) {
@@ -188,6 +189,7 @@ export class ProductComponent implements OnInit, OnDestroy {
         }
       case STATE.VIEW:
         {
+
           this.subscriptions.push(this.productService.getOneProduct(id).subscribe(item => {
             this.formEverything.patchValue({
               name: item.name,
@@ -203,6 +205,8 @@ export class ProductComponent implements OnInit, OnDestroy {
             this.visible = true;
             this.typeForm = 'view';
           }));
+
+          this.formEverything.disable();
           break;
         }
       default:
@@ -219,9 +223,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   pageSizeChange(value): void {
     this.table.pageSizeChange(value);
     this.search();
-  }
-  deleteSearch(): void {
-    this.table.filter.name = '';
   }
   deleteOneCategory(id): void {
     this.subscriptions.push(this.productService.deleteOneProduct(id).subscribe(_ => {

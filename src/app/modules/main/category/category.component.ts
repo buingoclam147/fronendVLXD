@@ -77,6 +77,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   // add update and delete
 
   showModal(state: STATE, id?: any): void {
+    this.formEverything.enable();
     this.id = id;
     this.state = state;
     switch (this.state) {
@@ -85,8 +86,9 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.visible = true;
           break;
         }
+      case  STATE.VIEW:
+        this.formEverything.disable();
       case STATE.UPDATE:
-      case STATE.VIEW:
         {
           this.subscriptions.push(this.categoryService.getOneCategory(id).subscribe(item => {
             this.formEverything.patchValue({ ...item });

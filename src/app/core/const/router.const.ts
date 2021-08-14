@@ -21,6 +21,10 @@ export const ROUTER_CONST =
     },
     NOT_AUTH: {
         HOME: '/',
-        ABOUTUS: '/about-us'
+        ABOUTUS: '/about-us',
+        PRODUCT: {
+            ROOT: '/product',
+        },
+        CONTACT: '/contact',
     }
 };

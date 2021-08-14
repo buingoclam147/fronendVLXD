@@ -145,6 +145,37 @@
   .st-carosel ul {
     bottom: 48px !important;
   }
-  .cart-about-us{
+
+  .cart-about-us {
     width: 100% !important;
   }
+
+  .per-page .ant-select {
+    margin-left: 16px;
+    width: 50%;
+    float: right;
+  }
+
+  .per-page .ant-select-selector {
+    border-radius: 20px !important;
+    padding: 0 16px !important;
+  }
+
+  .modal-product {
+    height: 516px;
+  }
+
+  .carousel-view .slick-list{
+    width: 100% !important;
+    height: 516px !important;
+  }
+  .carousel-view img{
+    width: 100% !important;
+    height: 516px !important;
+  }
+  .carousel-view ul{
+    left: -25px !important;
+  }
+  // .search{
+  //   height: 516px !important;
+  // }

@@ -11,13 +11,14 @@
         <ul nz-row nzJustify="center" class="d-flex categoryNav text-center">
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.HOME]">Trang chủ</a></li>
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.ABOUTUS]"> Giới thiệu </a></li>
-          <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu"><a href="#"> Sản phẩm</a></li>
-          <li class="col-md-3 "><a href="#"> Liên hệ</a></li>
+          <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu"><a
+              [routerLink]="[ROUTER_CONST.NOT_AUTH.PRODUCT.ROOT]"> Sản phẩm</a></li>
+          <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.CONTACT]"> Liên hệ</a></li>
         </ul>
 
       </div>
       <div nz-col nzSpan="5" class="d-flex pageItem align-item-center">
-        <a href="#" class="d-flex">
+        <a (click)="showModal()" class="d-flex">
           <i class='bx bx-search bx-sm'></i>
         </a>
         <a href="#" class="d-flex">
@@ -31,7 +32,7 @@
       </div>
     </div>
   </div>
-  
+
 </nz-header>
 <nz-back-top [nzDuration]="'1000'" [nzTemplate]="backtop"></nz-back-top>
 <ng-template #backtop>
@@ -43,7 +44,22 @@
 <nz-dropdown-menu #menu>
   <ul nz-menu nzSelectable class="dropdow-product">
     <ng-container *ngIf="listCategory |async as listCategory">
-      <li nz-menu-item *ngFor="let category of listCategory.data">{{category.name}}</li>
+      <li nz-menu-item *ngFor="let category of listCategory.data" (click)="navToProduct(category._id)">{{category.name}}
+      </li>
     </ng-container>
   </ul>
 </nz-dropdown-menu>
+
+<nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" nzWidth="1056px" [nzKeyboard]="true" [nzFooter]="null"
+  [nzCloseIcon]="offModal" [nzBodyStyle]="bodyStyle">
+  <ng-container *nzModalContent>
+    <form class="form-search" (ngSubmit)="searchPr()">
+      <input type="text" class="search" [formControl]="name">
+      <button type="submit"><i nz-icon nzType="search" nzTheme="outline"></i></button>
+    </form>
+  </ng-container>
+</nz-modal>
+
+<ng-template #offModal>
+  <button (click)="handleCancel()" class="off-modal"><i nz-icon nzType="close" nzTheme="outline"></i></button>
+</ng-template>

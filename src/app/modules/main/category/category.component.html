@@ -54,11 +54,13 @@
               </button>
               <button (click)="showModal(1,item._id)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
               <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
-
             </td>
           </tr>
         </tbody>
       </table>
+      <ng-container *ngIf="table.data.length === 0">
+        <nz-empty class="pt-5"></nz-empty>
+      </ng-container>
     </ng-container>
     <div class="pagination-bottom">
       <nz-pagination [nzPageIndex]="table.pagination.page + 1 " [nzTotal]="table.total" [nzPageSize]="2"
@@ -81,7 +83,7 @@
 </ng-template>
 
 
-<nz-modal [(nzVisible)]="visible" [nzTitle]="stateConfig[state].title" (nzOnCancel)="onCancel()"
+<nz-modal [(nzVisible)]="visible" [nzTitle]="stateConfig[state].title" (nzOnCancel)="onCancel()" nzAutofocus="oke"
   [nzCancelText]="stateConfig[state].cancelText" [nzOkText]="stateConfig[state].okText" (nzOnOk)="handleOk()"
   [nzOkDisabled]="formEverything.invalid">
   <form [formGroup]="formEverything">

@@ -39,6 +39,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbAreaComponent } from './components/breadcrumb-area/breadcrumb-area.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { InputNumberComponent } from './components/input-number/input-number.component';
 
 @NgModule({
   imports: [
@@ -71,7 +73,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzBackTopModule,
     NzDropDownModule,
     RouterModule,
-    NzCardModule
+    NzCardModule,
+    NzEmptyModule
   ],
   declarations: [
     ShareComponent,
@@ -83,7 +86,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     MoneyPipe,
     DatepickerComponent,
     FormControlErrorComponent,
-    BreadcrumbAreaComponent
+    BreadcrumbAreaComponent,
+    InputNumberComponent
 
   ],
   exports: [
@@ -123,7 +127,9 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzBackTopModule,
     NzDropDownModule,
     BreadcrumbAreaComponent,
-    NzCardModule
+    NzCardModule,
+    NzEmptyModule,
+    InputNumberComponent
   ]
 })
 export class ShareModule { }

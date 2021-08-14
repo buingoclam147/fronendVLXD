@@ -111,6 +111,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
     }
   }
   showModal(state: STATE, id?: any): void {
+    this.formEverything.enable();
     this.id = id;
     this.state = state;
     switch (this.state) {
@@ -139,6 +140,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
             });
             this.visible = true;
             this.typeForm = 'view';
+            this.formEverything.disable();
           }));
           break;
         }

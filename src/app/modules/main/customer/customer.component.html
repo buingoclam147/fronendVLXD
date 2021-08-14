@@ -88,11 +88,13 @@
                                     nzTheme="outline"></i></button>
                             <button (click)="showModal(2,item._id)"><i nz-icon nzType="eye"
                                     nzTheme="outline"></i></button>
-
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <ng-container *ngIf="table.data.length === 0">
+                <nz-empty class="pt-5"></nz-empty>
+              </ng-container>
         </ng-container>
     </div>
     <div class="pagination-bottom">

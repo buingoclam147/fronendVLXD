@@ -57,8 +57,9 @@
     </div>
   </div>
   <div class="table-content">
+    
     <ng-container *ngIf="!table.isLoading; else loading">
-      <table class="table-container">
+      <table class="table-container" >
         <thead>
           <tr>
             <th><input type="checkbox" class="checkbox-table" (click)="table.checkAll()" [checked]="table.isCheckedAll">
@@ -71,6 +72,7 @@
           </tr>
         </thead>
         <tbody>
+
           <tr *ngFor="let item of table.data">
             <td><input type="checkbox" class="checkbox-table" (click)="table.check(item)" [checked]="item.checked"></td>
             <td class="text-center">
@@ -97,6 +99,9 @@
           </tr>
         </tbody>
       </table>
+      <ng-container *ngIf="table.data.length === 0">
+        <nz-empty class="pt-5"></nz-empty>
+      </ng-container>
     </ng-container>
   </div>
   <div class="pagination-bottom">

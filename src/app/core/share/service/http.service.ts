@@ -26,6 +26,13 @@ export class HttpService {
     let res;
     switch (method) {
       case METHOD.GET: {
+        data = data || {};
+        const keys = Object.keys(data);
+        keys.forEach(key => {
+          if (data[key] === null || typeof data[key] === 'undefined' || data[key] === '') {
+            delete data[key];
+          }
+        });
         res = this.httpClient.get<any>(url, {
           params: data,
           headers: new HttpHeaders({

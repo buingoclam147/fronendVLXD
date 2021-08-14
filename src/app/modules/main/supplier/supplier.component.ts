@@ -106,6 +106,7 @@ export class SupplierComponent implements OnInit, OnDestroy {
     }
   }
   showModal(state: STATE, id?: any): void {
+    this.formEverything.enable();
     this.id = id;
     this.state = state;
     switch (this.state) {
@@ -114,8 +115,9 @@ export class SupplierComponent implements OnInit, OnDestroy {
           this.visible = true;
           break;
         }
-      case STATE.UPDATE:
-      case STATE.VIEW:
+        case  STATE.VIEW:
+          this.formEverything.disable();
+        case STATE.UPDATE:
         {
           this.subscriptions.push(this.supplierService.getOneSupplier(id).subscribe(item => {
             this.formEverything.patchValue({

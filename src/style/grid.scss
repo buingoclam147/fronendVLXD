@@ -16,7 +16,9 @@
 .align-item-center {
   align-items: center;
 }
-
+.ai-center {
+  align-items: center;
+}
 .text-center {
   text-align: center;
 }
@@ -24,7 +26,12 @@
 .justify-content-center {
   justify-content: center;
 }
-
+.jc-center{
+  justify-content: center;
+}
+.jc-between{
+  justify-content: space-between;
+}
 .m-0 {
   margin: 0 !important;
 }
@@ -478,8 +485,13 @@
   display: -ms-flexbox !important;
   display: flex !important
 }
-
+.w-100{
+  width: 100%;
+}
 .align-items-stretch {
   -ms-flex-align: stretch !important;
   align-items: stretch !important
+}
+.f-right{
+  float: right;
 }
