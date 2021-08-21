@@ -1,0 +1,41 @@
+
+<h2 class="t-login">Đăng nhập</h2>
+<form [formGroup]="formEverything" class="form-login  mb-3">
+    <div class="input-group">
+        <p for="userName"> Tên đăng nhập</p>
+        <nz-input-group [nzSize]="'large'" class="name-input-gr">
+            <input nz-input placeholder="Tên đăng nhập" [formControlName]="'userName'" [type]="'text'" />
+        </nz-input-group>
+        <app-form-control-error class="err" [form]="formEverything" [controlName]="'userName'" [errorsMessage]="
+                            {
+                                required: 'Giá trị không được bỏ trống',
+                                minlength:'Giá trị không được ngắn hơn 6 ký tự'
+                            }
+                            "></app-form-control-error>
+    </div>
+    <div class="input-group">
+        <p for="password">Mật khẩu</p>
+          <app-input-pw placeholder="Mật khẩu" [formControlName]="'password'"></app-input-pw>
+        <app-form-control-error class="err" [form]="formEverything" [controlName]="'password'" [errorsMessage]="
+                            {
+                                required: 'Giá trị không được bỏ trống',
+                                minlength:'Giá trị không được ngắn hơn 8 ký tự'
+                            }
+                            "></app-form-control-error>
+    </div>
+    <button type="submit" class="btn-lg" [disabled]="formEverything.invalid" (click)="login()">Đăng
+        nhập</button>
+    <nz-alert *ngIf="errorMessage" class="err" nzType="error"
+        nzMessage="Thông tin tài khoản hoặc mật khẩu không chính xác"></nz-alert>
+</form>
+
+<div class="re-fo">
+    <div class=" d-flex">
+        <button type="submit" class="btn-create" [routerLink]="'/login/register'">Tạo mới tài khoản</button>
+    </div>
+    <div class="fo">
+        <h4>
+            Bạn quên tài khoản?
+        </h4>
+    </div>
+</div>

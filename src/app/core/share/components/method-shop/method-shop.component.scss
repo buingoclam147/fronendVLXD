@@ -1,0 +1,30 @@
+@import '/src/style/variable.scss';
+
+.text-wrapper {
+  padding: 20px 40px 0;
+}
+
+.method-wrapper {
+  padding: 24px;
+  background-color: $colorred;
+}
+
+.icon-wrapper {
+  margin-bottom: 32px;
+}
+
+.icon-wrapper i {
+  font-size: 48px;
+  color: white;
+}
+
+.text-wrapper h2 {
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.text-wrapper p {
+  color: white;
+  font-size: 16px;
+}

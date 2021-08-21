@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShareComponent } from './share.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -41,6 +40,8 @@ import { BreadcrumbAreaComponent } from './components/breadcrumb-area/breadcrumb
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { InputNumberComponent } from './components/input-number/input-number.component';
+import { MethodShopComponent } from './components/method-shop/method-shop.component';
+import { InputPwComponent } from './components/input-pw/input-pw.component';
 
 @NgModule({
   imports: [
@@ -77,7 +78,6 @@ import { InputNumberComponent } from './components/input-number/input-number.com
     NzEmptyModule
   ],
   declarations: [
-    ShareComponent,
     NavbarComponent,
     FooterComponent,
     ColorDirective,
@@ -87,10 +87,13 @@ import { InputNumberComponent } from './components/input-number/input-number.com
     DatepickerComponent,
     FormControlErrorComponent,
     BreadcrumbAreaComponent,
-    InputNumberComponent
+    InputNumberComponent,
+    MethodShopComponent,
+    InputPwComponent
 
   ],
   exports: [
+    InputPwComponent,
     NavbarComponent,
     FooterComponent,
     NzMenuModule,
@@ -129,7 +132,8 @@ import { InputNumberComponent } from './components/input-number/input-number.com
     BreadcrumbAreaComponent,
     NzCardModule,
     NzEmptyModule,
-    InputNumberComponent
+    InputNumberComponent,
+    MethodShopComponent
   ]
 })
 export class ShareModule { }

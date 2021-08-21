@@ -82,10 +82,11 @@
         "named": "never"
       }
     },
-    "typedef": [
-      true,
-      "call-signature"
-    ],
+    // "typedef": [
+    //   true,
+    //   "call-signature"
+    // ],
+    "typedef": false,
     "typedef-whitespace": {
       "options": [{
           "call-signature": "nospace",

@@ -1,0 +1,54 @@
+<h2 class="t-login">Đăng ký</h2>
+<form [formGroup]="form" class="form-login  mb-3">
+    <div class="input-group">
+        <p for="userName"> Tên đăng nhập</p>
+        <nz-input-group [nzSize]="'large'" class="name-input-gr">
+            <input nz-input placeholder="Tên đăng nhập" [formControlName]="'userName'"
+                [type]="'text'" />
+        </nz-input-group>
+        <app-form-control-error class="err" [form]="form" [controlName]="'userName'"
+            [errorsMessage]="
+                {
+                    required: 'Giá trị không được bỏ trống',
+                    minlength:'Giá trị không được ngắn hơn 6 ký tự',
+                    pattern:'Giá trị chỉ chứa ký tự alphabet'
+                }
+                "></app-form-control-error>
+    </div>
+    <div class="input-group">
+        <p for="password">Mật khẩu</p>
+        <app-input-pw  placeholder="Mật Khẩu" [formControlName]="'password'"></app-input-pw>
+        <app-form-control-error class="err" [form]="form" [controlName]="'password'"
+            [errorsMessage]="
+                {
+                    required: 'Giá trị không được bỏ trống',
+                    minlength:'Giá trị không được ngắn hơn 8 ký tự'
+                }
+                "></app-form-control-error>
+    </div>
+    <div class="input-group">
+        <p for="checkPassword">Nhập lại mật khẩu</p>
+        <app-input-pw placeholder="Nhập lại mật khẩu" [formControlName]="'checkPassword'"></app-input-pw>
+        <app-form-control-error class="err" [form]="form"
+            [controlName]="'checkPassword'" [errorsMessage]="
+                {
+                    required: 'Giá trị không được bỏ trống',
+                    minlength:'Giá trị không được ngắn hơn 8 ký tự',
+                    pattern:'Giá trị không hợp lệ'
+                }
+                "></app-form-control-error>
+    </div>
+    <nz-alert nzType="error" [nzMessage]="'Giá trị không hợp lệ'"
+            *ngIf="form.errors && form.controls.checkPassword.valid ">
+        </nz-alert>
+    <button type="submit" class="btn-lg" [disabled]="form.invalid">Đăng
+        ký</button>
+    <!-- <nz-alert *ngIf="errorMessage" class="err" nzType="error"
+        nzMessage="Thông tin tài khoản hoặc mật khẩu không chính xác"></nz-alert> -->
+</form>
+
+<div class="re-fo">
+    <div class=" d-flex">
+        <button  class="btn-create" [routerLink]="'/login'">Đã có tài khoản ? </button>
+    </div>
+</div>
