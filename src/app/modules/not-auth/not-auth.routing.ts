@@ -9,7 +9,10 @@ const routes: Routes = [
       { path: 'about-us', loadChildren: () => import('./child/about-us/about-us.module').then((x) => x.AboutUsModule) },
       { path: 'product', loadChildren: () => import('./child/product/product.module').then((x) => x.ProductModule) },
       { path: 'contact', loadChildren: () => import('./child/contact/contact.module').then((x) => x.ContactModule) },
-      { path: 'login', loadChildren: () => import('./child/login/login.module').then((x) => x.LoginModule) }
+      { path: 'login', loadChildren: () => import('./child/login/login.module').then((x) => x.LoginModule) },
+      { path: 'shoping-cart', loadChildren: () => import('./child/shoping-cart/shoping-cart.module').then((x) => x.ShopingCartModule) },
+      { path: 'product-details/:id', loadChildren: () => import('./child/product-details/product-details.module')
+      .then((x) => x.ProductDetailsModule) }
     ]
   }
 

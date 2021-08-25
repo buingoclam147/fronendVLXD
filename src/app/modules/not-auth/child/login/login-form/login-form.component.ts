@@ -36,7 +36,12 @@ export class LoginFormComponent implements OnInit {
     this.auth.loginCustomer(this.formEverything.value).subscribe(
       x => {
         console.log(x.login);
-        this.router.navigate([ROUTER_CONST.NOT_AUTH.HOME]);
+        if (x.login === undefined) {
+          this.router.navigate([ROUTER_CONST.NOT_AUTH.HOME]);
+        }
+        else{
+          this.errorMessage = true;
+        }
       },
       error => {
         this.errorMessage = true;

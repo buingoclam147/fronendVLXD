@@ -1,0 +1,18 @@
+<div class="container-fluid mb-7">
+  <div class="title">
+      <h4>Sản phẩm mới</h4>
+  </div>
+  <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="d-flex">
+      <ng-container *ngIf="listNewProducts |async as productsNew">
+          <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let product of productsNew.data">
+              <div class="inner-box product-new">
+                  <div class="box-out-img">
+                      <img src="{{product.photos[0]}}" alt="noithatvanphong1">
+                  </div>
+                  <h5 [routerLink]="['/product-details', product._id]" class="pointer">{{product.name}}</h5>
+                  <span>{{product.price |money}}</span>
+              </div>
+          </div>
+      </ng-container>
+  </div>
+</div>

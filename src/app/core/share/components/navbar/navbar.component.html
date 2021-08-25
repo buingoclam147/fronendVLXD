@@ -21,10 +21,10 @@
         <a (click)="showModal()" class="d-flex">
           <i class='bx bx-search bx-sm'></i>
         </a>
-        <a href="#" class="d-flex">
+        <a [routerLink]="[ROUTER_CONST.NOT_AUTH.LOGIN]" class="d-flex">
           <i class='bx bx-user bx-sm'></i>
         </a>
-        <a href="#" class="d-flex">
+        <a [routerLink]="[ROUTER_CONST.NOT_AUTH.SHOPING_CART]" class="d-flex">
           <nz-badge [nzCount]="5">
             <i class='bx bx-cart bx-sm'></i>
           </nz-badge>

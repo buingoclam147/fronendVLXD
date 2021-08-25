@@ -64,7 +64,7 @@
                 </div>
                 <div class="b-card">
                     <div class="content-product">
-                        <h4>{{item.name}}</h4>
+                        <h4 [routerLink]="['/product-details', item._id]">{{item.name}}</h4>
                         <p>{{item.price | money}}</p>
                     </div>
                     <i nz-icon nzType="heart" nzTheme="outline"></i>
@@ -94,7 +94,7 @@
             </div>
             <div nz-col class="gutter-row" [nzSpan]="10">
                 <div class="inner-box">
-                    <nz-carousel #carosel (nzAfterChange)="onProduct($event)" [nzEffect]="effect" class="carousel-view"
+                    <nz-carousel #carosel  [nzEffect]="effect" class="carousel-view"
                         [nzDotPosition]="'left'">
                         <div nz-carousel-content *ngFor="let index of onProduct.photos">
                             <img [src]="index" [alt]="index">

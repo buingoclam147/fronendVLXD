@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Pagination } from 'src/app/core/share/model/table.model';
+import { CategoryService } from 'src/app/core/share/service/category.service';
+import { ProductService } from 'src/app/core/share/service/product.service';
+import { SupplierService } from 'src/app/core/share/service/supplier.service';
 
 @Component({
   selector: 'app-product-details',
@@ -6,10 +12,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-
-  constructor() { }
+  @ViewChild('carosel') onCarousel;
+  @ViewChild('caroselCmt') onCarouselCmt;
+  effect = 'scrollx';
+  dataCategory;
+  dataSupplier;
+  idProduct;
+  dataDetails;
+  nameDescription = ['Miêu tả', 'Thông tin chi tiết', ' Nhận xét(1)'];
+  indexTab = 0;
+  constructor(
+    private supplierService: SupplierService,
+    private categoryService: CategoryService,
+    private route: ActivatedRoute,
+    private productService: ProductService,
+  ) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.idProduct = params.get('id');
+      this.dataDetails = this.productService.getOneProduct(this.idProduct);
+    });
+    this.dataCategory = this.categoryService.getCategory(new Pagination(99, 0), '');
+    this.dataSupplier = this.supplierService.getSupplier(new Pagination(99, 0), '');
   }
-
+  onTab(index): void {
+    this.onCarousel.goTo(index);
+  }
+  onTabCmt(index): void {
+    this.indexTab = Number(index);
+    this.onCarouselCmt.goTo(index);
+  }
 }

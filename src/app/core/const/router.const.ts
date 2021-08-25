@@ -26,5 +26,8 @@ export const ROUTER_CONST =
             ROOT: '/product',
         },
         CONTACT: '/contact',
+        LOGIN: '/login',
+        REGITER: '/login/register',
+        SHOPING_CART: '/shoping-cart'
     }
 };

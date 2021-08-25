@@ -42,6 +42,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { InputNumberComponent } from './components/input-number/input-number.component';
 import { MethodShopComponent } from './components/method-shop/method-shop.component';
 import { InputPwComponent } from './components/input-pw/input-pw.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
 
 @NgModule({
   imports: [
@@ -89,7 +90,8 @@ import { InputPwComponent } from './components/input-pw/input-pw.component';
     BreadcrumbAreaComponent,
     InputNumberComponent,
     MethodShopComponent,
-    InputPwComponent
+    InputPwComponent,
+    NewProductComponent
 
   ],
   exports: [
@@ -133,7 +135,8 @@ import { InputPwComponent } from './components/input-pw/input-pw.component';
     NzCardModule,
     NzEmptyModule,
     InputNumberComponent,
-    MethodShopComponent
+    MethodShopComponent,
+    NewProductComponent
   ]
 })
 export class ShareModule { }

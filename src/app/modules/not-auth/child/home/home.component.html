@@ -62,7 +62,7 @@
                         </h2>
                         <p>Giải pháp vật liệu cho căn nhà giàu thẩm mỹ.
                         </p>
-                        <div class="py-3">
+                        <div class="py-3 pointer">
                             <a href="#">Đọc Thêm</a>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         </h2>
                         <p>Giải pháp cho vật liệu bền và giá thành thấp nhất.
                         </p>
-                        <div class="py-3">
+                        <div class="py-3 pointer">
                             <a href="#">Đọc Thêm</a>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                         </h2>
                         <p>Cửa hàng phục vụ Chuyên nghiệp, hiệp đại và chu đáo.
                         </p>
-                        <div class="py-3">
+                        <div class="py-3 pointer">
                             <a href="#">Đọc Thêm</a>
                         </div>
                     </div>
@@ -112,12 +112,11 @@
                         <div class="box-out-img">
                             <img src="{{product.photos[0]}}" alt="noithatvanphong1">
                         </div>
-                        <h5>{{product.name}}</h5>
+                        <h5 [routerLink]="['/product-details', product._id]" class="pointer">{{product.name}}</h5>
                         <span>{{product.price |money}}</span>
                     </div>
                 </div>
             </ng-container>
-
         </div>
     </div>
     <!-- INTRODUCE -->

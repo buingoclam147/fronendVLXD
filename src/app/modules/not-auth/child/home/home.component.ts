@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Pagination } from 'src/app/core/share/model/table.model';
 import { ProductService } from 'src/app/core/share/service/product.service';
 
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
+    private route: ActivatedRoute,
   ) {
     this.items = [
       {

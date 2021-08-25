@@ -1,0 +1,116 @@
+@import '/src/style/variable.scss';
+
+.img-mini-produc {
+  margin-bottom: 18px;
+}
+
+.img-mini-produc img {
+  width: 80px;
+  height: 88px;
+}
+
+.img-mini-produc img:hover {
+  cursor: pointer;
+}
+
+.content-product h4 {
+  font-size: 24px;
+  font-weight: 600;
+  color: $color33;
+  margin: 0;
+}
+
+.content-product h4:hover {
+  cursor: pointer;
+  color: $colorblack;
+  transition: all 500ms;
+}
+
+.content-product p {
+  font-size: 16px;
+  color: $colorred;
+}
+
+.note-product {
+  min-height: 300px;
+  scroll-y: auto;
+  overflow-y: auto;
+}
+
+.bt-add {
+  border-radius: 25px;
+  padding: 15px 24px 11px;
+  font-weight: 600;
+  background-color: $color71;
+  color: #fff;
+  margin-top: 24px;
+  border: 1px solid;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.description-carosel {
+  border: 1.5px solid rgb(0 0 0 / 20%);
+  border-radius: 5px;
+  padding: 48px 80px 0px;
+}
+
+.mrg-description {
+  margin: auto;
+  width: 540px;
+}
+
+.nav-description h3:hover {
+  cursor: pointer;
+}
+
+.card-comment img {
+  border: none;
+  border-radius: 50%;
+}
+
+.card-comment>div {
+  margin-left: 24px;
+}
+
+.cmt-name {
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cmt-name i {
+  color: $colorred;
+}
+
+.content-cmt {
+  opacity: 0.6;
+}
+
+.new-cmt h3 {
+  font-weight: bold;
+}
+
+.rating {
+  margin-right: 8px;
+}
+
+.btn-cmt {
+  padding: 8px 32px;
+  border-radius: 5px;
+  border: 1px solid $color71;
+  color: white;
+  background-color: $color71;
+}
+.btn-cmt:hover{
+  cursor: pointer;
+  background-color: #5466e8;
+}
+.active{
+  color: rgba(0,0,0);
+  text-decoration-line:underline;
+  opacity: 1 !important;
+}

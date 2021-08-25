@@ -1,1 +1,113 @@
-<p>product-details works!</p>
+<app-breadcrumb-area title="Chi tiết sản phẩm"></app-breadcrumb-area>
+<div class="container-fluid" *ngIf="dataDetails |async as dataDetails">
+    <div class="modal-product mt-4 mb-6" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div nz-col class="gutter-row" [nzSpan]="4">
+            <div class="inner-box text-center">
+                <div class="img-mini-produc" *ngFor="let index of dataDetails.photos; index as i">
+                    <img [src]="index" [alt]="index" (click)="onTab(i)">
+                </div>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="10">
+            <div class="inner-box">
+                <nz-carousel #carosel [nzEffect]="effect" class="carousel-view" [nzDotPosition]="'left'">
+                    <div nz-carousel-content *ngFor="let index of dataDetails.photos">
+                        <img [src]="index" [alt]="index">
+                    </div>
+                </nz-carousel>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSpan]="10">
+            <div class="inner-box">
+                <div class="content-view content-product">
+                    <h4 class="title">{{dataDetails.name}}</h4>
+                    <div class="d-flex w-100 jc-between">
+                        <p>{{dataDetails.price | money }}</p>
+                        <div><b>Còn: </b> {{dataDetails.quantity}} {{dataDetails.unit}}</div>
+                    </div>
+                    <div class="note-product">{{dataDetails.note}}</div>
+                    <app-input-number></app-input-number>
+                    <div class="text-center">
+                        <button class="bt-add">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="description-carosel mb-6">
+        <div class="nav-description d-flex jc-center  ">
+            <h3 *ngFor="let des of nameDescription ; index as i" class="mx-4">
+                <div (click)="onTabCmt(i)" [class.active]="indexTab == i" class="op-06"> {{des}}</div>
+
+            </h3>
+        </div>
+        <div class="content-description mt-5">
+            <nz-carousel #caroselCmt [nzEffect]="effect">
+                <div nz-carousel-content class=" fs op-06">
+                    <h3>{{dataDetails.note}}</h3>
+                </div>
+                <div nz-carousel-content>
+                    <ul class="mrg-description fs">
+                        <ng-container *ngIf="dataCategory |async as dataCategory">
+                            <li> <b> Loại hàng:</b> {{dataDetails.categoryId |category:dataCategory.data}}</li>
+                        </ng-container>
+                        <ng-container *ngIf="dataSupplier |async as dataSupplier">
+                            <li> <b>Nhà cung cấp:</b> {{dataDetails.supplierId |supplier:dataSupplier.data}}</li>
+                        </ng-container>
+                        <li> <b>Tên sản phẩm: </b>{{dataDetails.name}}</li>
+                        <li> <b>Giá sản phẩm:</b> {{dataDetails.price |money}}</li>
+                        <li> <b>Đơn vị:</b> {{dataDetails.unit}}</li>
+                        <li> <b>Số lượng còn lại:</b> {{dataDetails.quantity}}</li>
+                    </ul>
+                </div>
+                <div nz-carousel-content>
+                    <div class="card-comment mrg-description d-flex mb-5">
+                        <img src="/assets/avt-cart-cmt.jpg" alt="avt-cmt" width="60px" height="60px">
+                        <div class=" w-100">
+                            <div class="cmt-name">
+                                <h3>Bùi Lâm</h3>
+                                <div class="start">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                            <div class="content-cmt">
+                                Sản phẩm thật tốt, giao hàng nhanh chóng
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-cmt mrg-description">
+                        <h3 class="mb-4">Bình luận</h3>
+                        <div class="rating d-flex">
+                            <p class="me-2">Đánh giá sản phẩm</p>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="box-cmt">
+                            <label for="">Nội dung</label>
+                            <textarea rows="6" nz-input></textarea>
+                            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="d-flex jc-space my-3">
+                                <div nz-col nzSpan="12">
+                                    <label for="">Tên</label>
+                                    <input nz-input />
+                                </div>
+                                <div nz-col nzSpan="12">
+                                    <label for="">Email</label>
+                                    <input nz-input />
+                                </div>
+                            </div>
+                            <button class="btn-cmt">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+            </nz-carousel>
+        </div>
+    </div>
+    <app-new-product></app-new-product>
+</div>

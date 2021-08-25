@@ -38,7 +38,7 @@
                 }
                 "></app-form-control-error>
     </div>
-    <nz-alert nzType="error" [nzMessage]="'Giá trị không hợp lệ'"
+    <nz-alert nzType="error" class="err" [nzMessage]="'Giá trị không hợp lệ'"
             *ngIf="form.errors && form.controls.checkPassword.valid ">
         </nz-alert>
     <button type="submit" class="btn-lg" [disabled]="form.invalid">Đăng

@@ -53,9 +53,8 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(x => {
-      if (x.categoryId) {
-        this.table.filter.categoryId = x.categoryId;
-      }
+
+      this.table.filter.categoryId = x.categoryId;
       if (x.name) {
         this.table.filter.name = x.name;
       }
