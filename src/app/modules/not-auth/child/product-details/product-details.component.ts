@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ROUTER_CONST } from 'src/app/core/const/router.const';
 import { Pagination } from 'src/app/core/share/model/table.model';
 import { CategoryService } from 'src/app/core/share/service/category.service';
 import { ProductService } from 'src/app/core/share/service/product.service';
@@ -15,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   @ViewChild('carosel') onCarousel;
   @ViewChild('caroselCmt') onCarouselCmt;
   effect = 'scrollx';
+  valueNumber = 1;
   dataCategory;
   dataSupplier;
   idProduct;
@@ -26,6 +27,7 @@ export class ProductDetailsComponent implements OnInit {
     private categoryService: CategoryService,
     private route: ActivatedRoute,
     private productService: ProductService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,5 +44,8 @@ export class ProductDetailsComponent implements OnInit {
   onTabCmt(index): void {
     this.indexTab = Number(index);
     this.onCarouselCmt.goTo(index);
+  }
+  addShopingCart(): void {
+    this.router.navigate([ROUTER_CONST.NOT_AUTH.SHOPING_CART]);
   }
 }

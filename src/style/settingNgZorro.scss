@@ -23,7 +23,7 @@
     width: 20px;
     height: 20px;
     background-color: #efefef;
-    border-color: #3e4ab8;
+    border-color: $color71;
   }
 
 
@@ -42,7 +42,7 @@
   }
 
   .checkbox-rmb .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: #3e4ab8;
+    background-color: $color71;
   }
 
   .err .ant-alert {
@@ -51,23 +51,23 @@
   }
 
   .name-input-gr .ant-input:hover {
-    border-color: #3e4ab8;
+    border-color: $color71;
   }
 
   .input-group .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
-    border-color: #3e4ab8;
+    border-color: $color71;
   }
 
   .name-input-gr .ant-input-focused,
   .ant-input:focus {
-    border-color: #3e4ab8;
+    border-color: $color71;
     box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
 
   }
 
   .input-group .ant-input-affix-wrapper-focused,
   .ant-input-affix-wrapper:focus {
-    border-color: #3e4ab8;
+    border-color: $color71;
     box-shadow: 0 0 0 2px rgb(62 74 184 / 20%);
   }
 

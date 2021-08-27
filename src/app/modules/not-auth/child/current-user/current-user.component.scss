@@ -1,0 +1,37 @@
+@import '/src/style/variable.scss';
+
+.box-current {
+  border: 1px solid #e6e6e6;
+  padding: 48px 32px;
+}
+
+.box-information {
+  border: 1px solid #e6e6e6;
+  padding: 48px 32px;
+}
+
+.box-current button {
+  margin-left: 16px;
+  height: 40px;
+  border-radius: 16px;
+  padding: 8px 24px;
+  background-color: $color71;
+  color: white;
+  border: 1px solid $color71;
+}
+
+.box-current button:hover {
+  cursor: pointer;
+  background-color: $colorhover;
+}
+
+.box-information li {
+  margin-bottom: 16px;
+}
+
+.box-information li:hover {
+  cursor: pointer;
+}
+.focus{
+  font-weight: bold;
+}

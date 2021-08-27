@@ -76,7 +76,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
     NzDropDownModule,
     RouterModule,
     NzCardModule,
-    NzEmptyModule
+    NzEmptyModule,
   ],
   declarations: [
     NavbarComponent,

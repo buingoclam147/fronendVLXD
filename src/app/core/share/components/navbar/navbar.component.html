@@ -21,7 +21,7 @@
         <a (click)="showModal()" class="d-flex">
           <i class='bx bx-search bx-sm'></i>
         </a>
-        <a [routerLink]="[ROUTER_CONST.NOT_AUTH.LOGIN]" class="d-flex">
+        <a nz-dropdown [nzDropdownMenu]="curentId? viewLogout : viewLogin" class="d-flex">
           <i class='bx bx-user bx-sm'></i>
         </a>
         <a [routerLink]="[ROUTER_CONST.NOT_AUTH.SHOPING_CART]" class="d-flex">
@@ -63,3 +63,14 @@
 <ng-template #offModal>
   <button (click)="handleCancel()" class="off-modal"><i nz-icon nzType="close" nzTheme="outline"></i></button>
 </ng-template>
+<nz-dropdown-menu #viewLogout="nzDropdownMenu">
+  <ul nz-menu >
+    <li nz-menu-item [routerLink]="[ROUTER_CONST.NOT_AUTH.CURRENT_USER]">Trang cá nhân</li>
+    <li nz-menu-item (click)="logout()">Đăng xuất</li>
+  </ul>
+</nz-dropdown-menu>
+<nz-dropdown-menu #viewLogin="nzDropdownMenu">
+  <ul nz-menu >
+    <li nz-menu-item [routerLink]="[ROUTER_CONST.NOT_AUTH.LOGIN]">Đăng nhập</li>
+  </ul>
+</nz-dropdown-menu>

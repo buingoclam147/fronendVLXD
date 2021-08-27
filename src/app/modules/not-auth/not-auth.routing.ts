@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: 'contact', loadChildren: () => import('./child/contact/contact.module').then((x) => x.ContactModule) },
       { path: 'login', loadChildren: () => import('./child/login/login.module').then((x) => x.LoginModule) },
       { path: 'shoping-cart', loadChildren: () => import('./child/shoping-cart/shoping-cart.module').then((x) => x.ShopingCartModule) },
+      { path: 'current-user', loadChildren: () => import('./child/current-user/current-user.module').then((x) => x.CurrentUserModule) },
       { path: 'product-details/:id', loadChildren: () => import('./child/product-details/product-details.module')
       .then((x) => x.ProductDetailsModule) }
     ]

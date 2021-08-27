@@ -1,0 +1,35 @@
+<app-breadcrumb-area title="Trang cá nhân"></app-breadcrumb-area>
+<div class="container-fluid">
+  <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzSpan]="16">
+      <div class="inner-box">
+        <div class="box-current" *ngIf="currentUser |async as currentUser">
+          <h3 class="boder-bt title-3">Thông tin tài khoản</h3>
+          <p class="title-35"> <b>Tên đăng nhập:</b>  {{currentUser.userName }}</p>
+          <p class="title-35"> <b>Họ và tên:</b>  {{currentUser.fullName }}</p>
+          <p class="title-35"> <b>Số điện thoại:</b>  {{currentUser.phoneNumber }}</p>
+          <p class="title-35"> <b>Giới tính:</b>  {{currentUser.sex? 'Nam':'Nữ' }}</p>
+          <p class="title-35"> <b>Ngày sinh:</b>  {{currentUser.dateOfBirth | date: 'ddMMyyyy'}}</p>
+          <p class="title-35 boder-bt"> <b>Địa chỉ:</b>  {{currentUser.address }}</p>
+          <button (click)="logout()">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <div class="inner-box">
+        <ul class="box-information">
+          <h3 class="boder-bt title-3">Tài khoản</h3>
+          <li class="title-35 focus">
+            Thông tin tài khoản
+          </li>
+          <li class="title-35">
+            Danh sách địa chỉ
+          </li>
+          <li class="title-35">
+            Khách hàng thân thiết
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

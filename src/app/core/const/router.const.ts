@@ -17,7 +17,7 @@ export const ROUTER_CONST =
         },
         EMPLOYEE: {
             ROOT: '/main/employee'
-        }
+        },
     },
     NOT_AUTH: {
         HOME: '/',
@@ -28,6 +28,7 @@ export const ROUTER_CONST =
         CONTACT: '/contact',
         LOGIN: '/login',
         REGITER: '/login/register',
-        SHOPING_CART: '/shoping-cart'
+        SHOPING_CART: '/shoping-cart',
+        CURRENT_USER: '/current-user'
     }
 };

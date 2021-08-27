@@ -1,4 +1,52 @@
 <app-breadcrumb-area title="Giỏ hàng"></app-breadcrumb-area>
 <div class="container-fluid">
-  dsaw
+  <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+    <div nz-col class="gutter-row" [nzSpan]="16">
+      <div class="inner-box">
+        <div class="table-shoping-cart">
+          <nz-table #basicTable [nzData]="listOfData" [nzHideOnSinglePage]="true" [nzFooter]="footerTable">
+            <thead>
+              <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of basicTable.data" class="td-table">
+                <td class="produce-img"><img [src]="data.img" [alt]="data.product"> {{ data.product }} </td>
+                <td class="fs">{{ data.price |money}}</td>
+                <td>
+                  <app-input-number [num]="1"></app-input-number>
+                </td>
+                <td> {{ data.sumPrice |money }} </td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </div>
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <div class="inner-box cart-totals">
+        <div class="total-prd">
+          <h3 class="title-3  boder-bt">Tổng giỏ hàng</h3>
+        </div>
+        <div class="shipping">
+          <p class="title-35"> <b>Phương thức giao hàng:</b> giao theo xe tải tính cước dnskjandwa ndsja</p>
+          <p class="title-35 boder-bt"> <b>Phiếu giảm giá được áp dụng:</b> giảm 100% dbsuajds ndsand</p>
+        </div>
+        <div class="totalPrice">
+          <h3 class="title-35 mb-4"><b> TỔNG TIỀN:</b> {{totalPrice|money}}</h3>
+          <button class="btn-tt">Tiến hành thanh toán</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<ng-template #footerTable>
+  <div class="ft-table d-flex ms-6">
+    <input type="text" placeholder="Nhập mã giảm giá">
+    <button>áp dụng</button>
+  </div>
+</ng-template>

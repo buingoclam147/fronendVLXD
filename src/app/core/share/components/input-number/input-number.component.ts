@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-input-number',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./input-number.component.scss']
 })
 export class InputNumberComponent implements OnInit {
-  num = 0;
+  @Input() num = 0;
   constructor() { }
 
   ngOnInit(): void {

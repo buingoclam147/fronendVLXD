@@ -73,7 +73,7 @@ a {
   text-transform: uppercase;
 }
 .title-3{
-  color: $colorblack;
+  color: black;
   font-size: 24px;
   line-height: 56px;
   font-weight: 700;
@@ -132,6 +132,10 @@ a {
   margin-top: 16px;
   font-size: 16px;
   opacity: 0.6;
+}
+.title-35{
+  font-size: 16px;
+  color: $colorblack;
 }
 
 

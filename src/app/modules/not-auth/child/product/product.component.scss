@@ -121,6 +121,10 @@ nz-select {
   background-color: $color71;
   color: #fff;
 }
+.color-btn:hover{
+  background-color: $colorhover;
+  cursor: pointer;
+}
 .img-mini-produc {
   margin-bottom: 18px;
 }

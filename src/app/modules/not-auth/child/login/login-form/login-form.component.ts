@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/core/share/service/auth.service';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-
+  currentUser;
   formEverything: FormGroup;
   errorMessage = false;
 
@@ -33,19 +33,8 @@ export class LoginFormComponent implements OnInit {
     });
   }
   login(): void {
-    this.auth.loginCustomer(this.formEverything.value).subscribe(
-      x => {
-        console.log(x.login);
-        if (x.login === undefined) {
-          this.router.navigate([ROUTER_CONST.NOT_AUTH.HOME]);
-        }
-        else{
-          this.errorMessage = true;
-        }
-      },
-      error => {
-        this.errorMessage = true;
-        console.log('err login: ', error);
-      });
+    this.auth.loginCustomer(this.formEverything.value).subscribe(_ => {
+      this.router.navigate([ROUTER_CONST.NOT_AUTH.HOME]);
+     }, _ => this.errorMessage = true);
   }
 }

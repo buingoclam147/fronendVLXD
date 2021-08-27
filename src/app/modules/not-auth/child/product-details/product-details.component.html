@@ -26,9 +26,9 @@
                         <div><b>Còn: </b> {{dataDetails.quantity}} {{dataDetails.unit}}</div>
                     </div>
                     <div class="note-product">{{dataDetails.note}}</div>
-                    <app-input-number></app-input-number>
+                    <app-input-number [(num)]="valueNumber"></app-input-number>
                     <div class="text-center">
-                        <button class="bt-add">Thêm vào giỏ</button>
+                        <button class="bt-add" (click)="addShopingCart()">Thêm vào giỏ</button>
                     </div>
                 </div>
             </div>
