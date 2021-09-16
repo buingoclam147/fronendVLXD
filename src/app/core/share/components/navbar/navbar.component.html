@@ -21,11 +21,9 @@
         <a (click)="showModal()" class="d-flex">
           <i class='bx bx-search bx-sm'></i>
         </a>
-        <a nz-dropdown [nzDropdownMenu]="curentId? viewLogout : viewLogin" class="d-flex">
-          <i class='bx bx-user bx-sm'></i>
-        </a>
+        <ng-container [ngTemplateOutlet]="logoutTpl" *ngIf="(auth.currentUser$|async); else loginTpl"></ng-container>
         <a [routerLink]="[ROUTER_CONST.NOT_AUTH.SHOPING_CART]" class="d-flex">
-          <nz-badge [nzCount]="5">
+          <nz-badge [nzCount]="sumNum$ |async">
             <i class='bx bx-cart bx-sm'></i>
           </nz-badge>
         </a>
@@ -64,13 +62,23 @@
   <button (click)="handleCancel()" class="off-modal"><i nz-icon nzType="close" nzTheme="outline"></i></button>
 </ng-template>
 <nz-dropdown-menu #viewLogout="nzDropdownMenu">
-  <ul nz-menu >
+  <ul nz-menu>
     <li nz-menu-item [routerLink]="[ROUTER_CONST.NOT_AUTH.CURRENT_USER]">Trang cá nhân</li>
     <li nz-menu-item (click)="logout()">Đăng xuất</li>
   </ul>
 </nz-dropdown-menu>
 <nz-dropdown-menu #viewLogin="nzDropdownMenu">
-  <ul nz-menu >
+  <ul nz-menu>
     <li nz-menu-item [routerLink]="[ROUTER_CONST.NOT_AUTH.LOGIN]">Đăng nhập</li>
   </ul>
 </nz-dropdown-menu>
+<ng-template #logoutTpl>
+  <a nz-dropdown [nzDropdownMenu]="viewLogout" class="d-flex" [nzTrigger]="'click'">
+    <i class='bx bx-user bx-sm'></i>
+  </a>
+</ng-template>
+<ng-template #loginTpl>
+  <a nz-dropdown [nzDropdownMenu]="viewLogin" class="d-flex" [nzTrigger]="'click'">
+    <i class='bx bx-user bx-sm'></i>
+  </a>
+</ng-template>

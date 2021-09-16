@@ -19,9 +19,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
   visible = false;
   formEverything: FormGroup;
   stateConfig: StateConfig[] = [
-    new StateConfig('Tạo mới người dùng', 'Hủy', 'Tạo mới'),
-    new StateConfig('Sửa thông tin người dùng', 'Hủy', 'Đồng Ý'),
-    new StateConfig('Xem chi tiết người dùng', 'Đóng', null),
+    new StateConfig('Tạo mới khách hàng', 'Hủy', 'Tạo mới'),
+    new StateConfig('Sửa thông tin khách hàng', 'Hủy', 'Đồng Ý'),
+    new StateConfig('Xem chi tiết khách hàng', 'Đóng', null),
   ];
   action = {
     create: 'Tạo mới thành công',

@@ -1,11 +1,15 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Subscription } from 'rxjs';
+import { InputNumberComponent } from 'src/app/core/share/components/input-number/input-number.component';
 import { IProduct } from 'src/app/core/share/model/product.model';
 import { Pagination, Table } from 'src/app/core/share/model/table.model';
+import { CartService } from 'src/app/core/share/service/cart.service';
 import { CategoryService } from 'src/app/core/share/service/category.service';
 import { ProductService } from 'src/app/core/share/service/product.service';
 import { SupplierService } from 'src/app/core/share/service/supplier.service';
+import { CartStoreService } from 'src/app/core/share/stores/cart-store.service';
 
 @Component({
   selector: 'app-product',
@@ -14,6 +18,7 @@ import { SupplierService } from 'src/app/core/share/service/supplier.service';
 })
 export class ProductComponent implements OnInit, OnDestroy {
   @ViewChild('carosel') onCarousel;
+  @ViewChild(InputNumberComponent) InputNumber;
   effect = 'scrollx';
   onProduct: IProduct;
   isVisible = false;
@@ -46,6 +51,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private productService: ProductService,
     private route: ActivatedRoute,
+    private cartStore: CartStoreService,
+    private notification: NzNotificationService
   ) { }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
@@ -104,5 +111,15 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
   onTab(index): void {
     this.onCarousel.goTo(index);
+  }
+  addShopingCart(product: IProduct, typeStatus): void {
+    this.cartStore.addShopingCart(product, this.InputNumber.num);
+    this.notification.create(
+      typeStatus,
+      'Thành công',
+      'Thêm sản phẩm vào giỏ hàng thành công!',
+      { nzDuration: 1000 }
+    );
+    this.isVisible = false;
   }
 }

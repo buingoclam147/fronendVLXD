@@ -80,7 +80,7 @@
                             <div class="text-overflow"> {{item.phoneNumber}} </div>
                         </td>
                         <td class="btn-action text-center">
-                            <button nz-popconfirm [nzPopconfirmTitle]="'Xóa '+item.name+' không?'"
+                            <button nz-popconfirm [nzPopconfirmTitle]="'Chắc chắn xóa khách hàng này không?'"
                                 (nzOnConfirm)="deleteOneCustomer(item._id)">
                                 <i nz-icon nzType="delete" nzTheme="outline"></i>
                             </button>

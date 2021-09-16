@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="box-out-search">
+    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+      <div nz-col [nzSpan]="24">
+        <div class="inner-box">
+          <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton" [nzSuffix]="inputClearTpl">
+            <input #ipsearch type="text" [(ngModel)]="table.filter.code" nz-input
+              placeholder="Tìm kiếm theo mã hóa đơn" />
+          </nz-input-group>
+          <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSize="large" nzSearch class="m-0 abc" (click)="search()">Tìm
+              kiếm</button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-content" *ngIf="!table.isLoading; else loading">
+    
+      <table class="table-container">
+        <thead>
+          <tr>
+            <th>Mã hóa đơn</th>
+            <th>Ngày tạo</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let invoice of table.data">
+            <td class="text-center">
+              {{invoice.code}}
+            </td>
+            <td class="text-center ">
+              {{invoice.createAt |date:'dd/MM/yyyy'}}
+            </td>
+            <td class="text-center note-text py-6">
+              <nz-select [(ngModel)]="invoice.status" (ngModelChange)="statusChange($event, invoice)">
+                <ng-container *ngFor="let i of status">
+                  <nz-option [nzValue]="i" [nzLabel]="(i |status)"></nz-option>
+                </ng-container>
+              </nz-select>
+            </td>
+            <td class="btn-action text-center">
+              <button (click)="showInvoice(invoice._id)"><i nz-icon nzType="eye" nzTheme="outline"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <ng-container *ngIf="table.data.length === 0">
+      <nz-empty class="pt-5"></nz-empty>
+    </ng-container>
+    <div class="pagination-bottom">
+      <nz-pagination [nzPageIndex]="table.pagination.page + 1 " [nzTotal]="table.total" [nzPageSize]="2"
+        (nzPageIndexChange)="pageIndexChange($event)" [nzPageSize]="table.pagination.perPage" nzShowSizeChanger
+        [nzPageSizeOptions]="[5, 10, 20]" (nzPageSizeChange)="pageSizeChange($event)"></nz-pagination>
+    </div>
+  </div>
+</div>
+
+<ng-template #inputClearTpl>
+  <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="ipsearch.value"
+    (click)="deleteSearch()"></i>
+</ng-template>
+<ng-template #loading>
+  <div class="example">
+    <nz-spin nzSimple></nz-spin>
+  </div>
+</ng-template>

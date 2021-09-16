@@ -43,7 +43,9 @@ import { InputNumberComponent } from './components/input-number/input-number.com
 import { MethodShopComponent } from './components/method-shop/method-shop.component';
 import { InputPwComponent } from './components/input-pw/input-pw.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
-
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { StatusPipe } from './pipes/status.pipe';
+import { InformationPipe } from './pipes/Information.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -77,6 +79,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
     RouterModule,
     NzCardModule,
     NzEmptyModule,
+    NzNotificationModule
   ],
   declarations: [
     NavbarComponent,
@@ -91,7 +94,9 @@ import { NewProductComponent } from './components/new-product/new-product.compon
     InputNumberComponent,
     MethodShopComponent,
     InputPwComponent,
-    NewProductComponent
+    NewProductComponent,
+    StatusPipe,
+    InformationPipe
 
   ],
   exports: [
@@ -136,7 +141,10 @@ import { NewProductComponent } from './components/new-product/new-product.compon
     NzEmptyModule,
     InputNumberComponent,
     MethodShopComponent,
-    NewProductComponent
+    NewProductComponent,
+    NzNotificationModule,
+    StatusPipe,
+    InformationPipe
   ]
 })
 export class ShareModule { }

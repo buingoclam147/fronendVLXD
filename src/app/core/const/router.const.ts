@@ -18,6 +18,10 @@ export const ROUTER_CONST =
         EMPLOYEE: {
             ROOT: '/main/employee'
         },
+        INVOICE: {
+            ROOT: '/main/invoice',
+            DETAIL: '/main/invoice/detail'
+        }
     },
     NOT_AUTH: {
         HOME: '/',

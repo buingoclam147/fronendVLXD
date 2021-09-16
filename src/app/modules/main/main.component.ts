@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {  NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ROUTER_CONST } from '../../core/const/router.const';
 
@@ -39,5 +39,8 @@ export class MainComponent implements OnInit, OnDestroy {
   refeshBread(path): void {
     this.breadcrumb.pagemain = path.url.split('/')[1];
     this.breadcrumb.pagechild = path.url.split('/')[2];
+  }
+  logout(): void {
+    localStorage.removeItem('userId');
   }
 }

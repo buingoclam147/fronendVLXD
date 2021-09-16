@@ -69,5 +69,33 @@ export const API = {
         },
         DELETE_MANY: 'employe/delete-many'
     },
+    INVOICE: {
+        GET_LIST: 'invoice',
+        GET_ONE: (id: any) => {
+            return 'invoice/' + id;
+        },
+        POST_ONE: 'invoice',
+        DELETE_ONE: (id: any) => {
+            return 'invoice/' + id;
+        },
+        UPDATE: (id: any) => {
+            return 'invoice/' + id;
+        },
+        DELETE_MANY: 'invoice/delete-many'
+    },
+    INVOICE_DETAIL: {
+        GET_LIST: 'invoice-detail',
+        GET_ONE: (id: any) => {
+            return 'invoice-detail/' + id;
+        },
+        POST_ONE: 'invoice-detail',
+        DELETE_ONE: (id: any) => {
+            return 'invoice-detail/' + id;
+        },
+        UPDATE: (id: any) => {
+            return 'invoice-detail/' + id;
+        },
+        DELETE_MANY: 'invoice-detail/delete-many'
+    },
 
 };

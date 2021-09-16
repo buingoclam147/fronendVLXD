@@ -9,16 +9,10 @@
           <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.SUPPLIER.ROOT]">Nhà cung cấp</li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Hóa đơn" nzIcon="file-done">
-        <ul>
-          <li nz-menu-item>Hóa đơn</li>
-          <li nz-menu-item>Chi tiết hóa đơn</li>
-        </ul>
+      <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.INVOICE.ROOT]">
+        <i nz-icon nzType="file-done"></i>
+        <span>Hóa đơn</span>
       </li>
-      <!-- <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.VOUCHER.ROOT]">
-        <i nz-icon nzType="gift" nzTheme="outline"></i>
-        <span>Mã giảm giá</span>
-      </li> -->
       <li nz-menu-item [routerLink]="[ROUTER_CONST.MAIN.CUSTOMER.ROOT]">
         <i nz-icon nzType="team"></i>
         <span>Khách hàng</span>
@@ -35,7 +29,8 @@
       <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
         (click)="isCollapsed = !isCollapsed"></i>
       <div class="logout">
-        <button><a [routerLink]="['/main/login']"><i nz-icon nzType="logout" nzTheme="outline"></i></a></button>
+        <button><a [routerLink]="['/main/login']"><i nz-icon nzType="logout" nzTheme="outline" 
+          (click)="logout()"></i></a></button>
       </div>
     </nz-header>
     <nz-content>

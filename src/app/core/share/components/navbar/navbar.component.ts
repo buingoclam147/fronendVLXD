@@ -5,6 +5,7 @@ import { ROUTER_CONST } from 'src/app/core/const/router.const';
 import { Pagination } from '../../model/table.model';
 import { CategoryService } from '../../service/category.service';
 import { AuthService } from 'src/app/core/share/service/auth.service';
+import { CartStoreService } from '../../stores/cart-store.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +13,7 @@ import { AuthService } from 'src/app/core/share/service/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  sumNum$ = this.cartStore.sumNum$;
   name = new FormControl('');
   curentId = false;
   bodyStyle = {
@@ -21,22 +23,20 @@ export class NavbarComponent implements OnInit {
     padding: '0',
   };
   isVisible = false;
-  categoryUrl = { };
+  categoryUrl = {};
   ROUTER_CONST = ROUTER_CONST;
   listCategory;
   isShowMiddleNav = false;
   constructor(
     private router: Router,
     private categoryService: CategoryService,
-    private auth: AuthService
+    public auth: AuthService,
+    private cartStore: CartStoreService
   ) {
   }
 
   ngOnInit(): void {
-    this.listCategory = this.categoryService.getCategory(new Pagination(20, 0), { });
-    this.auth.currentUser$.subscribe(id => {
-      this.curentId = id !== '' ? true : false;
-    });
+    this.listCategory = this.categoryService.getCategory(new Pagination(20, 0), {});
   }
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
@@ -64,5 +64,10 @@ export class NavbarComponent implements OnInit {
   }
   logout() {
     this.auth.logout();
+  }
+  selectLogin() {
+  }
+  onUser() {
+    this.selectLogin();
   }
 }

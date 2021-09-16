@@ -32,6 +32,22 @@
 .box-information li:hover {
   cursor: pointer;
 }
-.focus{
+
+.focus {
   font-weight: bold;
+}
+
+.buil {
+  margin-top: 16px;
+  padding: 48px 32px;
+  border: 1px solid #e6e6e6;
+}
+
+.box {
+  border: 1px solid #e6e6e6;
+  padding: 16px;
+  border-radius: 5px;
+}
+.details:hover{
+  cursor: pointer;
 }

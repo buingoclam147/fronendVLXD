@@ -1,0 +1,92 @@
+<div class="container" *ngIf="invoice$ |async as invoice">
+  <h3 class="d-flex  title-exception mb-6 mt-3">THÔNG TIN CHI TIẾT ĐƠN HÀNG</h3>
+  <div nz-row [nzGutter]="{ xs: 24, sm: 48, md: 72, lg: 96 }" class="mb-4">
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <div class="inner-box text-center"><b>Mã hóa đơn: </b> {{invoice.code}}</div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <div class="inner-box text-center"><b>Trạng thái: </b>{{invoice.status |status}}
+      </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSpan]="8">
+      <div class="inner-box text-center"><b>Ngày tạo: </b>{{invoice.createAt |date:'dd/MM/yyyy'}}
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 title-box">
+    <b class="mb-3">
+      I. Người duyệt
+    </b>
+    <nz-table #basicTable [nzData]="invoice.employeId" [nzFrontPagination]="false" [nzShowPagination]="false"
+      *ngIf="employe$ |async as employe">
+      <thead>
+        <tr>
+          <th>Họ và tên</th>
+          <th>Địa chỉ</th>
+          <th>số điện thoại</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="invoice.employeId">
+          <td>{{ invoice.employeId |Information:'fullName':(employe.data)}}</td>
+          <td>{{ invoice.employeId |Information:'address':(employe.data)}}</td>
+          <td>{{ invoice.employeId |Information:'phoneNumber':(employe.data)}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="mb-4 title-box">
+    <b class="mb-3">
+      II. Người mua
+    </b>
+    <nz-table #basicTable [nzData]="invoice.customerId" [nzFrontPagination]="false" [nzShowPagination]="false"
+      *ngIf="customer$ |async as customer">
+      <thead>
+        <tr>
+          <th>Họ và tên</th>
+          <th>Địa chỉ</th>
+          <th>số điện thoại</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="invoice.customerId">
+          <td>{{ invoice.customerId |Information:'fullName':(customer.data)}}</td>
+          <td>{{ invoice.customerId |Information:'address':(customer.data)}}</td>
+          <td>{{ invoice.customerId |Information:'phoneNumber':(customer.data)}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="mb-4 title-box">
+    <b class="mb-3">
+      III. Sản phẩm
+    </b>
+    <ng-container *ngIf="invoiceDetail$ |async as invoiceDetail">
+      <nz-table #basicTable [nzData]="invoiceDetail.data" [nzFrontPagination]="false" [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>Tên sản phẩm</th>
+            <th>Giá bán</th>
+            <th>Số lượng</th>
+            <th>tổng giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="invoiceDetail.data">
+            <ng-container *ngIf="product$ |async as product">
+              <tr *ngFor=" let item of invoiceDetail.data">
+                <td>{{ item.productId |Information:'name':(product.data)}}</td>
+                <td>{{ item.productId |Information:'price':(product.data)}}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.totalCash |money}}</td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </nz-table>
+      <div class="right me-5 font-sum">
+        <h5>Tổng tất cả chi phí: {{invoiceDetail.sumPrice |money }} </h5>
+      </div>
+    </ng-container>
+  </div>
+</div>

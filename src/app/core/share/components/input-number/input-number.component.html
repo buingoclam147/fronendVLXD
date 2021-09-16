@@ -1,5 +1,5 @@
 <div class="input-num d-flex w-100 jc-center">
-  <button (click)="num = num - 1"><i nz-icon nzType="minus" nzTheme="outline"></i></button>
+  <button (click)="minus()"><i nz-icon nzType="minus" nzTheme="outline"></i></button>
   <input type="number" [(ngModel)]="num" >
-  <button (click)="num = num + 1"><i nz-icon nzType="plus" nzTheme="outline"></i></button>
+  <button (click)="sum()"><i nz-icon nzType="plus" nzTheme="outline"></i></button>
 </div>

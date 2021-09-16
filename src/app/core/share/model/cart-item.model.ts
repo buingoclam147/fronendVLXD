@@ -1,23 +1,16 @@
+import { IProduct } from './product.model';
+
 export class CartItem {
-    product: string;
-    price: number;
-    img: string;
+    product: IProduct;
     quantity: number;
-    constructor(product: string, price: number, img: string, quantity: number) {
+    constructor(product: IProduct,  quantity: number) {
         this.product = product;
-        this.price = price;
-        this.img = img;
         this.quantity = quantity;
     }
     get mathPrice(): number {
-        const sumPrice = this.price + this.quantity;
+        const sumPrice = this.product.price * this.quantity;
         return sumPrice;
     }
-    mathFullPrice(sumPrice: number[]) {
-        let sumFullPrice: number;
-        sumPrice.forEach(element => {
-            sumFullPrice = sumFullPrice + element;
-        });
-    }
+
 }
 

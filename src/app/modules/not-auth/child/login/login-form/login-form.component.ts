@@ -33,8 +33,13 @@ export class LoginFormComponent implements OnInit {
     });
   }
   login(): void {
-    this.auth.loginCustomer(this.formEverything.value).subscribe(_ => {
-      this.router.navigate([ROUTER_CONST.NOT_AUTH.HOME]);
-     }, _ => this.errorMessage = true);
+    this.auth.loginCustomer(this.formEverything.value).subscribe(x => {
+      if (x.login) {
+        this.errorMessage = true;
+      }
+      else {
+        this.router.navigate([ROUTER_CONST.NOT_AUTH.HOME]);
+      }
+    }, _ => this.errorMessage = true);
   }
 }
