@@ -49,30 +49,33 @@
             </div>
         </div>
     </div>
-    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-        <ng-container *ngIf="table.data.length === 0">
-            <nz-empty class="pt-5 m-auto" [nzNotFoundContent]="'Không có sản phẩm'"></nz-empty>
-        </ng-container>
-        <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let item of table.data" class="mb-5">
-            <div class="inner-box card-poduct">
-                <div class="img-poduct mb-3">
-                    <img [src]="item.photos[0]" [alt]="item.name">
-                    <div class="quick-view" (click)="showModal(item._id)">
-                        Xem Trước
+    <ng-container *ngIf="!table.isLoading; else loading">
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+
+            <ng-container *ngIf="table.data.length === 0">
+                <nz-empty class="pt-5 m-auto" [nzNotFoundContent]="'Không có sản phẩm'"></nz-empty>
+            </ng-container>
+            <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let item of table.data" class="mb-5">
+                <div class="inner-box card-poduct">
+                    <div class="img-poduct mb-3">
+                        <img [src]="item.photos[0]" [alt]="item.name">
+                        <div class="quick-view" (click)="showModal(item._id)">
+                            Xem Trước
+                        </div>
                     </div>
-                </div>
-                <div class="b-card">
-                    <div class="content-product">
-                        <h4 [routerLink]="['/product-details', item._id]">{{item.name}}</h4>
-                        <p>{{item.price | money}}</p>
+                    <div class="b-card">
+                        <div class="content-product">
+                            <h4 [routerLink]="['/product-details', item._id]">{{item.name}}</h4>
+                            <p>{{item.price | money}}</p>
+                        </div>
+                        <i nz-icon nzType="heart" nzTheme="outline"></i>
                     </div>
-                    <i nz-icon nzType="heart" nzTheme="outline"></i>
                 </div>
             </div>
-        </div>
 
-    </div>
-  <app-method-shop></app-method-shop>
+        </div>
+    </ng-container>
+    <app-method-shop></app-method-shop>
 </div>
 
 <ng-template #inputClearTpl1>
@@ -80,8 +83,8 @@
         (click)="deleteSearch()"></i>
 </ng-template>
 
-<nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" nzWidth="1056px"
-[nzKeyboard]="true" [nzFooter]="null" [nzCloseIcon]="offModal">
+<nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" nzWidth="1056px" [nzKeyboard]="true" [nzFooter]="null"
+    [nzCloseIcon]="offModal">
     <ng-container *nzModalContent>
         <div class="modal-product my-4" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
             <div nz-col class="gutter-row" [nzSpan]="4">
@@ -93,8 +96,7 @@
             </div>
             <div nz-col class="gutter-row" [nzSpan]="10">
                 <div class="inner-box">
-                    <nz-carousel #carosel  [nzEffect]="effect" class="carousel-view"
-                        [nzDotPosition]="'left'">
+                    <nz-carousel #carosel [nzEffect]="effect" class="carousel-view" [nzDotPosition]="'left'">
                         <div nz-carousel-content *ngFor="let index of onProduct.photos">
                             <img [src]="index" [alt]="index">
                         </div>
@@ -112,7 +114,7 @@
                         <div class="note-product">{{onProduct.note}}</div>
                         <app-input-number></app-input-number>
                         <div class="text-center">
-                            <button class="bt-add" (click)="addShopingCart(onProduct, 'success')" >Thêm vào giỏ</button>
+                            <button class="bt-add" (click)="addShopingCart(onProduct, 'success')">Thêm vào giỏ</button>
                         </div>
                     </div>
                 </div>
@@ -123,4 +125,9 @@
 </nz-modal>
 <ng-template #offModal>
     <button (click)="handleCancel()" class="off-modal"><i nz-icon nzType="close" nzTheme="outline"></i></button>
+</ng-template>
+<ng-template #loading>
+    <div class="example">
+        <nz-spin nzSimple></nz-spin>
+    </div>
 </ng-template>

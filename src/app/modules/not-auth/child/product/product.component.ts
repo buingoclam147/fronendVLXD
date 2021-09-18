@@ -80,6 +80,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       });
       this.typeForm = '';
       this.table.isLoading = false;
+      console.log(this.table.isLoading);
     }));
   }
   formatFn = (value: number): string => {
