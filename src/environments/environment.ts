@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  endPoint: 'https://dbvlxd.herokuapp.com/api/',
-  localhost: 'https://dbvlxd.herokuapp.com/'
+  endPoint: 'https://dbvlxd.herokuapp/api/',
+  localhost: 'https://dbvlxd.herokuapp/'
 };
 
 /*
