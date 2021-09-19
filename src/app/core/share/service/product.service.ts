@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.prod';
 import { API } from '../../const/api';
 import { PAGINATION_INIT } from '../../const/sys.const';
 import { Pagination } from '../model/table.model';
@@ -24,16 +26,45 @@ export class ProductService {
       {
         ...pagination, ...filter
       };
-
+    let result;
     if (data) {
-      return this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_LIST, data);
+      result = this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_LIST, data);
     }
     else {
-      return this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_LIST, PAGINATION_INIT);
+      result = this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_LIST, PAGINATION_INIT);
     }
+
+    return result.pipe(
+      map((x: {
+        total: number,
+        data: any[]
+      }) => {
+        return {
+          ...x,
+          data: x.data.map((i) => this.tranformProduct(i))
+        };
+      }),
+    );
   }
+
+  private tranformProduct = (product: any) => {
+    return {
+      ...product,
+      photos: product.photos.map(p => this.replaceImgUrl(p))
+    };
+  }
+
+  private replaceImgUrl = (url) => {
+    if (environment.production) {
+      return url.replace('http://localhost:3000/', 'https://dbvlxd.herokuapp.com/');
+    }
+    return url;
+  }
+
   getOneProduct(id: any): Observable<any> {
-    return this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_ONE(id));
+    return this.httpService.sendToServer(METHOD.GET, API.PRODUCT.GET_ONE(id)).pipe(
+      map(x => this.tranformProduct(x))
+    );
   }
   postOneProduct(data: any): Observable<any> {
     return this.httpService.sendToServer(METHOD.POST, API.PRODUCT.POST_ONE, data);
