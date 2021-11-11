@@ -1,6 +1,6 @@
 <div class="container p-0">
     <div class="bgr-img">
-        <nz-carousel nzAutoPlay [nzAutoPlaySpeed]="3000" (nzBeforeChange)="caroselOn()" (nzAfterChange)="caroselOn()">
+        <nz-carousel nzAutoPlay [nzAutoPlaySpeed]="3000" (nzAfterChange)="caroselOn()" (nzBeforeChange)="caroselOn()">
             <div nz-carousel-content *ngFor="let i of items">
                 <div nz-row class="bgr-carosel1">
                     <div class="box-content">
@@ -156,7 +156,7 @@
                             </p>
                         </div>
                         <div class="about-carousel-box">
-                            <nz-carousel class="out-carosel introduce-carosel">
+                            <nz-carousel class="out-carosel introduce-carosel" >
                                 <div nz-carousel-content class="p-3 index-carosel">
                                     <div nz-row class="align-item-center">
                                         <div nz-col nzFlex="1">

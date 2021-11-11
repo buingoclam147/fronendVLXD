@@ -51,7 +51,6 @@ export class RegiterComponent implements OnInit {
     );
   }
   validateUsername(username: string): Observable<boolean> {
-    console.log('Trigger API call');
     const existedUsers = ['trungvo', 'tieppt', 'chautran'];
     const isValid = existedUsers.every(x => x !== username);
     return of(isValid).pipe(delay(1000));

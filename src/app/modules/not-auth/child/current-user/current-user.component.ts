@@ -62,7 +62,6 @@ export class CurrentUserComponent implements OnInit {
   }
 
   handleOk(): void {
-    console.log('Button ok clicked!');
     this.isVisible = false;
   }
 }

@@ -72,7 +72,6 @@ export class HttpService {
           );
         break;
       }
-
       default:
         break;
     }

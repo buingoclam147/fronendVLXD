@@ -11,11 +11,10 @@
         <ul nz-row nzJustify="center" class="d-flex categoryNav text-center">
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.HOME]">Trang chủ</a></li>
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.ABOUTUS]"> Giới thiệu </a></li>
-          <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu"><a
+          <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu" ><a
               [routerLink]="[ROUTER_CONST.NOT_AUTH.PRODUCT.ROOT]"> Sản phẩm</a></li>
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.CONTACT]"> Liên hệ</a></li>
         </ul>
-
       </div>
       <div nz-col nzSpan="5" class=" pageItem align-item-center">
         <a (click)="showModal()" class="d-flex">

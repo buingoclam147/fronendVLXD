@@ -59,7 +59,6 @@ export class InvoiceComponent implements OnInit, OnDestroy {
       status: valueStt,
       employeId: this.idMain
     };
-    console.log(data);
     this.subscriptions.push(this.invoiceService.updateInvoice(invoice._id, data).subscribe(_ => {
       this.search();
     }));
