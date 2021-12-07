@@ -159,6 +159,9 @@ a {
   display: flex;
 }
 @media (max-width: 320px) {
+  .title-2 {
+    font-size: 26px;
+  }
   .non-mobile{
     display: none !important;
   }
@@ -177,14 +180,18 @@ a {
     font-weight: 600;
     text-transform: uppercase;
   }
+  .crs-mobile .slick-list{
+    min-height: 200px;
+  }
+  .crs-mobile{
+    min-height: 200px;
+  }
 }
 @media (min-width: 321px) {
   .non-desktop{
     display: none !important;
   }
-  .crs-mobile .slick-list{
-    min-height: 200px;
-  }
+  
 }
 
 
