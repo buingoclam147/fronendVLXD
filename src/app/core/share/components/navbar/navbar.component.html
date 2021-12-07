@@ -1,18 +1,17 @@
-<nz-header class=" bgr-navbar" [class.scroll]="isShowMiddleNav" nzAlign="top">
+<nz-header class="bgr-navbar" [class.scroll]="isShowMiddleNav" nzAlign="top">
   <div class="container-fluid">
-    <div nz-row class="align-item-center pt-3">
+    <div nz-row class="align-item-center pt-3 nav-desktop">
       <div nz-col nzSpan="5" nzJustify="center" class="logo text-align-center">
         <a [routerLink]="[ROUTER_CONST.NOT_AUTH.HOME]">
           <img src="../../../../../assets//building-login.png" alt="logo">
         </a>
       </div>
       <div nz-col nzSpan="14">
-
         <ul nz-row nzJustify="center" class="d-flex categoryNav text-center">
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.HOME]">Trang chủ</a></li>
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.ABOUTUS]"> Giới thiệu </a></li>
-          <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu" ><a
-              [routerLink]="[ROUTER_CONST.NOT_AUTH.PRODUCT.ROOT]"> Sản phẩm</a></li>
+          <li nz-dropdown class="col-md-3 " [nzDropdownMenu]="menu"><a
+              [routerLink]="[ROUTER_CONST.NOT_AUTH.PRODUCT.ROOT]">Sản phẩm</a></li>
           <li class="col-md-3 "><a [routerLink]="[ROUTER_CONST.NOT_AUTH.CONTACT]"> Liên hệ</a></li>
         </ul>
       </div>
@@ -28,10 +27,38 @@
         </a>
       </div>
     </div>
+    <!-- mobile -->
+    <div nz-row class="align-item-center pt-3 non-desktop">
+      <div nz-col nzSpan="12">
+          <i (click)="open()" class="iMenu" nz-icon nzType="menu" nzTheme="outline"></i>
+        <nz-drawer [nzClosable]="false" [nzVisible]="visibleMenu" nzPlacement="left"
+          (nzOnClose)="close()">
+          <ng-container *nzDrawerContent class="relative">
+              <div  class="drawerMenu top-border"><a [routerLink]="[ROUTER_CONST.NOT_AUTH.HOME]" (click)="close()">Trang chủ</a></div>
+              <div  class="drawerMenu"><a [routerLink]="[ROUTER_CONST.NOT_AUTH.ABOUTUS]" (click)="close()"> Giới thiệu </a></div>
+              <div  class="drawerMenu"><a [routerLink]="[ROUTER_CONST.NOT_AUTH.PRODUCT.ROOT]" (click)="close()"> Sản phẩm</a></div>
+              <div  class="drawerMenu bottom-border"><a [routerLink]="[ROUTER_CONST.NOT_AUTH.CONTACT]" (click)="close()"> Liên hệ</a></div>
+              <i nz-icon nzType="close" nzTheme="outline" class="iCloseMenu" (click)="close()"></i>
+          </ng-container>
+        </nz-drawer>
+        
+      </div>
+      <div nz-col nzSpan="12" class=" pageItem align-item-center">
+        <a (click)="showModal()" class="d-flex me-2">
+          <i class='bx bx-search bx-sm'></i>
+        </a>
+        <ng-container [ngTemplateOutlet]="logoutTpl" *ngIf="(auth.currentUser$|async); else loginTpl"></ng-container>
+        <a [routerLink]="[ROUTER_CONST.NOT_AUTH.SHOPING_CART]" class="d-flex ms-2">
+          <nz-badge [nzCount]="sumNum$ |async">
+            <i class='bx bx-cart bx-sm'></i>
+          </nz-badge>
+        </a>
+      </div>
+    </div>
   </div>
 
 </nz-header>
-<nz-back-top [nzDuration]="'1000'" [nzTemplate]="backtop"></nz-back-top>
+<nz-back-top [nzDuration]="'1000'" [nzTemplate]="backtop" class="non-mobile"></nz-back-top>
 <ng-template #backtop>
   <div class="back-to-top">
     <i class="fas fa-level-up-alt"></i>

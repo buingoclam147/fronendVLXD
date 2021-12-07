@@ -59,4 +59,27 @@
   font-size: 24px;
 }
 
+@media (max-width: 320px) {
+  .footer-desktop {
+    display: none;
+  }
 
+  .icon-footer {
+    margin-top: 16px;
+    float: left;
+  }
+
+  .facebook-footer {
+    height: 260px;
+  }
+  .copyright{
+    font-size: 12px;
+  }
+  .icon-footer{
+    float: left;
+    i{
+      font-size: 18px;
+      margin: 6px;
+    }
+  }
+}

@@ -157,3 +157,54 @@
   border: 1px solid;
   padding-left: 60px;
 }
+
+//responsive
+@media (max-width: 576px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .icDropDownMenu {
+    i {
+      color: black;
+      font-size: 20px;
+    }
+  }
+
+  .bgr-navbar {
+    min-height: 88px;
+  }
+
+  .iMenu {
+    color: $color33;
+    font-size: 22px;
+  }
+
+  .drawerMenu {
+    width: 100%;
+    border-top: 1px solid #ececec;
+    padding: 8px 0;
+    border-bottom: 1px solid #ececec;
+
+    a {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 16px;
+      letter-spacing: .02em;
+      color: $color33;
+    }
+  }
+  .top-border {
+    border-top: 2px solid #ececec;
+  }
+
+  .bottom-border {
+    border-bottom: 2px solid #ececec;
+  }
+  .iCloseMenu{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-size: 22px;
+  }
+}

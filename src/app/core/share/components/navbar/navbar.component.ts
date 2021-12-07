@@ -13,6 +13,7 @@ import { CartStoreService } from '../../stores/cart-store.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  visibleMenu = false;
   sumNum$ = this.cartStore.sumNum$;
   name = new FormControl('');
   curentId = false;
@@ -69,5 +70,13 @@ export class NavbarComponent implements OnInit {
   }
   onUser() {
     this.selectLogin();
+  }
+
+  open(): void {
+    this.visibleMenu = true;
+  }
+
+  close(): void {
+    this.visibleMenu = false;
   }
 }

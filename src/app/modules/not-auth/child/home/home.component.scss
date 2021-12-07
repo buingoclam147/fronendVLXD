@@ -115,13 +115,15 @@ h3 {
   border-radius: 15px;
   height: 60px;
   width: 168px;
-  font-size: 18px;
+  font-size: 16px;
   background-color: $colorred;
   border: none;
   outline: none;
   box-shadow: none;
   font-weight: 500;
   transition: all 600ms ease;
+  font-weight: bold;
+
 }
 
 .box-content button a {
@@ -211,6 +213,11 @@ h3 {
 }
 
 //box and text
+.m-introduce {
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+
 .img-box {
   position: relative;
   display: block;
@@ -240,6 +247,11 @@ h3 {
 .in-box-img {
   z-index: 2;
   position: absolute;
+
+  img {
+    width: 410px;
+    height: 370px;
+  }
 }
 
 .text-box {
@@ -314,6 +326,7 @@ h3 {
 
 .abount-text {
   position: relative;
+  padding-left: 4rem;
 }
 
 .inner-content {
@@ -487,6 +500,13 @@ h3 {
   border-radius: 5px;
 }
 
+.img-selling {
+  img {
+    width: 512px;
+    height: 512px;
+  }
+}
+
 // contact home
 .outsidecontact {
   background-image: url(/assets/bgrcontact.png);
@@ -552,4 +572,145 @@ nz-select {
 }
 
 //wrapper
+// responsive
+@media (max-width: 320px) {
+  .bgr-img {
+    position: relative;
+    min-height: 200px;
+    margin-bottom: 32px;
+  }
 
+  .bgr-carosel1 {
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 200px;
+    align-items: center;
+    display: flex;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url(/assets/bgr-vlxd1.jpg);
+  }
+
+  .box-content button {
+    border-radius: 15px;
+    height: 32px;
+    width: 88px;
+    font-size: 10px;
+    background-color: #e9212e;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    font-weight: 500;
+    transition: all 600ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pcarosel {
+    margin-top: 0;
+    line-height: 1;
+    height: 52px;
+    margin-bottom: 0;
+  }
+
+  .caroselOn {
+    margin-top: 32px;
+  }
+
+  .btncarosel {
+    margin-top: 16px;
+  }
+
+  .box-out-img {
+    padding: 4px;
+    margin-bottom: 0;
+  }
+
+  .pointer {
+    margin-bottom: 0;
+  }
+
+  .img-selling {
+    img {
+      width: 300px;
+      height: 300px;
+    }
+  }
+
+  .card-carosel {
+    display: none;
+  }
+
+  .img-box {
+    max-width: 470px;
+    padding-top: 50px;
+    padding-left: 50px;
+    height: 520px;
+    margin-bottom: 24px;
+
+    .in-box-img {
+      z-index: 2;
+      position: absolute;
+
+      img {
+        width: 260px;
+        height: 205px;
+      }
+
+    }
+  }
+
+  .m-introduce {
+    margin: 0;
+  }
+
+  .abount-text {
+    padding-left: 8px;
+  }
+
+  .text-carosel {
+    h3 {
+      font-size: 22px;
+      text-decoration: solid underline;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .redux-size {
+    font-size: 60px;
+  }
+
+  .selling-products {
+    h2::after {
+      content: "";
+      display: block;
+      width: 85px;
+      height: 2px;
+      background: $colorred;
+      position: absolute;
+      top: 70%;
+      transform: translateY(-50%);
+      left: 70%;
+      border-radius: 5px;
+    }
+
+    h2::before {
+      content: "";
+      display: block;
+      width: 85px;
+      height: 2px;
+      background: $colorred;
+      position: absolute;
+      top: 70%;
+      transform: translateY(-50%);
+      right: 70%;
+      border-radius: 5px;
+    }
+  }
+  // boximg mobile
+  .text-boximg {
+    padding: 8px;
+  }
+}

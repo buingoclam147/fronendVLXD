@@ -46,6 +46,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { StatusPipe } from './pipes/status.pipe';
 import { InformationPipe } from './pipes/Information.pipe';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 @NgModule({
   imports: [
     CommonModule,
@@ -79,7 +80,8 @@ import { InformationPipe } from './pipes/Information.pipe';
     RouterModule,
     NzCardModule,
     NzEmptyModule,
-    NzNotificationModule
+    NzNotificationModule,
+    NzDrawerModule
   ],
   declarations: [
     NavbarComponent,
@@ -144,6 +146,7 @@ import { InformationPipe } from './pipes/Information.pipe';
     NewProductComponent,
     NzNotificationModule,
     StatusPipe,
+    NzDrawerModule,
     InformationPipe
   ]
 })

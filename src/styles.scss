@@ -72,13 +72,15 @@ a {
   font-weight: 700;
   text-transform: uppercase;
 }
-.title-3{
+
+.title-3 {
   color: black;
   font-size: 24px;
   line-height: 56px;
   font-weight: 700;
   text-transform: uppercase;
 }
+
 .title-box {
   padding-bottom: 24px;
 }
@@ -128,22 +130,61 @@ a {
   text-transform: uppercase;
   margin: 0 0 7px;
 }
+
 .text {
   margin-top: 16px;
   font-size: 16px;
   opacity: 0.6;
 }
-.title-exception{
+
+.title-exception {
   font-size: 32px;
   color: black;
   font-weight: 600;
 }
-.title-35{
+
+.title-35 {
   font-size: 16px;
   color: $colorblack;
 }
-.right{
+
+.right {
   float: right;
+}
+.relative{
+  position: relative;
+}
+.justify-center {
+  justify-content: center;
+  display: flex;
+}
+@media (max-width: 320px) {
+  .non-mobile{
+    display: none !important;
+  }
+  .title-1{
+    font-size: 30px;
+  }
+  .title h4 {
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  .title {
+    color: $colorblack;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+@media (min-width: 321px) {
+  .non-desktop{
+    display: none !important;
+  }
+  .crs-mobile .slick-list{
+    min-height: 200px;
+  }
 }
 
 
