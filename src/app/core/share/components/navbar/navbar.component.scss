@@ -1,5 +1,6 @@
 @import '/src/style/variable.scss';
 
+
 .bgr-navbar {
   position: relative;
   background-color: white;
@@ -172,7 +173,8 @@
   }
 
   .bgr-navbar {
-    min-height: 88px;
+    max-height: 64px;
+    min-height: 64px;
   }
 
   .iMenu {
@@ -201,10 +203,9 @@
   .bottom-border {
     border-bottom: 2px solid #ececec;
   }
-  .iCloseMenu{
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    font-size: 22px;
+  
+  .back-to-top {
+    background: #ff2020b9;
   }
+  
 }

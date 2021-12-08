@@ -176,6 +176,15 @@
   .carousel-view ul{
     left: -25px !important;
   }
-  // .search{
-  //   height: 516px !important;
-  // }
+  
+  @media (max-width: 576px) {
+    .carousel-view .slick-list{
+      width: 100% !important;
+      height: 258px !important;
+    }
+    .carousel-view img{
+      width: 100% !important;
+      height: 258px !important;
+    }
+   
+  }

@@ -1,7 +1,8 @@
 <app-breadcrumb-area title="Sản phẩm"></app-breadcrumb-area>
 <!-- filter -->
 <div class="container-fluid">
-    <div class="filter-container mb-6">
+    <!-- filter product -->
+    <div class="filter-container mb-6 non-mobile">
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
             <div nz-col [nzSpan]="6">
                 <div class="inner-box">
@@ -49,13 +50,63 @@
             </div>
         </div>
     </div>
+    <!-- filter product mobile-->
+    <div class="filter-container mb-6 non-desktop">
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="px-2">
+            <div nz-col [nzSpan]="12">
+                <div class="inner-box mb-3">
+                    <nz-select [nzSize]="'large'" nzShowSearch [nzAllowClear]="true" nzPlaceHolder="Loại hàng"
+                        [(ngModel)]="table.filter.categoryId">
+                        <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataCategory"></nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="12">
+                <div class="inner-box mb-3">
+                    <nz-select [nzSize]="'large'" nzShowSearch nzAllowClear nzPlaceHolder="Nhà cung cấp"
+                        [(ngModel)]="table.filter.supplierId">
+                        <nz-option [nzLabel]="i.name" [nzValue]="i._id" *ngFor="let i of dataSupplier"></nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="12">
+                <div class="inner-box mb-3">
+                    <nz-input-group nzSearch nzSize="large" [nzSuffix]="inputClearTpl1">
+                        <input #ipsearch1 type="text" [(ngModel)]="table.filter.name" nz-input
+                            placeholder="Tên sản phẩm" />
+                    </nz-input-group>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="12">
+                <div class="inner-box ">
+                    <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search()"
+                        class="m-0 color-btn">Tìm kiếm</button>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="24" class="mt-4">
+                <label class="text-Price"> Giá sản phẩm</label>
+                <div class="inner-box px-3">
+                    <nz-slider [nzTipFormatter]="formatFn" nzRange [(ngModel)]="table.filter.price" [nzMarks]="marks"
+                        [nzMax]="maxPrice"></nz-slider>
+                </div>
+            </div>
+            <div nz-col [nzSpan]="24" class="ps-3 mt-5 f-right per-page">
+                <nz-select [(ngModel)]="valueSelect" [nzSize]="'large'" (ngModelChange)="onChangeModel()">
+                    <nz-option nzValue="12" nzLabel="12 Sản phẩm"></nz-option>
+                    <nz-option nzValue="24" nzLabel="24 Sản phẩm"></nz-option>
+                    <nz-option nzValue="48" nzLabel="48 Sản phẩm"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+    </div>
     <ng-container *ngIf="!table.isLoading; else loading">
         <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
 
             <ng-container *ngIf="table.data.length === 0">
                 <nz-empty class="pt-5 m-auto" [nzNotFoundContent]="'Không có sản phẩm'"></nz-empty>
             </ng-container>
-            <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let item of table.data" class="mb-5">
+            <!-- product -->
+            <div nz-col class="gutter-row" [nzSpan]="8" *ngFor="let item of table.data" class="mb-5 non-mobile">
                 <div class="inner-box card-poduct">
                     <div class="img-poduct mb-3">
                         <img [src]="item.photos[0]" [alt]="item.name">
@@ -69,6 +120,26 @@
                             <p>{{item.price | money}}</p>
                         </div>
                         <i nz-icon nzType="heart" nzTheme="outline"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- product mobile-->
+            <div nz-col class="gutter-row" [nzSpan]="24" *ngFor="let item of table.data" class="mb-5 non-desktop">
+                <div class="inner-box card-poduct px-3">
+                    <div class="img-poduct mb-3">
+                        <img [src]="item.photos[0]" [alt]="item.name">
+                        
+                    </div>
+                    <div class="b-card">
+                        <div class="content-product">
+                            <h4 [routerLink]="['/product-details', item._id]">{{item.name}}</h4>
+                            <p>{{item.price | money}}</p>
+                            <button class="quick-view" (click)="showModal(item._id)">
+                                Xem Trước
+                            </button>
+                        </div>
+                        <i nz-icon nzType="heart" nzTheme="outline"></i>
+                        
                     </div>
                 </div>
             </div>
@@ -86,7 +157,7 @@
 <nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" nzWidth="1056px" [nzKeyboard]="true" [nzFooter]="null"
     [nzCloseIcon]="offModal">
     <ng-container *nzModalContent>
-        <div class="modal-product my-4" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div class="modal-product my-4 non-mobile" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
             <div nz-col class="gutter-row" [nzSpan]="4">
                 <div class="inner-box text-center">
                     <div class="img-mini-produc" *ngFor="let index of onProduct.photos; index as i">
@@ -115,6 +186,38 @@
                         <app-input-number></app-input-number>
                         <div class="text-center">
                             <button class="bt-add" (click)="addShopingCart(onProduct, 'success')">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-product my-4 non-desktop" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+            
+            <div nz-col class="gutter-row" [nzSpan]="24">
+                <div class="inner-box">
+                    <nz-carousel #carosel [nzEffect]="effect" class="carousel-view" [nzDotPosition]="'bottom'">
+                        <div nz-carousel-content *ngFor="let index of onProduct.photos">
+                            <img [src]="index" [alt]="index">
+                        </div>
+                    </nz-carousel>
+                </div>
+            </div>
+            
+            <div nz-col class="gutter-row" [nzSpan]="24">
+                <div class="inner-box">
+                    <div class="content-view content-product">
+                        <h4 class="title">{{onProduct.name}}</h4>
+                        <div class="d-flex w-100 jc-between">
+                            <p>{{onProduct.price |money}}</p>
+                            <div><b>Còn: </b> {{onProduct.quantity}} {{onProduct.unit}}</div>
+                        </div>
+                        <div class="note-product">{{onProduct.note}}</div>
+                        <div nz-row [nzGutter]="24" class="d-flex align-item-center">
+                            <app-input-number nz-col class="gutter-row" [nzSpan]="12"></app-input-number>
+                            <div nz-col class="gutter-row" [nzSpan]="12">
+                                <button class="bt-add" (click)="addShopingCart(onProduct, 'success')">Thêm vào giỏ</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,9 @@ import { CartStoreService } from '../../stores/cart-store.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  imgLogo = `<a (click)="close()" [routerLink]="[ROUTER_CONST.NOT_AUTH.HOME]">
+  <img src="../../../../../assets//building-login.png" alt="logo" width="70px">
+</a>`;
   visibleMenu = false;
   sumNum$ = this.cartStore.sumNum$;
   name = new FormControl('');

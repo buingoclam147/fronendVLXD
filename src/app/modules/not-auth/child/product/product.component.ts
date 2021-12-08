@@ -29,8 +29,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   dataCategory = [];
   dataSupplier = [];
   marks = {
-    0: '0đ',
-    50000: '50.000đ',
+    0: '0',
+    70000: '70.000đ',
     200000: '200.000đ',
     500000: {
       style: {

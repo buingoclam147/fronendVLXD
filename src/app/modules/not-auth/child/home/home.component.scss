@@ -573,7 +573,7 @@ nz-select {
 
 //wrapper
 // responsive
-@media (max-width: 320px) {
+@media (max-width: 576px) {
   .bgr-img {
     position: relative;
     min-height: 200px;
@@ -631,7 +631,7 @@ nz-select {
 
   .img-selling {
     img {
-      width: 300px;
+      width: 100%;
       height: 300px;
     }
   }
@@ -652,13 +652,16 @@ nz-select {
       position: absolute;
 
       img {
-        width: 260px;
+        width: 125%;
         height: 205px;
       }
 
     }
   }
-
+  .box-out-img img {
+    min-height: 440px;
+    
+  }
   .m-introduce {
     margin: 0;
   }
@@ -690,7 +693,7 @@ nz-select {
       height: 2px;
       background: $colorred;
       position: absolute;
-      top: 70%;
+      top: 86%;
       transform: translateY(-50%);
       left: 70%;
       border-radius: 5px;
@@ -703,7 +706,7 @@ nz-select {
       height: 2px;
       background: $colorred;
       position: absolute;
-      top: 70%;
+      top: 86%;
       transform: translateY(-50%);
       right: 70%;
       border-radius: 5px;
