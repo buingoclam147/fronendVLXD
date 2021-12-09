@@ -134,13 +134,14 @@
                         <div class="content-product">
                             <h4 [routerLink]="['/product-details', item._id]">{{item.name}}</h4>
                             <p>{{item.price | money}}</p>
-                            <button class="quick-view" (click)="showModal(item._id)">
-                                Xem Trước
-                            </button>
+                            
                         </div>
-                        <i nz-icon nzType="heart" nzTheme="outline"></i>
                         
+                        <i nz-icon nzType="heart" nzTheme="outline"></i>
                     </div>
+                    <button class="quick-view m-auto d-flex" (click)="showModal(item._id)">
+                        Xem Trước
+                    </button>
                 </div>
             </div>
 
@@ -157,6 +158,7 @@
 <nz-modal [(nzVisible)]="isVisible" (nzOnCancel)="handleCancel()" nzWidth="1056px" [nzKeyboard]="true" [nzFooter]="null"
     [nzCloseIcon]="offModal">
     <ng-container *nzModalContent>
+         <!-- review -->
         <div class="modal-product my-4 non-mobile" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
             <div nz-col class="gutter-row" [nzSpan]="4">
                 <div class="inner-box text-center">
@@ -191,9 +193,8 @@
                 </div>
             </div>
         </div>
-
+        <!-- review mobile -->
         <div class="modal-product my-4 non-desktop" nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-            
             <div nz-col class="gutter-row" [nzSpan]="24">
                 <div class="inner-box">
                     <nz-carousel #carosel [nzEffect]="effect" class="carousel-view" [nzDotPosition]="'bottom'">
