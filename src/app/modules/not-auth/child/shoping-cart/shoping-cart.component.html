@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
     <ng-container *ngIf="cartItems$ |async as cartItems">
-      <div nz-col class="gutter-row" [nzSpan]="16">
+      <div nz-col class="gutter-row non-mobile" [nzSpan]="16">
         <div class="inner-box">
           <div class="table-shoping-cart">
             <nz-table #basicTable [nzData]="cartItems" [nzHideOnSinglePage]="true" [nzFooter]="footerTable">
@@ -31,7 +31,54 @@
           </div>
         </div>
       </div>
-      <div nz-col class="gutter-row" [nzSpan]="8">
+      <div nz-col class="gutter-row non-mobile" [nzSpan]="8">
+        <div class="inner-box cart-totals">
+          <div class="total-prd">
+            <h3 class="title-3  boder-bt">Tổng giỏ hàng</h3>
+          </div>
+          <div class="shipping">
+            <p class="title-35"> <b>Phương thức giao hàng:</b> Sản phẩm sẽ được đơn vị giao hàng gần nhất trợ giúp</p>
+            <p class="title-35"> <b>Phương thức thanh toán:</b> Sau khi khách hàng "Tiến hành thanh toán" nhân viên sẽ
+              liên hệ khách hàng trong khoảng 5-30 phút</p>
+            <p class="title-35 boder-bt"> <b>Phiếu giảm giá được áp dụng:</b> chưa áp dụng bất kì mã giảm giá nào</p>
+          </div>
+          <div class="totalPrice">
+            <h3 class="title-35 mb-4"><b> TỔNG TIỀN:</b> {{total$ |async |money}}</h3>
+            <button class="btn-tt" (click)="onSolve(cartItems)">Đặt hàng</button>
+          </div>
+        </div>
+      </div>
+
+      <div nz-col class="gutter-row non-desktop" [nzSpan]="24">
+        <div class="inner-box">
+          <div class="table-shoping-cart">
+            <nz-table #basicTable [nzData]="cartItems" [nzHideOnSinglePage]="true" [nzFooter]="footerTable">
+              <thead>
+                <tr>
+                  <th>Sản phẩm</th>
+                  <th>Đơn giá</th>
+                  <th>Số lượng</th>
+                  <th>Thành tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cartItem of cartItems" class="td-table">
+                  <td class="produce-img"><img [src]="cartItem.product.photos[0]" [alt]="cartItem.product.name"> {{
+                    cartItem.product.name }}
+                  </td>
+                  <td class="fs">{{ cartItem.product.price |money}}</td>
+                  <td>
+                    <app-input-number (numChange)="addItem($event, cartItem)" [num]="cartItem.quantity">
+                    </app-input-number>
+                  </td>
+                  <td> {{ cartItem.mathPrice |money }} </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
+      <div nz-col class="gutter-row non-desktop" [nzSpan]="24">
         <div class="inner-box cart-totals">
           <div class="total-prd">
             <h3 class="title-3  boder-bt">Tổng giỏ hàng</h3>

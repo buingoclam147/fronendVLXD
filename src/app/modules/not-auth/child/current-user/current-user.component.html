@@ -1,7 +1,7 @@
 <app-breadcrumb-area title="Trang cá nhân"></app-breadcrumb-area>
 <div class="container-fluid">
   <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="mb-4">
-    <div nz-col class="gutter-row" [nzSpan]="16">
+    <div nz-col class="gutter-row non-mobile" [nzSpan]="16">
       <div class="inner-box">
         <div class="box-current" *ngIf="currentUser |async as currentUser">
           <h3 class="boder-bt title-3">Thông tin tài khoản</h3>
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div nz-col class="gutter-row" [nzSpan]="8">
+    <div nz-col class="gutter-row non-mobile" [nzSpan]="8">
       <div class="inner-box">
         <ul class="box-information">
           <h3 class="boder-bt title-3">Tài khoản</h3>
@@ -31,12 +31,28 @@
         </ul>
       </div>
     </div>
+
+    <div nz-col class="gutter-row non-desktop px-3" [nzSpan]="24">
+      <div class="inner-box">
+        <div class="box-current" *ngIf="currentUser |async as currentUser">
+          <h3 class="boder-bt title-3">Thông tin tài khoản</h3>
+          <p class="title-35"> <b>Tên đăng nhập:</b> {{currentUser.userName }}</p>
+          <p class="title-35"> <b>Họ và tên:</b> {{currentUser.fullName }}</p>
+          <p class="title-35"> <b>Số điện thoại:</b> {{currentUser.phoneNumber }}</p>
+          <p class="title-35"> <b>Giới tính:</b> {{currentUser.sex? 'Nam':'Nữ' }}</p>
+          <p class="title-35"> <b>Ngày sinh:</b> {{currentUser.dateOfBirth | date: 'ddMMyyyy'}}</p>
+          <p class="title-35 boder-bt"> <b>Địa chỉ:</b> {{currentUser.address }}</p>
+          <button (click)="logout()">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="buil">
     <h3 class="title-3 mb-4"> Danh sách đơn hàng</h3>
     <ng-container *ngIf="invoices$ |async as invoices">
       <div *ngFor="let invoice of invoices.data" class="mb-6" class="box mb-4">
-        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="non-mobile">
           <div nz-col class="gutter-row" [nzSpan]="6">
             <div class="inner-box text-center"><b>Mã hóa đơn: </b> {{invoice.code}}</div>
           </div>
@@ -52,9 +68,26 @@
             <button nz-button (click)="onInvoice(invoice)" class="details"> Xem chi tiết</button>
           </div>
         </div>
+
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="non-desktop">
+          <div nz-col class="gutter-row mb-3" [nzSpan]="12">
+            <div class="inner-box text-center"><b>Mã hóa đơn: </b> {{invoice.code}}</div>
+          </div>
+          <div nz-col class="gutter-row mb-3" [nzSpan]="12">
+            <div class="inner-box text-center"><b>Trạng thái: </b>{{invoice.status |status}}
+            </div>
+          </div>
+          <div nz-col class="gutter-row" [nzSpan]="12">
+            <div class="inner-box text-center"><b>Ngày tạo: </b>{{invoice.createAt |date:'dd/MM/yyyy'}}
+            </div>
+          </div>
+          <div nz-col class="gutter-row d-flex jc-center" [nzSpan]="12">
+            <button nz-button (click)="onInvoice(invoice)" class="details"> Xem chi tiết</button>
+          </div>
+        </div>
       </div>
       <nz-modal [(nzVisible)]="isVisible" nzTitle="Chi tiết đơn hàng" [nzCancelText]="null"
-        (nzOnOk)="handleOk()">
+        (nzOnOk)="handleOk()" [nzClosable]="false" nzOkText="Xong">
         <ng-container *nzModalContent>
           <div class="mb-4" nz-row>
             <ng-container *ngIf="employe$ |async as employe">

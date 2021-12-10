@@ -48,3 +48,18 @@
       color: $colorhover;
     }
   }
+
+  @media (max-width: 576px) {
+    .btn-create {
+      width: 100%;
+      border: none !important;
+      background: none !important;
+      font-weight: 700;
+      color: $color33 !important;
+      border: none;
+    
+    }
+    .btn-lg{
+      border: 0;
+    }
+  }
