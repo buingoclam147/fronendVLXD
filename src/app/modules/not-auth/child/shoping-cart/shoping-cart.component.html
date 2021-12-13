@@ -56,7 +56,6 @@
               <thead>
                 <tr>
                   <th>Sản phẩm</th>
-                  <th>Đơn giá</th>
                   <th>Số lượng</th>
                   <th>Thành tiền</th>
                 </tr>
@@ -66,7 +65,6 @@
                   <td class="produce-img"><img [src]="cartItem.product.photos[0]" [alt]="cartItem.product.name"> {{
                     cartItem.product.name }}
                   </td>
-                  <td class="fs">{{ cartItem.product.price |money}}</td>
                   <td>
                     <app-input-number (numChange)="addItem($event, cartItem)" [num]="cartItem.quantity">
                     </app-input-number>
@@ -99,7 +97,7 @@
   </div>
 </div>
 <ng-template #footerTable>
-  <div class="ft-table d-flex ms-6">
+  <div class="ft-table d-flex ms-6 non-mobile">
     <input type="text" placeholder="Nhập mã giảm giá">
     <button>áp dụng</button>
   </div>

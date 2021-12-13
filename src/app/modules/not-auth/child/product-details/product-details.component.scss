@@ -117,3 +117,15 @@
   text-decoration-line:underline;
   opacity: 1 !important;
 }
+@media (max-width: 576px) {
+  .note-product {
+    min-height: 100px;
+    scroll-y: auto;
+    overflow-y: auto;
+  }
+  .description-carosel{
+    border: 1.5px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 24px 0 0px;
+  }
+}
