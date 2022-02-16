@@ -10,8 +10,7 @@
             [errorsMessage]="
                 {
                     required: 'Giá trị không được bỏ trống',
-                    minlength:'Giá trị không được ngắn hơn 6 ký tự',
-                    pattern:'Giá trị chỉ chứa ký tự alphabet'
+                    minlength:'Giá trị không được ngắn hơn 6 ký tự'
                 }
                 "></app-form-control-error>
     </div>
@@ -41,14 +40,14 @@
     <nz-alert nzType="error" class="err" [nzMessage]="'Giá trị không hợp lệ'"
             *ngIf="form.errors && form.controls.checkPassword.valid ">
         </nz-alert>
-    <button type="submit" class="btn-lg" [disabled]="form.invalid">Đăng
+    <button type="submit" class="btn-lg" [disabled]="form.invalid" (click)="createAccount()">Đăng
         ký</button>
-    <!-- <nz-alert *ngIf="errorMessage" class="err" nzType="error"
-        nzMessage="Thông tin tài khoản hoặc mật khẩu không chính xác"></nz-alert> -->
+    <nz-alert *ngIf="errorMessage" class="err" nzType="error"
+        nzMessage="Tài khoản đã tồn tại"></nz-alert>
 </form>
 
 <div class="re-fo">
     <div class=" d-flex">
-        <button  class="btn-create" [routerLink]="'/login'">Đã có tài khoản ? </button>
+        <button  class="btn-create" [routerLink]="'/login'">Đã có tài khoản ?</button>
     </div>
 </div>

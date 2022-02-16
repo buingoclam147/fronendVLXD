@@ -46,4 +46,11 @@ export class AuthService {
     this.router.navigate([ROUTER_CONST.NOT_AUTH.LOGIN]);
     this._currentUser$.next('');
   }
+  createAccount(data: any) {
+    data = {
+      userName: data.userName,
+      password: data.password
+    };
+    return this.httpService.sendToServer(METHOD.POST, 'employe', data);
+  }
 }
