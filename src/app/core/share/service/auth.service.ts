@@ -51,6 +51,6 @@ export class AuthService {
       userName: data.userName,
       password: data.password
     };
-    return this.httpService.sendToServer(METHOD.POST, 'employe', data);
+    return this.httpService.sendToServer(METHOD.POST, 'customer', data);
   }
 }
